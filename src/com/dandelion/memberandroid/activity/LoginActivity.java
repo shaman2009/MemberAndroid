@@ -1,15 +1,10 @@
 package com.dandelion.memberandroid.activity;
 
-import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.R.id;
-import com.dandelion.memberandroid.R.layout;
-import com.dandelion.memberandroid.R.menu;
-import com.dandelion.memberandroid.R.string;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +16,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dandelion.memberandroid.R;
+
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
@@ -31,7 +28,7 @@ public class LoginActivity extends Activity {
 	 * TODO: remove after connecting to a real authentication system.
 	 */
 	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
+			"ff@ff.com:0330", "bar@example.com:world" };
 
 	/**
 	 * The default email to populate the email field with.
@@ -196,7 +193,11 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
-
+	public void MerchantLogin() {
+		Intent intent = new Intent(this, SlidingmenuActivity.class);
+	    startActivity(intent);
+	    finish();
+	}
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
@@ -215,9 +216,13 @@ public class LoginActivity extends Activity {
 
 			for (String credential : DUMMY_CREDENTIALS) {
 				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
+				if (pieces[0].equals(mEmail) && pieces[1].equals(mPassword)) {
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							LoginActivity.this.MerchantLogin();
+						}
+					}).start();
 				}
 			}
 
