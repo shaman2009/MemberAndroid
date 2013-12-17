@@ -1,4 +1,10 @@
-package com.dandelion.memberandroid;
+package com.dandelion.memberandroid.activity;
+
+import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.R.id;
+import com.dandelion.memberandroid.R.layout;
+import com.dandelion.memberandroid.R.menu;
+import com.dandelion.memberandroid.R.string;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
