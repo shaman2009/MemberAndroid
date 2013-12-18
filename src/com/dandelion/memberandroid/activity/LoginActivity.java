@@ -87,6 +87,15 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		
+		
+		findViewById(R.id.sign_in_register_button).setOnClickListener(
+			new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					register();
+				}
+			});
 	}
 
 	@Override
@@ -96,6 +105,12 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 
+	
+	public void register() {
+		Intent intent = new Intent(this, RegisterActivity.class);
+	    startActivity(intent);
+	    finish();
+	}
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
 	 * If there are form errors (invalid email, missing fields, etc.), the

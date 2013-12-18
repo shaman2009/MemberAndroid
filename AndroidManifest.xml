@@ -35,6 +35,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dandelion.memberandroid.activity.LoginActivity" />
         </activity>
+        <activity
+            android:name="com.dandelion.memberandroid.activity.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName="com.dandelion.memberandroid.activity.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>
