@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.constant.IntentConstant;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -210,6 +211,7 @@ public class LoginActivity extends Activity {
 	}
 	public void MerchantLogin() {
 		Intent intent = new Intent(this, SlidingmenuActivity.class);
+		intent.putExtra(IntentConstant.USERTYPE, IntentConstant.MERCHANT);
 	    startActivity(intent);
 	    finish();
 	}

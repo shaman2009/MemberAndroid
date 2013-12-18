@@ -9,7 +9,8 @@ package com.dandelion.memberandroid;
 
 public final class R {
     public static final class array {
-        public static final int menu_names=0x7f0b0000;
+        public static final int member_menu_names=0x7f0b0001;
+        public static final int merchant_menu_names=0x7f0b0000;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1201,6 +1202,8 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f090007;
         public static final int action_forgot_password=0x7f09001a;
         public static final int action_register=0x7f090018;
+        public static final int action_register_member=0x7f090022;
+        public static final int action_register_merchant=0x7f090021;
         public static final int action_settings=0x7f09000e;
         public static final int action_sign_in_member=0x7f090017;
         public static final int action_sign_in_merchant=0x7f090016;

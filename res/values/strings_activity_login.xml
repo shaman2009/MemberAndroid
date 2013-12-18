@@ -16,5 +16,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="register_notice">點擊【會員註冊】，即表示您同意接受我們的隱私聲明及使用條款</string>
+    <string name="action_register_merchant">商戶註冊</string>
+    <string name="action_register_member">會員註冊</string>
 
 </resources>

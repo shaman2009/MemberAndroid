@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	
-    <string-array name="menu_names">
+
+    <string-array name="merchant_menu_names">
         <item>我的檔案</item>
         <item>系統通知</item>
         <item>我要發佈</item>
@@ -10,4 +10,14 @@
         <item>我要分享</item>
         <item>登出</item>
     </string-array>
+    <string-array name="member_menu_names">
+        <item>我的檔案</item>
+        <item>優惠諮詢</item>
+        <item>加入會員</item>
+        <item>我的商戶</item>
+        <item>更改密碼</item>
+        <item>我要分享</item>
+        <item>登出</item>
+    </string-array>
+
 </resources>

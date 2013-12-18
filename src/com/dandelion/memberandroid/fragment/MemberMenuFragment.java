@@ -13,7 +13,7 @@ import android.widget.ListView;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.activity.SlidingmenuActivity;
 
-public class MenuFragment extends ListFragment {
+public class MemberMenuFragment extends ListFragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MenuFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		String[] colors = getResources().getStringArray(R.array.menu_names);
+		String[] colors = getResources().getStringArray(R.array.member_menu_names);
 		ArrayAdapter<String> colorAdapter = new ArrayAdapter<String>(getActivity(), 
 				android.R.layout.simple_list_item_1, android.R.id.text1, colors);
 		setListAdapter(colorAdapter);
