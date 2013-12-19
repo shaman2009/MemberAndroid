@@ -1078,11 +1078,26 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040018;
         public static final int abs__title=0x7f040020;
         public static final int abs__up=0x7f04000b;
-        public static final int action_forgot_password=0x7f04004a;
-        public static final int action_settings=0x7f04004b;
+        public static final int action_forgot_password=0x7f040068;
+        public static final int action_settings=0x7f040069;
+        public static final int button1=0x7f040063;
+        public static final int checkbox_record_address=0x7f040059;
+        public static final int checkbox_record_email=0x7f04005b;
+        public static final int checkbox_record_member_birthday=0x7f04005d;
+        public static final int checkbox_record_member_name=0x7f040053;
+        public static final int checkbox_record_member_sex=0x7f040055;
+        public static final int checkbox_record_mobile=0x7f040057;
         public static final int content_frame=0x7f040045;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f04002b;
+        public static final int edit_text_record_address=0x7f04004b;
+        public static final int edit_text_record_email=0x7f04004d;
+        public static final int edit_text_record_info=0x7f040051;
+        public static final int edit_text_record_member_cost=0x7f040060;
+        public static final int edit_text_record_member_times=0x7f040061;
+        public static final int edit_text_record_merchant_name=0x7f040047;
+        public static final int edit_text_record_mobile=0x7f040049;
+        public static final int edit_text_record_type=0x7f04004f;
         public static final int email=0x7f04003a;
         public static final int fullscreen=0x7f040013;
         public static final int homeAsUp=0x7f040006;
@@ -1093,7 +1108,7 @@ containing a value of this type.
         public static final int login_status=0x7f040037;
         public static final int login_status_message=0x7f040038;
         public static final int margin=0x7f040012;
-        public static final int menu_frame=0x7f040046;
+        public static final int menu_frame=0x7f040064;
         public static final int normal=0x7f040001;
         public static final int password=0x7f04003b;
         public static final int register_email=0x7f040040;
@@ -1101,8 +1116,8 @@ containing a value of this type.
         public static final int register_merchant_button=0x7f040042;
         public static final int register_password=0x7f040041;
         public static final int right=0x7f040011;
-        public static final int row_icon=0x7f040047;
-        public static final int row_title=0x7f040048;
+        public static final int row_icon=0x7f040065;
+        public static final int row_title=0x7f040066;
         public static final int selected_view=0x7f040014;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
@@ -1110,9 +1125,24 @@ containing a value of this type.
         public static final int sign_in_member_button=0x7f04003e;
         public static final int sign_in_merchant_button=0x7f04003d;
         public static final int sign_in_register_button=0x7f04003f;
-        public static final int slidingmenumain=0x7f040049;
+        public static final int slidingmenumain=0x7f040067;
         public static final int tabMode=0x7f040003;
+        public static final int text_checkbox_record_address=0x7f04005a;
+        public static final int text_checkbox_record_email=0x7f04005c;
+        public static final int text_checkbox_record_mobile=0x7f040058;
+        public static final int text_record_address=0x7f04004a;
+        public static final int text_record_email=0x7f04004c;
+        public static final int text_record_info=0x7f040050;
+        public static final int text_record_member_birthday=0x7f04005e;
+        public static final int text_record_member_name=0x7f040054;
+        public static final int text_record_member_provide_info=0x7f040052;
+        public static final int text_record_member_setting=0x7f04005f;
+        public static final int text_record_member_sex=0x7f040056;
+        public static final int text_record_merchant_name=0x7f040046;
+        public static final int text_record_mobile=0x7f040048;
+        public static final int text_record_type=0x7f04004e;
         public static final int text_register_notice=0x7f040044;
+        public static final int togglebutton_record_member_setting=0x7f040062;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
@@ -1220,6 +1250,23 @@ containing a value of this type.
          */
         public static final int prompt_email=0x7f090014;
         public static final int prompt_password=0x7f090015;
+        public static final int record_address=0x7f090025;
+        public static final int record_email=0x7f090026;
+        public static final int record_info=0x7f090028;
+        public static final int record_member_birthday=0x7f09002c;
+        public static final int record_member_cost=0x7f09002e;
+        public static final int record_member_name=0x7f09002a;
+        public static final int record_member_provide_info=0x7f090029;
+        public static final int record_member_setting=0x7f09002d;
+        public static final int record_member_sex=0x7f09002b;
+        public static final int record_member_times=0x7f09002f;
+        /**  My Document Fragment 
+         */
+        public static final int record_merchant_name=0x7f090023;
+        public static final int record_mobile=0x7f090024;
+        public static final int record_register=0x7f090031;
+        public static final int record_score_plan=0x7f090030;
+        public static final int record_type=0x7f090027;
         public static final int register_notice=0x7f090020;
         public static final int title_activity_login=0x7f090013;
         public static final int title_activity_register=0x7f090012;
@@ -2394,7 +2441,7 @@ containing a value of this type.
          */
         public static final int[] SherlockSpinner = {
             0x010100af, 0x01010175, 0x01010176, 0x0101017b,
-            0x01010262, 0x010102ac, 0x010102ad, 0x0101043a
+            0x01010262, 0x010102ac, 0x010102ad, 0x01010411
         };
         /**
           <p>

@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="title_activity_login">登陸</string>
+    <string name="title_activity_login">會員管理</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">電郵</string>
@@ -18,5 +18,23 @@
     <string name="register_notice">點擊【會員註冊】，即表示您同意接受我們的隱私聲明及使用條款</string>
     <string name="action_register_merchant">商戶註冊</string>
     <string name="action_register_member">會員註冊</string>
+    
+    
+    <!-- My Document Fragment -->
+    <string name="record_merchant_name">店名</string>
+    <string name="record_mobile">電話</string>
+    <string name="record_address">地址</string>
+    <string name="record_email">電郵</string>
+    <string name="record_type">類別</string>
+    <string name="record_info">簡介</string>
+    <string name="record_member_provide_info">會員提供資料</string>
+    <string name="record_member_name">姓名</string>
+    <string name="record_member_sex">性別</string>
+    <string name="record_member_birthday">出生日期</string>
+    <string name="record_member_setting">會員設定</string>
+    <string name="record_member_cost">設定消費金額</string>
+    <string name="record_member_times">設定消費次數</string>
+    <string name="record_score_plan">積分計劃</string>
+    <string name="record_register">登記</string>
 
 </resources>
