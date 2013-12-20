@@ -1093,8 +1093,8 @@ containing a value of this type.
         public static final int edit_text_record_address=0x7f04004b;
         public static final int edit_text_record_email=0x7f04004d;
         public static final int edit_text_record_info=0x7f040051;
-        public static final int edit_text_record_member_cost=0x7f040060;
-        public static final int edit_text_record_member_times=0x7f040061;
+        public static final int edit_text_record_member_cost=0x7f040061;
+        public static final int edit_text_record_member_times=0x7f040062;
         public static final int edit_text_record_merchant_name=0x7f040047;
         public static final int edit_text_record_mobile=0x7f040049;
         public static final int edit_text_record_type=0x7f04004f;
@@ -1142,7 +1142,7 @@ containing a value of this type.
         public static final int text_record_mobile=0x7f040048;
         public static final int text_record_type=0x7f04004e;
         public static final int text_register_notice=0x7f040044;
-        public static final int togglebutton_record_member_setting=0x7f040062;
+        public static final int togglebutton_record_member_setting=0x7f040060;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
