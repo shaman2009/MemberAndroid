@@ -7,6 +7,7 @@ import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.IntentConstant;
 import com.dandelion.memberandroid.fragment.MemberMenuFragment;
 import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
+import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 

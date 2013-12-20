@@ -1,63 +1,34 @@
 package com.dandelion.memberandroid.activity;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.constant.IntentConstant;
+import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
 
-public class RegisterActivity extends Activity {
-	
-	
-	private EditText mEmailView;
-	private EditText mPasswordView;
+public class MerchantRegisterActivity extends FragmentActivity {
+	private Fragment mContent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_register);
-		// Show the Up button in the action bar.
+		if (mContent == null)
+			mContent = new MerchantRegisterFragment();
+
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.content_frame, mContent).commit();
+		// set the Above View
+		setContentView(R.layout.content_frame);
 		setupActionBar();
-		
-		mEmailView = (EditText) findViewById(R.id.email);
-		mPasswordView = (EditText) findViewById(R.id.password);
-		findViewById(R.id.register_merchant_button).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						merchantRegister();
-					}
-				});	
-		findViewById(R.id.register_member_button).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						attemptRegister(IntentConstant.MEMBER);
-					}
-				});	
-		//register_merchant_button
+
 	}
-	
-	private void merchantRegister() {
-		Intent intent = new Intent(this, MerchantRegisterActivity.class);
-	    startActivity(intent);
-	    finish();
-	}
-	
-	private void attemptRegister(String str) {
-		Intent intent = new Intent(this, SlidingmenuActivity.class);
-		intent.putExtra(IntentConstant.USERTYPE, str);
-	    startActivity(intent);
-	    finish();
-	}
+
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
@@ -71,7 +42,7 @@ public class RegisterActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.register, menu);
+		getMenuInflater().inflate(R.menu.merchant_register, menu);
 		return true;
 	}
 

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -265,8 +265,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onToggleClicked"
-                    android:textOff="Vibrate off"
-                    android:textOn="Vibrate on" />
+                    android:textOff="off"
+                    android:textOn="on" />
 
                 <EditText
                     android:id="@+id/edit_text_record_member_cost"
@@ -301,21 +301,29 @@
                 android:layout_marginRight="30dp"
                 android:text="@string/record_score_plan" />
 
-            <ToggleButton
-                android:id="@+id/togglebutton_record_score_plan"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onToggleClicked"
-                android:textOff="Vibrate off"
-                android:textOn="Vibrate on" />
+                android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/button_record_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="@string/record_register" />
+                <ToggleButton
+                    android:id="@+id/togglebutton_record_score_plan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onToggleClicked"
+                    android:textOff="off"
+                    android:textOn="on" />
+
+            </LinearLayout>
         </LinearLayout>
+        
+                <Button
+                    android:id="@+id/button_record_register"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:text="@string/record_register" />
     </LinearLayout>
 
 </ScrollView>

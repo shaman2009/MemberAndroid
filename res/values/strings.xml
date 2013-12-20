@@ -7,5 +7,6 @@
     <string name="hello_fragment">Hello fragment!</string>
     <string name="title_activity_slidingmenu">SlidingmenuActivity</string>
     <string name="title_activity_register">註冊</string>
+    <string name="title_activity_merchant_register">商戶註冊</string>
 
 </resources>

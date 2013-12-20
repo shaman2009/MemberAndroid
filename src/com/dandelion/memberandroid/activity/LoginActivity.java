@@ -85,7 +85,16 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						attemptLogin();
+//						attemptLogin();
+						MerchantLogin();
+					}
+				});
+		
+		findViewById(R.id.sign_in_member_button).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						MemberLogin();
 					}
 				});
 		
@@ -107,11 +116,7 @@ public class LoginActivity extends Activity {
 	}
 
 	
-	public void register() {
-		Intent intent = new Intent(this, RegisterActivity.class);
-	    startActivity(intent);
-	    finish();
-	}
+
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
 	 * If there are form errors (invalid email, missing fields, etc.), the
@@ -209,9 +214,21 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
+	
+	public void register() {
+		Intent intent = new Intent(this, RegisterActivity.class);
+	    startActivity(intent);
+	    finish();
+	}
 	public void MerchantLogin() {
 		Intent intent = new Intent(this, SlidingmenuActivity.class);
 		intent.putExtra(IntentConstant.USERTYPE, IntentConstant.MERCHANT);
+	    startActivity(intent);
+	    finish();
+	}
+	public void MemberLogin() {
+		Intent intent = new Intent(this, SlidingmenuActivity.class);
+		intent.putExtra(IntentConstant.USERTYPE, IntentConstant.MEMBER);
 	    startActivity(intent);
 	    finish();
 	}

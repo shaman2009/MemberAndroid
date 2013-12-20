@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.dandelion.memberandroid.R;
 
-public class MyMembersFragment extends Fragment{
+public class NotificationFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

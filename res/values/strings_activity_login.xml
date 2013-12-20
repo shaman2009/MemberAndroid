@@ -21,6 +21,7 @@
     
     
     <!-- My Document Fragment -->
+    <string name="record_merchant_no">商號</string>
     <string name="record_merchant_name">店名</string>
     <string name="record_mobile">電話</string>
     <string name="record_address">地址</string>
@@ -36,5 +37,6 @@
     <string name="record_member_times">設定消費次數</string>
     <string name="record_score_plan">積分計劃</string>
     <string name="record_register">登記</string>
+    <string name="record_update">更新檔案</string>
 
 </resources>
