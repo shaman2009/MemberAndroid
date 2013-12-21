@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llStatus"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="8sp"
+    android:paddingLeft="8sp"
+    android:paddingTop="8sp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:contentDescription="@drawable/devfest_shanghai"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/text_record_merchant_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/register_notice" 
+            android:layout_weight="1"/>
+
+</LinearLayout>
