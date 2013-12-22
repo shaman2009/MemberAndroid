@@ -38,5 +38,7 @@
     <string name="record_score_plan">積分計劃</string>
     <string name="record_register">登記</string>
     <string name="record_update">更新檔案</string>
+    <string name="record_pic_upload">上傳</string>
+    <string name="record_pic_upload_status">上傳</string>
 
 </resources>

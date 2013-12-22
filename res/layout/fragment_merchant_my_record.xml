@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -169,18 +170,33 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" >
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView_record_merchant_avator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@drawable/devfest_shanghai"
                     android:src="@drawable/ic_launcher"
                     tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:id="@+id/record_pic_upload_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <Button
+                    android:id="@+id/record_pic_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/record_pic_upload" />
             </LinearLayout>
         </LinearLayout>
         <!-- checkbox begin -->
