@@ -1,5 +1,7 @@
 package com.dandelion.memberandroid.activity;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +14,7 @@ import com.dandelion.memberandroid.constant.IntentConstant;
 import com.dandelion.memberandroid.fragment.MemberMenuFragment;
 import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
 import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
+import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -66,7 +69,6 @@ public class SlidingmenuActivity extends BaseActivity {
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		
 		
-		
 
 	}
 	
@@ -83,6 +85,31 @@ public class SlidingmenuActivity extends BaseActivity {
 		.replace(R.id.content_frame, fragment)
 		.commit();
 		getSlidingMenu().showContent();
+		
+		
+		
+		if (fragment instanceof NotificationFragment || fragment instanceof MyMembersFragment) {
+	        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	        if (getSupportActionBar().getTabCount() != 3) {
+		        for (int i = 0; i <= 2; i++) {
+		        	List<String> list = initTabNames(IntentConstant.MERCHANT);
+		            ActionBar.Tab tab = getSupportActionBar().newTab();
+		            tab.setText(list.get(i));
+		            tab.setTabListener(this);
+		            getSupportActionBar().addTab(tab);
+		        }
+		        
+	        }
+	        getSupportActionBar().setDisplayShowHomeEnabled(false);
+	        getSupportActionBar().setDisplayShowTitleEnabled(false);
+		} else {
+			getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+			getSupportActionBar().removeAllTabs();
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+			getSupportActionBar().setDisplayShowTitleEnabled(true);
+		}
+		
+
 	}
 
 

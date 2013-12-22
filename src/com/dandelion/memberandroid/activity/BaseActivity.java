@@ -3,7 +3,6 @@ package com.dandelion.memberandroid.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -13,6 +12,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.MenuItem;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.IntentConstant;
+import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.dandelion.memberandroid.fragment.SlidingFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -80,9 +80,6 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
 	
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-	}
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		getSupportFragmentManager()
 		.beginTransaction()
 		.replace(R.id.content_frame, new NotificationFragment())
@@ -90,8 +87,15 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
 		getSlidingMenu().showContent();
 	}
 	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	}
+	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.content_frame, new MyRecordFragment())
+		.commit();
+		getSlidingMenu().showContent();
 	}
 	public List<String> initTabNames(String str) {
 		List<String> list = new ArrayList<String>();
