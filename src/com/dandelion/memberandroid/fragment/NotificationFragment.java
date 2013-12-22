@@ -1,6 +1,5 @@
 package com.dandelion.memberandroid.fragment;
 
-import adapter.NotificationListAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.adapter.NotificationListAdapter;
 
 public class NotificationFragment extends Fragment{
-	private ListView listView  = null;
-	private NotificationListAdapter notificationListAdapter = null;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,8 @@ public class NotificationFragment extends Fragment{
 	}
 	@Override
 	public void onStart() {
-		notificationListAdapter = new NotificationListAdapter(getActivity(), 0);
-		listView = (ListView)getActivity().findViewById(R.id.notification_list);
+		final NotificationListAdapter notificationListAdapter = new NotificationListAdapter(getActivity());
+		ListView listView = (ListView)getActivity().findViewById(R.id.notification_list);
 		listView.setAdapter(notificationListAdapter);
 		listView.setFastScrollEnabled(true);
 		super.onStart();

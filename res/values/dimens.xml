@@ -15,4 +15,7 @@
     <dimen name="list_status_response">14sp</dimen>
     <dimen name="list_status_text">16sp</dimen>
     
+    
+    
+    <dimen name="list_detail_image_size">60dp</dimen>
 </resources>

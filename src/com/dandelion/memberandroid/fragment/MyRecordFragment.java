@@ -92,7 +92,7 @@ public class MyRecordFragment extends Fragment {
 		PutExtra extra = new PutExtra();
 		extra.checkCrc = PutExtra.AUTO_CRC32;
 		extra.params.put("x:arg", "value");
-		hint.setText("上傳中");
+		hint.setText("上傳中...");
 		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
 			@Override
 			public void onSuccess(JSONObject resp) {
@@ -107,7 +107,7 @@ public class MyRecordFragment extends Fragment {
 					return;
 				}
 				String redirect = "http://" + QiNiuConstant.DOWNLOAD_DOMAIN + "/" + key;
-				hint.setText("上傳成功！ " + hash);
+				hint.setText("上傳成功！ ");
 				Log.d("QINIU_UPLOAD", "redirect : " + redirect);
 				downloadViaPicasso(getActivity(), redirect);
 			}

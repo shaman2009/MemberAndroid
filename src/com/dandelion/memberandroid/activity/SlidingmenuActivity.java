@@ -2,17 +2,24 @@ package com.dandelion.memberandroid.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.IntentConstant;
 import com.dandelion.memberandroid.fragment.MemberMenuFragment;
 import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
 import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
+import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class SlidingmenuActivity extends BaseActivity {
+
 	private Fragment mContent;
+
 	/**
 	 * @param titleRes
 	 */
@@ -22,16 +29,21 @@ public class SlidingmenuActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		String userType = (String) this.getIntent().getExtras().get(IntentConstant.USERTYPE);
+		boolean b = IntentConstant.MERCHANT.equals(userType);
 		// set the Above View
 		if (savedInstanceState != null) {
 			mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
 		}
-		boolean b = IntentConstant.MERCHANT.equals(this.getIntent().getExtras().get(IntentConstant.USERTYPE));
-		
+
 		if (mContent == null) {
 			mContent = new MyRecordFragment();	
 		}
+		
 		setContentView(R.layout.content_frame);
+		
+        
+        
 		getSupportFragmentManager()
 		.beginTransaction()
 		.replace(R.id.content_frame, mContent)
@@ -52,6 +64,10 @@ public class SlidingmenuActivity extends BaseActivity {
 		}
 		// customize the SlidingMenu
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		
+		
+		
+
 	}
 	
 	
@@ -68,7 +84,7 @@ public class SlidingmenuActivity extends BaseActivity {
 		.commit();
 		getSlidingMenu().showContent();
 	}
-	
+
 
 }
 

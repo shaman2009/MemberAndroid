@@ -177,23 +177,22 @@
 
                 <ImageView
                     android:id="@+id/imageView_record_merchant_avator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@drawable/devfest_shanghai"
-                    android:src="@drawable/ic_launcher"
-                    tools:ignore="NestedWeights" />
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:contentDescription="@drawable/eye"
+                    android:src="@drawable/eye" />
 
                 <TextView
                     android:id="@+id/record_pic_upload_status"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:text="" />
 
                 <Button
                     android:id="@+id/record_pic_upload"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
                     android:text="@string/record_pic_upload" />

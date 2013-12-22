@@ -40,5 +40,13 @@
     <string name="record_update">更新檔案</string>
     <string name="record_pic_upload">上傳</string>
     <string name="record_pic_upload_status">上傳</string>
-
+    
+    
+    <!-- Tab  -->
+ 	<string name="tab_system_nofitication">系統通知</string>
+ 	<string name="tab_post">我要發佈</string>
+ 	<string name="tab_my_members">我的會員</string>
+ 	<string name="tab_timeline">優惠資訊</string>
+ 	<string name="tab_join_member">加入會員</string>
+ 	<string name="tab_my_merchant">我的商戶</string>
 </resources>

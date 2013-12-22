@@ -911,6 +911,7 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f08000f;
         public static final int activity_vertical_margin=0x7f080010;
+        public static final int list_detail_image_size=0x7f080019;
         public static final int list_padding=0x7f080013;
         public static final int list_status_response=0x7f080017;
         public static final int list_status_screen_name=0x7f080014;
@@ -1036,8 +1037,11 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
         public static final int devfest_shanghai=0x7f020070;
-        public static final int ic_launcher=0x7f020071;
-        public static final int shadow=0x7f020072;
+        public static final int error=0x7f020071;
+        public static final int eye=0x7f020072;
+        public static final int ic_launcher=0x7f020073;
+        public static final int placeholder=0x7f020074;
+        public static final int shadow=0x7f020075;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050025;
@@ -1079,8 +1083,8 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050018;
         public static final int abs__title=0x7f050020;
         public static final int abs__up=0x7f05000b;
-        public static final int action_forgot_password=0x7f050075;
-        public static final int action_settings=0x7f050076;
+        public static final int action_forgot_password=0x7f050076;
+        public static final int action_settings=0x7f050077;
         public static final int button1=0x7f05006c;
         public static final int button_record_register=0x7f05006a;
         public static final int checkbox_record_address=0x7f05005e;
@@ -1104,8 +1108,8 @@ containing a value of this type.
         public static final int email=0x7f05003a;
         public static final int fullscreen=0x7f050013;
         public static final int homeAsUp=0x7f050006;
-        public static final int imageView1=0x7f050071;
         public static final int imageView_record_merchant_avator=0x7f050054;
+        public static final int image_notification=0x7f050071;
         public static final int left=0x7f050010;
         public static final int listMode=0x7f050002;
         public static final int llStatus=0x7f050070;
@@ -1125,8 +1129,8 @@ containing a value of this type.
         public static final int register_merchant_button=0x7f050042;
         public static final int register_password=0x7f050041;
         public static final int right=0x7f050011;
-        public static final int row_icon=0x7f050072;
-        public static final int row_title=0x7f050073;
+        public static final int row_icon=0x7f050073;
+        public static final int row_title=0x7f050074;
         public static final int selected_view=0x7f050014;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
@@ -1134,13 +1138,14 @@ containing a value of this type.
         public static final int sign_in_member_button=0x7f05003e;
         public static final int sign_in_merchant_button=0x7f05003d;
         public static final int sign_in_register_button=0x7f05003f;
-        public static final int slidingmenumain=0x7f050074;
+        public static final int slidingmenumain=0x7f050075;
         public static final int tabMode=0x7f050003;
         public static final int textView=0x7f05006d;
         public static final int textView1=0x7f05006e;
         public static final int text_checkbox_record_address=0x7f05005f;
         public static final int text_checkbox_record_email=0x7f050061;
         public static final int text_checkbox_record_mobile=0x7f05005d;
+        public static final int text_notification=0x7f050072;
         public static final int text_record_address=0x7f05004c;
         public static final int text_record_email=0x7f05004e;
         public static final int text_record_info=0x7f050052;
@@ -1292,6 +1297,14 @@ containing a value of this type.
         public static final int record_type=0x7f040029;
         public static final int record_update=0x7f040034;
         public static final int register_notice=0x7f040021;
+        public static final int tab_join_member=0x7f04003b;
+        public static final int tab_my_members=0x7f040039;
+        public static final int tab_my_merchant=0x7f04003c;
+        public static final int tab_post=0x7f040038;
+        /**  Tab  
+         */
+        public static final int tab_system_nofitication=0x7f040037;
+        public static final int tab_timeline=0x7f04003a;
         public static final int title_activity_login=0x7f040014;
         public static final int title_activity_merchant_register=0x7f040013;
         public static final int title_activity_register=0x7f040012;

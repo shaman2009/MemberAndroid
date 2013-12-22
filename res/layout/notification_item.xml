@@ -9,7 +9,7 @@
     android:paddingTop="8sp" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/image_notification"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="3"
@@ -17,7 +17,7 @@
             android:src="@drawable/ic_launcher" />
 
         <TextView
-            android:id="@+id/text_record_merchant_name"
+            android:id="@+id/text_notification"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/register_notice" 
