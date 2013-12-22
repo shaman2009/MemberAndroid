@@ -8,6 +8,13 @@ Android client of memberapp
 
 - [JakeWharton/ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
 - [jfeinstein10/SlidingMenu](https://github.com/jfeinstein10/SlidingMenu)
+- [qiniu / android-sdk](https://github.com/qiniu/android-sdk/tree/v6.0.0)
+
+
+引用Jar包
+- [square/okhttp](https://github.com/square/okhttp)
+- [square/picasso](https://github.com/square/picasso)
+
 
 
 How to run this Android Project
