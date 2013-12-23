@@ -33,6 +33,15 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
+            <EditText
+                android:id="@+id/register_alias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_alias"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
+
             <Button
                 android:id="@+id/register_merchant_button"
                 android:layout_width="wrap_content"
@@ -56,9 +65,9 @@
             <TextView
                 android:id="@+id/text_register_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="20dp"
                 android:paddingLeft="28dp"
                 android:paddingRight="28dp"
                 android:text="@string/register_notice"
