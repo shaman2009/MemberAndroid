@@ -8,7 +8,8 @@ Android client of memberapp
 
 - [JakeWharton/ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
 - [jfeinstein10/SlidingMenu](https://github.com/jfeinstein10/SlidingMenu)
-- [qiniu / android-sdk](https://github.com/qiniu/android-sdk/tree/v6.0.0)
+- [qiniu/android-sdk](https://github.com/qiniu/android-sdk/tree/v6.0.0)
+- [google/volley](https://android.googlesource.com/platform/frameworks/volley)
 
 
 引用Jar包
