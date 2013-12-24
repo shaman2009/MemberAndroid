@@ -5,6 +5,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">電郵</string>
     <string name="prompt_password">密碼</string>
+    <string name="prompt_alias">暱稱</string>
     <string name="action_sign_in_merchant">商戶登入</string>
     <string name="action_sign_in_member">會員登入</string>
     <string name="action_register">申請加入</string>

@@ -8,5 +8,8 @@
     <string name="title_activity_slidingmenu">SlidingmenuActivity</string>
     <string name="title_activity_register">註冊</string>
     <string name="title_activity_merchant_register">商戶註冊</string>
+    
+    <!-- Toast -->
+    <string name="toast_message_register_failed">註冊失敗</string>
 
 </resources>

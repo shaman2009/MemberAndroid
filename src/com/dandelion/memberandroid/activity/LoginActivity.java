@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.IntentConstant;
+import com.dandelion.memberandroid.volley.MyVolley;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -55,7 +56,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		MyVolley.init(this);
 		setContentView(R.layout.activity_login);
 
 		// Set up the login form.
