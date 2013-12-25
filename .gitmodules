@@ -1,6 +1,6 @@
 [submodule "thirdparty/sliding-menu"]
 	path = thirdparty/sliding-menu
-	url = https://github.com/jfeinstein10/SlidingMenu.git
+	url = https://github.com/ThrowDice/SlidingMenu.git
 [submodule "thirdparty/volley"]
 	path = thirdparty/volley
 	url = https://android.googlesource.com/platform/frameworks/volley
