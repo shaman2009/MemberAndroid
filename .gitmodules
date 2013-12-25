@@ -1,3 +1,9 @@
 [submodule "thirdparty/sliding-menu"]
 	path = thirdparty/sliding-menu
 	url = https://github.com/jfeinstein10/SlidingMenu.git
+[submodule "thirdparty/volley"]
+	path = thirdparty/volley
+	url = https://android.googlesource.com/platform/frameworks/volley
+[submodule "thirdparty/qiniu"]
+	path = thirdparty/qiniu
+	url = https://github.com/qiniu/android-sdk.git

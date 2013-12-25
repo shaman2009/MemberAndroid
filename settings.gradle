@@ -1,1 +1,4 @@
+include ":app"
 include ":thirdparty:sliding-menu:library"
+include ":thirdparty:volley"
+include ":thirdparty:qiniu"
