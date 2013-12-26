@@ -6,4 +6,4 @@
 	url = https://android.googlesource.com/platform/frameworks/volley
 [submodule "thirdparty/qiniu"]
 	path = thirdparty/qiniu
-	url = https://github.com/qiniu/android-sdk.git
+	url = https://github.com/ThrowDice/android-sdk.git
