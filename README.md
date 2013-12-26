@@ -7,8 +7,8 @@ Build instructions
 ------------------
 
 Dependency:
-# Gradle 1.8
-# Android Studio
+- Gradle 1.8
+- Android Studio
 
 Setup:
 
