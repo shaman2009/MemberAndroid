@@ -15,4 +15,13 @@ public class MemberappApi {
 		j.put("accountType", accountType);
 		HttpRequestViaVolley.httpRequest(WebserviceConstant.REGISTER_URI, WebserviceConstant.REGISTER_METHOD, j.toString(), listener, errorListener);
 	}
+
+    public static void login(String email, String password, String packageName, String identifier,Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
+        JSONObject j = new JSONObject();
+        j.put("packageName", packageName);
+        j.put("email", email);
+        j.put("password", password);
+        j.put("identifier", identifier);
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.LOGIN_URI, WebserviceConstant.LOGIN_METHOD, j.toString(), listener, errorListener);
+    }
 }

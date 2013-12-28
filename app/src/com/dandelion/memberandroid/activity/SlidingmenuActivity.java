@@ -75,7 +75,7 @@ public class SlidingmenuActivity extends BaseActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, "mContent", mContent);
+//        getSupportFragmentManager().putFragment(outState, "mContent", mContent);
     }
 
     public void switchContent(Fragment fragment) {

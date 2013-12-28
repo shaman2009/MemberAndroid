@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.dao.MemberDao;
 import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
 
 public class MerchantRegisterActivity extends FragmentActivity {
@@ -20,6 +23,12 @@ public class MerchantRegisterActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		if (mContent == null)
 			mContent = new MerchantRegisterFragment();
+
+
+        MemberDao memberDao = new MemberDao(this);
+        String sid = memberDao.getAccountSid();
+        Log.i(LoggerConstant.DATABASE_LOGGER,sid);
+
 
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, mContent).commit();

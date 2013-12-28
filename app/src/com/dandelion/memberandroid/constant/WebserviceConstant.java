@@ -12,11 +12,11 @@ public class WebserviceConstant {
 	
 	public static final String LOGIN_URI = HOST + "/Login";
 	public static final int LOGIN_METHOD = Method.POST;
-	
-	
-	
-	
-	
+
+
+
+
+    public static String PACKAGE_NAME = "com.dandelion.memberandroid";
 	
 	
 	

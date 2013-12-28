@@ -51,7 +51,9 @@
     <string name="my_members_applying">申請中</string>
 
     <string name="button_my_post">發佈優惠信息</string>
-    
+    <string name="button_post">發佈</string>
+    <string name="button_add_photo">上傳圖片</string>
+
     <!-- Tab  -->
  	<string name="tab_system_nofitication">系統通知</string>
  	<string name="tab_post">我要發佈</string>

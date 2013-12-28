@@ -86,6 +86,7 @@ public class MyRecordFragment extends Fragment {
 			hint.setText("上傳中，請稍後");
 			return;
 		}
+
 		uploading = true;
 		final String key = UUID.randomUUID().toString();
 		// 上传文件名
