@@ -29,7 +29,7 @@ public class NotificationListAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 	    ViewHolder holder;
 	    if (convertView == null) {
-	    	convertView = LayoutInflater.from(context).inflate(R.layout.notification_item, parent, false);
+	    	convertView = LayoutInflater.from(context).inflate(R.layout.item_notification, parent, false);
 	      holder = new ViewHolder();
 	      holder.image = (ImageView) convertView.findViewById(R.id.image_notification);
 	      holder.text = (TextView) convertView.findViewById(R.id.text_notification);
@@ -40,7 +40,7 @@ public class NotificationListAdapter extends BaseAdapter{
 
 	    // Get the image URL for the current position.
 	    NotificationMessagePO notificationMessage = (NotificationMessagePO) getItem(position);
-	    String url = notificationMessage.getAvatorUrl();
+	    String url = notificationMessage.getAvatarUrl();
 	    holder.text.setText(notificationMessage.getContext());
 	    
 
@@ -80,10 +80,10 @@ public class NotificationListAdapter extends BaseAdapter{
 		List<NotificationMessagePO> fakeNotificationData = new ArrayList<NotificationMessagePO>();
 		NotificationMessagePO notificationMessagePO1 = new NotificationMessagePO();
 		NotificationMessagePO notificationMessagePO2 = new NotificationMessagePO();
-		notificationMessagePO1.setAvatorUrl("http://img.hb.aicdn.com/c46ff78ec3a4013cdba090c690407a2ac106aacf13209-4Zazxz_fw658");
+		notificationMessagePO1.setAvatarUrl("http://img.hb.aicdn.com/dd36a7f1de13a98fb19d52374f8dd0581fc223da3b2f-kGpGMz_fw658");
 		notificationMessagePO1.setContext("Shaman 想要加入成為你的會員");
 		fakeNotificationData.add(notificationMessagePO1);
-		notificationMessagePO2.setAvatorUrl("http://img.hb.aicdn.com/a284ebacc7f6fc0fd2a9573d2d22e30146b9195513db5-xeRWvB_fw658");
+		notificationMessagePO2.setAvatarUrl("http://img.hb.aicdn.com/70c88c4d3f3f19df2f14ff33f1fe5219312564266b82-CFNhBE_fw658");
 		notificationMessagePO2.setContext("Daniel 發佈了更新");
 		fakeNotificationData.add(notificationMessagePO2);
 		return fakeNotificationData;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20px">
+
+    <LinearLayout  android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/post_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="發佈優惠信息"
+        android:gravity="left|top"
+        android:inputType="textMultiLine"
+        android:layout_weight="1"
+        />
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/imageView_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:contentDescription="@drawable/eye"
+            android:src="@drawable/eye" />
+    </LinearLayout>
+
+    <LinearLayout  android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button android:id="@+id/buttton_at"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text=""
+            android:layout_weight="1"
+            android:onClick="onAtButtonClick">
+        </Button>
+        <Button android:id="@+id/button_submit"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text=""
+            android:layout_weight="2"
+            android:onClick="onSubmitButtonClick">
+        </Button>
+    </LinearLayout >
+</RelativeLayout >

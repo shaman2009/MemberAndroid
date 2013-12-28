@@ -41,7 +41,16 @@
     <string name="record_update">更新檔案</string>
     <string name="record_pic_upload">上傳</string>
     <string name="record_pic_upload_status">上傳</string>
-    
+
+
+    <!-- My Members-->
+    <string name="my_members_total_score">累計積分</string>
+    <string name="my_members_total_cost">累計消費金額</string>
+    <string name="my_members_total_times">累計消費次數</string>
+    <string name="my_members_add_score">添加積分</string>
+    <string name="my_members_applying">申請中</string>
+
+    <string name="button_my_post">發佈優惠信息</string>
     
     <!-- Tab  -->
  	<string name="tab_system_nofitication">系統通知</string>

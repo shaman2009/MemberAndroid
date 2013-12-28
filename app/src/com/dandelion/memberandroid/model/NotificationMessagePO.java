@@ -1,13 +1,13 @@
 package com.dandelion.memberandroid.model;
 
 public class NotificationMessagePO {
-	private String avatorUrl;
+	private String avatarUrl;
 	private String context;
-	public String getAvatorUrl() {
-		return avatorUrl;
+	public String getAvatarUrl() {
+		return avatarUrl;
 	}
-	public void setAvatorUrl(String avatorUrl) {
-		this.avatorUrl = avatorUrl;
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
 	}
 	public String getContext() {
 		return context;

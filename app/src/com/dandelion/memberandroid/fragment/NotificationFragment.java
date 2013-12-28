@@ -1,6 +1,5 @@
 package com.dandelion.memberandroid.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.activity.SlidingmenuActivity;
 import com.dandelion.memberandroid.adapter.NotificationListAdapter;
 
 public class NotificationFragment extends Fragment{
