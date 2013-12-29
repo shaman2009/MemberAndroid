@@ -70,4 +70,12 @@
     <string name="account_logout_message">確定登出？</string>
     <string name="account_logout_cancel">取消</string>
     <string name="account_logout_sure">確定</string>
+
+
+
+    <!--Timeline -->
+    <string name="timeline_merchant_name">商戶姓名</string>
+    <string name="timeline_content">新產品， 會員優先試用 ！！！</string>
+    <string name="timeline_get_details">查看詳情</string>
+    <string name="timeline_share_info">分享好友</string>
 </resources>

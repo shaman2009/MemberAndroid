@@ -15,7 +15,10 @@ import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.IntentConstant;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
+import com.dandelion.memberandroid.fragment.JoinMemberFragment;
+import com.dandelion.memberandroid.fragment.MemberTimelineFragment;
 import com.dandelion.memberandroid.fragment.MyMembersFragment;
+import com.dandelion.memberandroid.fragment.MyMerchantsFragment;
 import com.dandelion.memberandroid.fragment.MyPostFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
@@ -88,14 +91,26 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         int x = tab.getPosition();
-
+        int accountType = authAccount.getAccountType();
         Fragment f = new NotificationFragment();
-        if (x == 0) {
-            f = new NotificationFragment();
-        } else if (x == 1) {
-            f = new MyPostFragment();
-        } else if (x == 2) {
-            f = new MyMembersFragment();
+        if (WebserviceConstant.ACCOUNT_TYPE_MERCHANT == accountType) {
+            if (x == 0) {
+                f = new NotificationFragment();
+            } else if (x == 1) {
+                f = new MyPostFragment();
+            } else if (x == 2) {
+                f = new MyMembersFragment();
+            }
+        } else {
+            if (WebserviceConstant.ACCOUNT_TYPE_MEMBER == accountType) {
+                if (x == 0) {
+                    f = new MemberTimelineFragment();
+                } else if (x == 1) {
+                    f = new JoinMemberFragment();
+                } else if (x == 2) {
+                    f = new MyMerchantsFragment();
+                }
+            }
         }
 
 

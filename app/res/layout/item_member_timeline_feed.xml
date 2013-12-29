@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llStatus"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="8sp"
+    android:paddingLeft="8sp"
+    android:paddingTop="8sp">
+
+    <ImageView
+        android:id="@+id/image_timeline_merchant_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@drawable/devfest_shanghai"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/timeline_merchant_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/timeline_merchant_name"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/timeline_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/timeline_content"
+            android:layout_weight="1" />
+
+        <LinearLayout  android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:id="@+id/timeline_share_info"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeline_share_info" />
+
+            <Button
+                android:id="@+id/timeline_get_details"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeline_get_details" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

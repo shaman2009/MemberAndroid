@@ -39,7 +39,7 @@ public class MemberMenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0:
-			newContent = new ColorFragment(android.R.color.white);
+			newContent = new MemberTimelineFragment();
 			break;
 		case 1:
 			newContent = new MyRecordFragment();
@@ -48,7 +48,7 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new ColorFragment(android.R.color.white);
 			break;
 		case 3:
-			newContent = new ColorFragment(android.R.color.white);
+			newContent = new ColorFragment(android.R.color.black);
 			break;
 		case 4:
             new AlertDialog.Builder(getActivity())

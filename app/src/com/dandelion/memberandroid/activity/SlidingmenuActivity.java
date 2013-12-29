@@ -8,6 +8,7 @@ import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.fragment.MemberMenuFragment;
+import com.dandelion.memberandroid.fragment.MemberTimelineFragment;
 import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
 import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
@@ -39,8 +40,18 @@ public class SlidingmenuActivity extends BaseActivity {
             mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
         }
 
+
+        accountService = new AccountService(this);
+        authAccount = accountService.getAuthAccount();
+        int accountType = authAccount.getAccountType();
+
         if (mContent == null) {
-            mContent = new MyRecordFragment();
+            if (WebserviceConstant.ACCOUNT_TYPE_MERCHANT == accountType) {
+                mContent = new NotificationFragment();
+            } else {
+                mContent = new MemberTimelineFragment();
+            }
+
         }
 
         setContentView(R.layout.content_frame);
@@ -51,9 +62,6 @@ public class SlidingmenuActivity extends BaseActivity {
                 .replace(R.id.content_frame, mContent)
                 .commit();
 
-        accountService = new AccountService(this);
-        authAccount = accountService.getAuthAccount();
-        int accountType = authAccount.getAccountType();
         if (WebserviceConstant.ACCOUNT_TYPE_MERCHANT == accountType) {
             // set the Behind View
             setBehindContentView(R.layout.menu_frame);
@@ -90,7 +98,7 @@ public class SlidingmenuActivity extends BaseActivity {
         getSlidingMenu().showContent();
 
 
-        if (fragment instanceof NotificationFragment || fragment instanceof MyMembersFragment) {
+        if (fragment instanceof NotificationFragment || fragment instanceof MemberTimelineFragment) {
             getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             if (getSupportActionBar().getTabCount() != 3) {
                 for (int i = 0; i <= 2; i++) {

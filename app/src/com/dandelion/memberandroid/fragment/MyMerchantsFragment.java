@@ -11,7 +11,10 @@ import android.widget.ListView;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.adapter.MyPostListAdapter;
 
-public class MyPostFragment extends Fragment {
+/**
+ * Created by FengxiangZhu on 13-12-29.
+ */
+public class MyMerchantsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
