@@ -13,15 +13,21 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.MenuItem;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.IntentConstant;
+import com.dandelion.memberandroid.constant.WebserviceConstant;
+import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyPostFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.dandelion.memberandroid.fragment.SlidingFragment;
+import com.dandelion.memberandroid.service.AccountService;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity implements ActionBar.TabListener {
+
+    private AccountService accountService;
+    private Account authAccount;
 
     private int mTitleRes;
     protected ListFragment mFrag;
@@ -34,7 +40,9 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String userType = (String) this.getIntent().getExtras().get(IntentConstant.USERTYPE);
+        accountService = new AccountService(this);
+        authAccount = accountService.getAuthAccount();
+
         setTitle(mTitleRes);
         // set the Behind View
         setBehindContentView(R.layout.menu_frame);
@@ -60,7 +68,7 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         for (int i = 0; i <= 2; i++) {
-            List<String> list = initTabNames(userType);
+            List<String> list = initTabNames();
 
             ActionBar.Tab tab = getSupportActionBar().newTab();
             tab.setText(list.get(i));
@@ -111,13 +119,14 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
         getSlidingMenu().showContent();
     }
 
-    public List<String> initTabNames(String str) {
+    public List<String> initTabNames() {
+        int accountType = authAccount.getAccountType();
         List<String> list = new ArrayList<String>();
-        if (str.equals(IntentConstant.MERCHANT)) {
+        if (WebserviceConstant.ACCOUNT_TYPE_MERCHANT == accountType) {
             list.add(getString(R.string.tab_system_nofitication));
             list.add(getString(R.string.tab_post));
             list.add(getString(R.string.tab_my_members));
-        } else if (str.equals(IntentConstant.MEMBER)) {
+        } else if (WebserviceConstant.ACCOUNT_TYPE_MEMBER == accountType) {
             list.add(getString(R.string.tab_timeline));
             list.add(getString(R.string.tab_join_member));
             list.add(getString(R.string.tab_my_merchant));

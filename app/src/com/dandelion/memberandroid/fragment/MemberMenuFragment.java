@@ -1,6 +1,9 @@
 package com.dandelion.memberandroid.fragment;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -11,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.activity.LoginActivity;
 import com.dandelion.memberandroid.activity.SlidingmenuActivity;
+import com.dandelion.memberandroid.service.AccountService;
 
 public class MemberMenuFragment extends ListFragment {
 	
@@ -34,10 +39,10 @@ public class MemberMenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0:
-			newContent = new MyRecordFragment();
+			newContent = new ColorFragment(android.R.color.white);
 			break;
 		case 1:
-			newContent = new ColorFragment(android.R.color.white);
+			newContent = new MyRecordFragment();
 			break;
 		case 2:
 			newContent = new ColorFragment(android.R.color.white);
@@ -46,14 +51,21 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new ColorFragment(android.R.color.white);
 			break;
 		case 4:
-			newContent = new ColorFragment(android.R.color.white);
-			break;
-		case 5:
-			newContent = new ColorFragment(android.R.color.white);
-			break;
-		case 6:
-			newContent = new ColorFragment(android.R.color.white);
-			break;
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(getActivity().getString(R.string.account_logout))
+                    .setMessage(getActivity().getString(R.string.account_logout_message))
+                    .setNegativeButton(getActivity().getString(R.string.account_logout_cancel), null)
+                    .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            AccountService accountService = new AccountService(getActivity());
+                            accountService.deleteAllAccounts();
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                    }).show();
+            break;
 		}
 		if (newContent != null)
 			switchFragment(newContent);

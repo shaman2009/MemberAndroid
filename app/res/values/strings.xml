@@ -11,5 +11,6 @@
     
     <!-- Toast -->
     <string name="toast_message_register_failed">註冊失敗</string>
+    <string name="toast_message_login_failed">登陸失敗</string>
 
 </resources>

@@ -17,11 +17,12 @@ public class WebserviceConstant {
 
 
     public static String PACKAGE_NAME = "com.dandelion.memberandroid";
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	public static final int ACCOUNT_TYPE_MERCHANT = 1;
 	public static final int ACCOUNT_TYPE_MEMBER = 0;
 }

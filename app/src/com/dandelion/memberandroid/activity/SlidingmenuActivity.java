@@ -1,31 +1,31 @@
 package com.dandelion.memberandroid.activity;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.constant.IntentConstant;
+import com.dandelion.memberandroid.constant.WebserviceConstant;
+import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.fragment.MemberMenuFragment;
 import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
-import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
 import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
+import com.dandelion.memberandroid.service.AccountService;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+import java.util.List;
 
 public class SlidingmenuActivity extends BaseActivity {
 
     private Fragment mContent;
 
-    /**
-     * @param titleRes
-     */
+
+    private AccountService accountService;
+    private Account authAccount;
+
+
     public SlidingmenuActivity() {
         super(R.string.app_name);
     }
@@ -33,8 +33,7 @@ public class SlidingmenuActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String userType = (String) this.getIntent().getExtras().get(IntentConstant.USERTYPE);
-        boolean b = IntentConstant.MERCHANT.equals(userType);
+
         // set the Above View
         if (savedInstanceState != null) {
             mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
@@ -51,7 +50,11 @@ public class SlidingmenuActivity extends BaseActivity {
                 .beginTransaction()
                 .replace(R.id.content_frame, mContent)
                 .commit();
-        if (b) {
+
+        accountService = new AccountService(this);
+        authAccount = accountService.getAuthAccount();
+        int accountType = authAccount.getAccountType();
+        if (WebserviceConstant.ACCOUNT_TYPE_MERCHANT == accountType) {
             // set the Behind View
             setBehindContentView(R.layout.menu_frame);
             getSupportFragmentManager()
@@ -91,7 +94,7 @@ public class SlidingmenuActivity extends BaseActivity {
             getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             if (getSupportActionBar().getTabCount() != 3) {
                 for (int i = 0; i <= 2; i++) {
-                    List<String> list = initTabNames(IntentConstant.MERCHANT);
+                    List<String> list = initTabNames();
                     ActionBar.Tab tab = getSupportActionBar().newTab();
                     tab.setText(list.get(i));
                     tab.setTabListener(this);

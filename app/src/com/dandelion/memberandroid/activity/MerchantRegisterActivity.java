@@ -25,9 +25,6 @@ public class MerchantRegisterActivity extends FragmentActivity {
 			mContent = new MerchantRegisterFragment();
 
 
-        MemberDao memberDao = new MemberDao(this);
-        String sid = memberDao.getAccountSid();
-        Log.i(LoggerConstant.DATABASE_LOGGER,sid);
 
 
 		getSupportFragmentManager().beginTransaction()

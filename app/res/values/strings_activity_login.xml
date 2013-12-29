@@ -6,9 +6,8 @@
     <string name="prompt_email">電郵</string>
     <string name="prompt_password">密碼</string>
     <string name="prompt_alias">暱稱</string>
-    <string name="action_sign_in_merchant">商戶登入</string>
-    <string name="action_sign_in_member">會員登入</string>
-    <string name="action_register">申請加入</string>
+    <string name="action_sign_in">登入</string>
+    <string name="action_register">註冊</string>
     <string name="action_sign_in_short">登陸</string>
     <string name="action_forgot_password">Recover lost password</string>
     <string name="login_progress_signing_in">Signing in&#8230;</string>
@@ -19,7 +18,9 @@
     <string name="register_notice">點擊【會員註冊】，即表示您同意接受我們的隱私聲明及使用條款</string>
     <string name="action_register_merchant">商戶註冊</string>
     <string name="action_register_member">會員註冊</string>
-    
+
+
+    <string name="register_progress_register">註冊中...</string>
     
     <!-- My Document Fragment -->
     <string name="record_merchant_no">商號</string>
@@ -61,4 +62,12 @@
  	<string name="tab_timeline">優惠資訊</string>
  	<string name="tab_join_member">加入會員</string>
  	<string name="tab_my_merchant">我的商戶</string>
+
+
+    <!-- Logout -->
+
+    <string name="account_logout">登出</string>
+    <string name="account_logout_message">確定登出？</string>
+    <string name="account_logout_cancel">取消</string>
+    <string name="account_logout_sure">確定</string>
 </resources>
