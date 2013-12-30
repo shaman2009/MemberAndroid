@@ -1,18 +1,24 @@
 package com.dandelion.memberandroid.adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.activity.MemberTimelineFeedDetailActivity;
+import com.dandelion.memberandroid.fragment.MemberTimelineFeedDetailFragment;
 import com.dandelion.memberandroid.model.MemberTimelineFeedPO;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +31,21 @@ public class MemberTimelineListAdapter extends BaseAdapter {
     private List<MemberTimelineFeedPO> notificationData = new ArrayList<MemberTimelineFeedPO>();
 
 
-    public MemberTimelineListAdapter(Context context) {
+    static class ViewHolder {
+        ImageView image;
+        TextView timeline_merchant_name;
+        TextView timeline_content;
+    }
+
+    public MemberTimelineListAdapter(Context context, List<MemberTimelineFeedPO> data) {
         this.context = context;
         //TODO
-        notificationData = fakeData();
+        notificationData = data;
     }
+
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_member_timeline_feed, parent, false);
@@ -44,19 +58,38 @@ public class MemberTimelineListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
         // Get the image URL for the current position.
         MemberTimelineFeedPO memberTimelineFeedPO = (MemberTimelineFeedPO) getItem(position);
-        String url = memberTimelineFeedPO.getMerchantAvatarUrl();
-        String feedTitile = memberTimelineFeedPO.getFeedTitle();
-        String merchantName = memberTimelineFeedPO.getMerchantName();
+        final String feedImageUrl = memberTimelineFeedPO.getMerchantAvatarUrl();
+        final String feedTitle = memberTimelineFeedPO.getFeedTitle();
+        final String feedMerchantName= memberTimelineFeedPO.getMerchantName();
+        final String feedContent = memberTimelineFeedPO.getFeedContent();
 
 
+        Button btn = (Button) convertView.findViewById(R.id.timeline_get_details);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle arguments = new Bundle();
+                arguments.putString(MemberTimelineFeedDetailFragment.FEED_MERCHANT_NAME, feedMerchantName);
+                arguments.putString(MemberTimelineFeedDetailFragment.FEED_TITLE, feedTitle);
+                arguments.putString(MemberTimelineFeedDetailFragment.FEED_CONTENT, feedContent);
+                arguments.putString(MemberTimelineFeedDetailFragment.FEED_IMAGE_URL, feedImageUrl);
 
-        holder.timeline_merchant_name.setText(merchantName);
-        holder.timeline_content.setText(feedTitile);
+                showDetails(arguments);
+//                new AlertDialog.Builder(parent.getContext()).
+//                        setView(funtion("Hello World!", parent))
+//                        .show();
+            }
+        });
+
+
+        holder.timeline_merchant_name.setText(feedMerchantName);
+        holder.timeline_content.setText(feedTitle);
         // Trigger the download of the URL asynchronously into the image view.
         Picasso.with(context)
-                .load(url)
+                .load(feedImageUrl)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
                 .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
@@ -82,28 +115,18 @@ public class MemberTimelineListAdapter extends BaseAdapter {
     }
 
 
+    private void showDetails(Bundle arguments) {
 
+        Intent intent = new Intent(context, MemberTimelineFeedDetailActivity.class);
+        intent.putExtras(arguments);
+        context.startActivity(intent);
 
-
-
-    public List<MemberTimelineFeedPO> fakeData() {
-        List<MemberTimelineFeedPO> fakeNotificationData = new ArrayList<MemberTimelineFeedPO>();
-        MemberTimelineFeedPO memberTimelineFeedPO1 = new MemberTimelineFeedPO();
-        MemberTimelineFeedPO memberTimelineFeedPO2 = new MemberTimelineFeedPO();
-        memberTimelineFeedPO1.setMerchantAvatarUrl("http://img.hb.aicdn.com/111f25fd751d819e22dda0ad53ef9ac7744af58bef2d-FVGRoR_fw236");
-        memberTimelineFeedPO1.setFeedTitle("会员 10% OFF");
-        memberTimelineFeedPO1.setMerchantName("自家點心");
-        fakeNotificationData.add(memberTimelineFeedPO1);
-        memberTimelineFeedPO2.setMerchantAvatarUrl("http://img.hb.aicdn.com/86ff3a78aa9863f2e8947da6764d9dc5e1a8eb1110f93-xMNJMr_fw236");
-        memberTimelineFeedPO2.setFeedTitle("新產品 會員優先試用");
-        memberTimelineFeedPO2.setMerchantName("精記蛋捲");
-        fakeNotificationData.add(memberTimelineFeedPO2);
-        return fakeNotificationData;
     }
 
-    static class ViewHolder {
-        ImageView image;
-        TextView timeline_merchant_name;
-        TextView timeline_content;
+    public View funtion(String title, ViewGroup parent) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_member_timeline_feed, parent, false);
+        return view;
     }
+
+
 }

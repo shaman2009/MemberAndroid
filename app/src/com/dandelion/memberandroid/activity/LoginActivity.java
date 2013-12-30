@@ -49,7 +49,7 @@ public class LoginActivity extends Activity {
     private TextView mLoginStatusMessageView;
 
     //Service
-    AccountService accountService;
+    private AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +59,11 @@ public class LoginActivity extends Activity {
         if (accountService.isAccountExist()) {
             loginSuccess();
         }
-
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
-        mEmailView = (EditText) findViewById(R.id.email);
+        initWidget();
         mEmailView.setText(mEmail);
-
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id,
@@ -78,11 +75,6 @@ public class LoginActivity extends Activity {
                 return false;
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mLoginStatusView = findViewById(R.id.login_status);
-        mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
-
         findViewById(R.id.sign_in_merchant_button).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -90,8 +82,6 @@ public class LoginActivity extends Activity {
                         attemptLogin();
                     }
                 });
-
-
         findViewById(R.id.sign_in_register_button).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -199,6 +189,15 @@ public class LoginActivity extends Activity {
             mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }
+
+
+    public void initWidget() {
+        mEmailView = (EditText) findViewById(R.id.email);
+        mPasswordView = (EditText) findViewById(R.id.password);
+        mLoginFormView = findViewById(R.id.login_form);
+        mLoginStatusView = findViewById(R.id.login_status);
+        mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
     }
 
     public void register() {

@@ -10,7 +10,7 @@
     <string name="action_register">註冊</string>
     <string name="action_sign_in_short">登陸</string>
     <string name="action_forgot_password">Recover lost password</string>
-    <string name="login_progress_signing_in">Signing in&#8230;</string>
+    <string name="login_progress_signing_in">玩命登錄中...</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -20,8 +20,9 @@
     <string name="action_register_member">會員註冊</string>
 
 
-    <string name="register_progress_register">註冊中...</string>
-    
+    <string name="register_progress_register">努力註冊中...</string>
+    <string name="timeline_progress_loading">拼命加載中...</string>
+
     <!-- My Document Fragment -->
     <string name="record_merchant_no">商號</string>
     <string name="record_merchant_name">店名</string>

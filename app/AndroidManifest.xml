@@ -55,6 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dandelion.memberandroid.activity.LoginActivity" />
         </activity>
+        <activity
+            android:name="com.dandelion.memberandroid.activity.MemberTimelineFeedDetailActivity"
+            android:label="@string/title_activity_member_timeline_feed_detail"
+            android:parentActivityName="com.dandelion.memberandroid.activity.SlidingmenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.SlidingmenuActivity" />
+        </activity>
     </application>
 
 </manifest>

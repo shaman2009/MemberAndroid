@@ -45,6 +45,7 @@ public class MyPostFragment extends Fragment {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, new PostFeedFragment())
+                .addToBackStack(null)
                 .commit();
     }
 }

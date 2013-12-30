@@ -2,14 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <Button
-        android:id="@+id/button_my_post"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/layout_my_post"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_my_post" />
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/button_my_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:text="@string/button_my_post" />
+    </LinearLayout>
+
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_below="@id/button_my_post"
+        android:layout_below="@id/layout_my_post"
         android:id="@+id/my_post_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
