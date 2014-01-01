@@ -25,12 +25,16 @@ import com.qiniu.io.IO;
 import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
 
-public class MyRecordFragment extends Fragment {
+public class MerchantMyRecordFragment extends Fragment {
 
+    //UI
 	private Button btnUpload;
 	private TextView hint;
 	private ImageView image;
 
+
+    //VALUE
+    private String imagekey;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,26 +92,17 @@ public class MyRecordFragment extends Fragment {
 		}
 
 		uploading = true;
-		final String key = UUID.randomUUID().toString();
+        imagekey = UUID.randomUUID().toString();
 		// 上传文件名
 		PutExtra extra = new PutExtra();
 		extra.checkCrc = PutExtra.AUTO_CRC32;
 		extra.params.put("x:arg", "value");
 		hint.setText("上傳中...");
-		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
+		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, imagekey, uri, extra, new JSONObjectRet() {
 			@Override
 			public void onSuccess(JSONObject resp) {
 				uploading = false;
-				String hash;
-				String value;
-				try {
-					hash = resp.getString("hash");
-					value = resp.getString("x:arg");
-				} catch (Exception ex) {
-					hint.setText(ex.getMessage());
-					return;
-				}
-				String redirect = "http://" + QiNiuConstant.DOWNLOAD_DOMAIN + "/" + key;
+				String redirect = QiNiuConstant.getImageDownloadURL(imagekey);
 				hint.setText("上傳成功！ ");
 				Log.d("QINIU_UPLOAD", "redirect : " + redirect);
 				downloadViaPicasso(getActivity(), redirect);

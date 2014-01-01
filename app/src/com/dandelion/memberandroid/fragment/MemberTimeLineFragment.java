@@ -24,13 +24,18 @@ import com.dandelion.memberandroid.activity.MemberTimelineFeedDetailActivity;
 import com.dandelion.memberandroid.activity.SlidingmenuActivity;
 import com.dandelion.memberandroid.adapter.MemberTimelineListAdapter;
 import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.model.MemberTimelineFeedPO;
+import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.util.DeviceUtil;
 import com.dandelion.memberandroid.volley.MemberappApi;
+import com.dandelion.memberandroid.volley.MyVolley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,16 +47,21 @@ public class MemberTimelineFragment extends Fragment {
 
 
 
+    //UI
+    private View mListView;
+    private View mLoadingStatusView;
+
+    private MemberTimelineListAdapter memberTimelineListAdapter;
 
 
+    //VALUE
+    private String sid;
+    private Long userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-    //UI
-    private View mListView;
-    private View mLoadingStatusView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,14 +71,16 @@ public class MemberTimelineFragment extends Fragment {
     @Override
     public void onStart() {
         initWidget();
+
+
+        memberTimelineListAdapter = new MemberTimelineListAdapter(getActivity());
+        ListView listView = (ListView) getActivity().findViewById(R.id.list_member_timeline_feed);
+        listView.setAdapter(memberTimelineListAdapter);
+        listView.setFastScrollEnabled(true);
+        getTimeLineData();
         showProgress(true);
-        getData();
         super.onStart();
     }
-
-
-
-
 
     private void initWidget() {
         mListView = getActivity().findViewById(R.id.list_member_timeline_feed);
@@ -76,13 +88,53 @@ public class MemberTimelineFragment extends Fragment {
     }
 
 
-    public void getData() {
-        try {
-            MemberappApi.login("001@qq.com", "34555", WebserviceConstant.PACKAGE_NAME, DeviceUtil.getWIFIMacAddress(getActivity()), loginListener, loginErrorListener);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void getTimeLineData() {
+        AccountService service = new AccountService(getActivity());
+        sid = service.getAuthAccount().getSid();
+        userId = service.getAuthAccount().getUsdId();
+        MemberappApi.getTimeline(userId, sid, timelineListener, timelineErrorListener);
     }
+    Response.Listener<String> timelineListener = new Response.Listener<String>() {
+
+        @Override
+        public void onResponse(String response) {
+            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+            List<MemberTimelineFeedPO> data = new ArrayList<MemberTimelineFeedPO>();
+            try {
+                JSONObject responseJson = new JSONObject(response);
+                JSONArray responseJsonArray = responseJson.getJSONArray("feedList");
+                for (int i = 0; i < responseJsonArray.length(); i++) {
+                    MemberTimelineFeedPO memberTimelineFeedPO = new MemberTimelineFeedPO();
+                    JSONObject feedJson = responseJsonArray.getJSONObject(i);
+                    JSONObject merchantJson = feedJson.getJSONObject("merchantDetailInfoResponse");
+                    memberTimelineFeedPO.setFeedimageUrl(QiNiuConstant.getImageDownloadURL(feedJson.getString("imageURL")));
+                    memberTimelineFeedPO.setFeedTitle(feedJson.getString("title"));
+                    memberTimelineFeedPO.setFeedContent(feedJson.getString("content"));
+                    memberTimelineFeedPO.setUserId(feedJson.getLong("userId"));
+                    memberTimelineFeedPO.setFeedId(feedJson.getLong("id"));
+                    memberTimelineFeedPO.setMerchantId(merchantJson.getLong("merchantId"));
+                    memberTimelineFeedPO.setMerchantName(merchantJson.getString("name"));
+                    //TODO
+//                    memberTimelineFeedPO.setMerchantTel(Long.valueOf(merchantJson.getString("phone")));
+                    memberTimelineFeedPO.setMerchantAddress(merchantJson.getString("address"));
+                    memberTimelineFeedPO.setMerchantEmail(merchantJson.getString("email"));
+                    memberTimelineFeedPO.setMerchantAvatarUrl(QiNiuConstant.getImageDownloadURL(feedJson.getString("imageURL")));
+                    memberTimelineFeedPO.setMember(true);
+                    data.add(memberTimelineFeedPO);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            memberTimelineListAdapter.swapItems(data);
+            showProgress(false);
+        }
+    };
+    Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+        }
+    };
 
 
     /**
@@ -147,30 +199,6 @@ public class MemberTimelineFragment extends Fragment {
     }
 
 
-    Response.Listener<String> loginListener = new Response.Listener<String>() {
 
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            List<MemberTimelineFeedPO> data = fakeData();
-//            notifyDataSetChanged();
-
-            final MemberTimelineListAdapter memberTimelineListAdapter = new MemberTimelineListAdapter(getActivity(), data);
-            ListView listView = (ListView) getActivity().findViewById(R.id.list_member_timeline_feed);
-            listView.setAdapter(memberTimelineListAdapter);
-
-            listView.setFastScrollEnabled(true);
-            showProgress(false);
-
-        }
-    };
-
-
-    Response.ErrorListener loginErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-        }
-    };
 
 }

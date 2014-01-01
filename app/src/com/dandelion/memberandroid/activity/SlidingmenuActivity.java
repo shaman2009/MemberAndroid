@@ -10,8 +10,6 @@ import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.fragment.MemberMenuFragment;
 import com.dandelion.memberandroid.fragment.MemberTimelineFragment;
 import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
-import com.dandelion.memberandroid.fragment.MyMembersFragment;
-import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.dandelion.memberandroid.service.AccountService;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;

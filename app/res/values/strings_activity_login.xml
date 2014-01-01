@@ -33,6 +33,7 @@
     <string name="record_info">簡介</string>
     <string name="record_member_provide_info">會員提供資料</string>
     <string name="record_member_name">姓名</string>
+    <string name="record_member_alias">昵稱</string>
     <string name="record_member_sex">性別</string>
     <string name="record_member_birthday">出生日期</string>
     <string name="record_member_setting">會員設定</string>
@@ -74,9 +75,43 @@
 
 
 
-    <!--Timeline -->
+    <!-- Timeline -->
     <string name="timeline_merchant_name">商戶姓名</string>
     <string name="timeline_content">新產品， 會員優先試用 ！！！</string>
     <string name="timeline_get_details">查看詳情</string>
     <string name="timeline_share_info">分享好友</string>
+
+
+    <!-- Join Merchant -->
+    <string name="join_merchant_entering_number">輸入商戶號碼</string>
+    <string name="join_merchant_button">加入</string>
+
+
+    <!-- Dialog Merchant Detail -->
+    <string name="dialog_merchant_applying">申請入會</string>
+    <string name="dialog_merchant_complete_self_info">補全資料</string>
+    <string name="dialog_merchant_applyed">申請中</string>
+    <string name="dialog_merchant_alert_apply_success">申請提交成功</string>
+    <string name="dialog_merchant_alert_apply_error">申請提交失敗，也許網絡出問題了</string>
+    <string name="dialog_merchant_search_error">該商戶不存在，或者哪裡出錯了</string>
+
+
+    <string name="app_name">Member</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_fragment">Hello fragment!</string>
+    <string name="title_activity_slidingmenu">SlidingmenuActivity</string>
+    <string name="title_activity_register">註冊</string>
+    <string name="title_activity_merchant_register">商戶註冊</string>
+    <string name="title_activity_member_timeline_feed_detail">詳細信息</string>
+
+    <!-- Toast -->
+    <string name="toast_message_register_failed">註冊失敗</string>
+    <string name="toast_message_login_failed">登陸失敗</string>
+
+    <!-- Alert -->
+    <string name="alert_post_null_image_error">爲了保證推廣質量，請選擇一張美膩的圖片.</string>
+    <string name="alert_post_success">優惠資訊發送成功.</string>
+    <string name="alert_post_error">優惠資訊發送失敗.</string>
+    <string name="alert_post_upload_image_error">上傳圖片失敗.</string>
 </resources>

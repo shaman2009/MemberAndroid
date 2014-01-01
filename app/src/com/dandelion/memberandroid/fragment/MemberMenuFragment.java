@@ -42,7 +42,7 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new MemberTimelineFragment();
 			break;
 		case 1:
-			newContent = new MyRecordFragment();
+			newContent = new MemberMyRecordFragment();
 			break;
 		case 2:
 			newContent = new ColorFragment(android.R.color.white);

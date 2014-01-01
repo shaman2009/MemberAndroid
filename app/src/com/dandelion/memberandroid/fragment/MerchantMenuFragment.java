@@ -42,7 +42,7 @@ public class MerchantMenuFragment extends ListFragment {
                 newContent = new NotificationFragment();
                 break;
             case 1:
-                newContent = new MyRecordFragment();
+                newContent = new MerchantMyRecordFragment();
                 break;
             case 2:
                 newContent = new ColorFragment(android.R.color.white);

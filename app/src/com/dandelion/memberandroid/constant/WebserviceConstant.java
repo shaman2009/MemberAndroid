@@ -13,9 +13,13 @@ public class WebserviceConstant {
 	public static final String LOGIN_URI = HOST + "/Login";
 	public static final int LOGIN_METHOD = Method.POST;
 
+    public static final String MERCHANT_URI = HOST + "/Merchants";
 
+    public static final String FRIENDS_URI = HOST + "/Friends";
 
+    public static final String FEED_URI = HOST + "/Feeds";
 
+    public static final String TIMELINE_URI = HOST + "/Timeline";
     public static String PACKAGE_NAME = "com.dandelion.memberandroid";
 
 

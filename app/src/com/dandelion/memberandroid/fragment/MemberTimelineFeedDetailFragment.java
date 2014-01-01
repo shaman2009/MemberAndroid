@@ -22,12 +22,7 @@ public class MemberTimelineFeedDetailFragment extends Fragment {
     public static final String FEED_IMAGE_URL = "feed:imageName";
     public static final String FEED_CONTENT = "feed:content";
 
-//    public MemberTimelineFeedDetailFragment () {
-//        getActivity().getE
-//        MemberTimelineFeedDetailFragment fragment = new MemberTimelineFeedDetailFragment();
-//        fragment.setArguments(arguments);
-//
-//    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

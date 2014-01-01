@@ -12,15 +12,14 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.MenuItem;
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.constant.IntentConstant;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.fragment.JoinMemberFragment;
 import com.dandelion.memberandroid.fragment.MemberTimelineFragment;
+import com.dandelion.memberandroid.fragment.MerchantMyRecordFragment;
 import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyMerchantsFragment;
 import com.dandelion.memberandroid.fragment.MyPostFragment;
-import com.dandelion.memberandroid.fragment.MyRecordFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.dandelion.memberandroid.fragment.SlidingFragment;
 import com.dandelion.memberandroid.service.AccountService;
@@ -127,9 +126,33 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
 
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
+        int x = tab.getPosition();
+        int accountType = authAccount.getAccountType();
+        Fragment f = new NotificationFragment();
+        if (WebserviceConstant.ACCOUNT_TYPE_MERCHANT == accountType) {
+            if (x == 0) {
+                f = new NotificationFragment();
+            } else if (x == 1) {
+                f = new MyPostFragment();
+            } else if (x == 2) {
+                f = new MyMembersFragment();
+            }
+        } else {
+            if (WebserviceConstant.ACCOUNT_TYPE_MEMBER == accountType) {
+                if (x == 0) {
+                    f = new MemberTimelineFragment();
+                } else if (x == 1) {
+                    f = new JoinMemberFragment();
+                } else if (x == 2) {
+                    f = new MyMerchantsFragment();
+                }
+            }
+        }
+
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_frame, new MyRecordFragment())
+                .replace(R.id.content_frame, f)
                 .commit();
         getSlidingMenu().showContent();
     }
