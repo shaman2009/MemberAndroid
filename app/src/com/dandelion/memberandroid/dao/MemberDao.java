@@ -11,6 +11,10 @@ package com.dandelion.memberandroid.dao;
         import com.dandelion.memberandroid.dao.auto.AccountDao;
         import com.dandelion.memberandroid.dao.auto.DaoMaster;
         import com.dandelion.memberandroid.dao.auto.DaoSession;
+        import com.dandelion.memberandroid.dao.auto.MerchantInfo;
+        import com.dandelion.memberandroid.dao.auto.MerchantInfoDao;
+
+        import java.util.List;
 
 /**
  * Created by FengxiangZhu on 13-12-28.
@@ -31,7 +35,7 @@ public class MemberDao {
         daoMaster = new DaoMaster(db);
         daoSession = daoMaster.newSession();
     }
-
+    //Account
     public void insertAccount(Account account) {
         AccountDao accountDao = daoSession.getAccountDao();
         accountDao.insert(account);
@@ -73,6 +77,25 @@ public class MemberDao {
         AccountDao accountDao = daoSession.getAccountDao();
         accountDao.deleteAll();
     }
+
+
+    //Merchant
+    public void insertMerchantInfo(MerchantInfo merchantinfo) {
+        MerchantInfoDao merchantInfoDao = daoSession.getMerchantInfoDao();
+        merchantInfoDao.insert(merchantinfo);
+    }
+    public void updateMerchantInfo(MerchantInfo merchantinfo) {
+        MerchantInfoDao merchantInfoDao = daoSession.getMerchantInfoDao();
+        merchantInfoDao.update(merchantinfo);
+    }
+    public List<MerchantInfo> getMerchantInfos(long userId) {
+        MerchantInfoDao merchantInfoDao = daoSession.getMerchantInfoDao();
+        List<MerchantInfo> merchantList = merchantInfoDao.queryBuilder().where(MerchantInfoDao.Properties.Useridfk.eq(userId)).list();
+        return merchantList;
+    }
+
+
+
 
 
 }
