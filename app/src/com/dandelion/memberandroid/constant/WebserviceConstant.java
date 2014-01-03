@@ -29,4 +29,8 @@ public class WebserviceConstant {
 
 	public static final int ACCOUNT_TYPE_MERCHANT = 1;
 	public static final int ACCOUNT_TYPE_MEMBER = 0;
+
+
+
+    public static final String STAR = "*";
 }
