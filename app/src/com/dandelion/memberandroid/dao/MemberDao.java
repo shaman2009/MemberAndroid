@@ -1,15 +1,16 @@
+
 package com.dandelion.memberandroid.dao;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+        import android.content.Context;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.util.Log;
 
-import com.dandelion.memberandroid.constant.LoggerConstant;
-import com.dandelion.memberandroid.dao.auto.Account;
-import com.dandelion.memberandroid.dao.auto.AccountDao;
-import com.dandelion.memberandroid.dao.auto.DaoMaster;
-import com.dandelion.memberandroid.dao.auto.DaoSession;
+        import com.dandelion.memberandroid.constant.LoggerConstant;
+        import com.dandelion.memberandroid.dao.auto.Account;
+        import com.dandelion.memberandroid.dao.auto.AccountDao;
+        import com.dandelion.memberandroid.dao.auto.DaoMaster;
+        import com.dandelion.memberandroid.dao.auto.DaoSession;
 
 /**
  * Created by FengxiangZhu on 13-12-28.

@@ -6,13 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.constant.LoggerConstant;
-import com.dandelion.memberandroid.dao.MemberDao;
 import com.dandelion.memberandroid.fragment.MerchantRegisterFragment;
 
 public class MerchantRegisterActivity extends FragmentActivity {

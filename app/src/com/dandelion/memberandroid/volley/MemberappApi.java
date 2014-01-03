@@ -35,7 +35,7 @@ public class MemberappApi {
         HttpRequestViaVolley.httpRequest(WebserviceConstant.FRIENDS_URI + "/" + targetUserId, Request.Method.PUT, j.toString(), listener, errorListener);
     }
 
-
+    //Merchant
     public static void getMerchantInfoByUserId(Long targetUserId,String sid, Response.Listener<String> listener, Response.ErrorListener errorListener){
         JSONObject j = new JSONObject();
         try {
@@ -45,6 +45,7 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.MERCHANT_URI + "/" + targetUserId, j.toString(), listener, errorListener);
     }
+
     public static void getMerchantInfoByMerchantId(Long merchantId,String sid, Response.Listener<String> listener, Response.ErrorListener errorListener){
         JSONObject j = new JSONObject();
         try {
@@ -55,7 +56,17 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.MERCHANT_URI, j.toString(), listener, errorListener);
     }
+    public static void updateMerchantInfoByUserId(Long targetUserId,String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.MERCHANT_URI + "/" + targetUserId, Request.Method.PUT, j.toString(), listener, errorListener);
+    }
 
+    //Feed
     public static void postFeed(String content, String title, String imageURL,String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
         JSONObject j = new JSONObject();
         try {
