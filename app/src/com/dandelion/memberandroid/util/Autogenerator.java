@@ -318,8 +318,8 @@ public class AutoGenerator {
         // System.out.println(new JO(b));
         // System.out.println(new ClassAttributesAssignment().assignLeft(a, b));
         // System.out.println(new ClassAttributesAssignment().assignLeft(b, a));
-//		System.out.println(new AutoGenerator().printSetter( new GameRoleAchievement()));
+		System.out.println(new AutoGenerator().printSetter( new MerchantInfo()));
 //		System.out.println(new AutoGenerator().printGetterSetter(new GameRoleAchievementInfo(), new GameRoleAchievement()));
-        new AutoGenerator().printGetter(new MerchantInfo());
+//        new AutoGenerator().printGetter(new MerchantInfo());
     }
 }
