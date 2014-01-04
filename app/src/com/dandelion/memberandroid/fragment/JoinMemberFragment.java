@@ -25,6 +25,7 @@ import com.dandelion.memberandroid.activity.LoginActivity;
 import com.dandelion.memberandroid.activity.RegisterActivity;
 import com.dandelion.memberandroid.adapter.MyPostListAdapter;
 import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.util.DeviceUtil;
@@ -154,7 +155,7 @@ public class JoinMemberFragment extends Fragment {
             JSONObject json = new JSONObject(response).getJSONArray("merchantList").getJSONObject(0);
             String imageUrl = json.getString("avatarurl");
             Picasso.with(getActivity())
-                    .load(imageUrl)
+                    .load(QiNiuConstant.getImageDownloadURL(imageUrl))
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.error)
                     .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)

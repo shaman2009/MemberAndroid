@@ -94,6 +94,8 @@
     <string name="dialog_merchant_alert_apply_success">申請提交成功</string>
     <string name="dialog_merchant_alert_apply_error">申請提交失敗，也許網絡出問題了</string>
     <string name="dialog_merchant_search_error">該商戶不存在，或者哪裡出錯了</string>
+    <string name="dialog_network_error">網絡出錯了</string>
+    <string name="dialog_submit_success">提交成功</string>
 
 
     <string name="app_name">Member</string>

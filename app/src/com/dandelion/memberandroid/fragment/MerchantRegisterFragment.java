@@ -100,7 +100,7 @@ public class MerchantRegisterFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //TODO
+                        //TODO  backgroundurl?
                         attemptMerchantRecordRegister();
                     }
                 });
