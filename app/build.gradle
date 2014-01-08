@@ -31,4 +31,5 @@ dependencies {
     compile project(':thirdparty:qiniu')
     compile files('libs/okhttp-1.2.1.jar')
     compile files('libs/picasso-2.1.1.jar')
+    compile files('libs/gson-2.2.4.jar')
 }
