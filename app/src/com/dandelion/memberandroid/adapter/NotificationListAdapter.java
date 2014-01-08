@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.model.MemberTimelineFeedPO;
 import com.dandelion.memberandroid.model.NotificationMessagePO;
 import com.squareup.picasso.Picasso;
 
@@ -23,7 +24,7 @@ public class NotificationListAdapter extends BaseAdapter{
 	public NotificationListAdapter(Context context) {
 		this.context = context;
 		//TODO 
-		notificationData = fakeData();
+		notificationData = new ArrayList<NotificationMessagePO>();
 	}
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -70,10 +71,13 @@ public class NotificationListAdapter extends BaseAdapter{
 	public long getItemId(int position) {
 		return position;
 	}
-	
 
 
-	
+
+    public void swapItems(List<NotificationMessagePO> data) {
+        notificationData = data;
+        notifyDataSetChanged();
+    }
 	
 	
 	public List<NotificationMessagePO> fakeData() {
