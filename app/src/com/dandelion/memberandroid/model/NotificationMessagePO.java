@@ -3,7 +3,17 @@ package com.dandelion.memberandroid.model;
 public class NotificationMessagePO {
 	private String avatarUrl;
 	private String context;
-	public String getAvatarUrl() {
+    private long targetUserId;
+
+    public long getTargetUserId() {
+        return targetUserId;
+    }
+
+    public void setTargetUserId(long targetUserId) {
+        this.targetUserId = targetUserId;
+    }
+
+    public String getAvatarUrl() {
 		return avatarUrl;
 	}
 	public void setAvatarUrl(String avatarUrl) {

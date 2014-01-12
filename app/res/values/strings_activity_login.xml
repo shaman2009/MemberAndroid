@@ -98,6 +98,8 @@
     <string name="dialog_submit_success">提交成功</string>
 
 
+    <string name="dialog_merchant_alert_accept_success">接納成功</string>
+
     <string name="app_name">Member</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -106,6 +108,8 @@
     <string name="title_activity_register">註冊</string>
     <string name="title_activity_merchant_register">商戶註冊</string>
     <string name="title_activity_member_timeline_feed_detail">詳細信息</string>
+
+    <string name="accept_join">接納</string>
 
     <!-- Toast -->
     <string name="toast_message_register_failed">註冊失敗</string>

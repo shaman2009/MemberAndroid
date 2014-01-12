@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.adapter.NotificationListAdapter;
 import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.model.NotificationDataResponse;
 import com.dandelion.memberandroid.model.NotificationMessagePO;
 import com.dandelion.memberandroid.service.AccountService;
@@ -80,9 +81,14 @@ public class NotificationFragment extends Fragment{
                 for (int i = 0; i < responseJsonArray.length(); i++) {
                     NotificationDataResponse notificationDataResponse;
                     NotificationMessagePO notificationMessagePO = new NotificationMessagePO();
-                    notificationDataResponse = gson.fromJson(responseJsonArray.get(i).toString(), NotificationDataResponse.class);
-                    notificationMessagePO.setContext("會員ID為 ： " + notificationDataResponse.getFromuseridfk() + " 想要成為你的會員");
-                    notificationMessagePO.setAvatarUrl("http://breadtripimages.qiniudn.com/photo_2014_01_07_9a251b5a3854928ec021071d6a54ec4f.jpg?imageView/2/w/640/q/85");
+                    notificationDataResponse = gson.fromJson(
+                            responseJsonArray.get(i).toString(), NotificationDataResponse.class);
+                    notificationMessagePO.setContext(
+                            notificationDataResponse.getMember().getName() + " 想要成為你的會員");
+                    notificationMessagePO.setAvatarUrl(
+                            QiNiuConstant.getImageDownloadURL(
+                                    notificationDataResponse.getMember().getAvatarurl()));
+                    notificationMessagePO.setTargetUserId(notificationDataResponse.getFromuseridfk());
                     data.add(notificationMessagePO);
                 }
             } catch (JSONException e) {
