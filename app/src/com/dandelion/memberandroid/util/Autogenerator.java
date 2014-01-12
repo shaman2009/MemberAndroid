@@ -4,7 +4,6 @@ package com.dandelion.memberandroid.util;
  * Created by Fengxiang on 14-1-3.
  */
 
-import com.dandelion.memberandroid.dao.auto.MerchantInfo;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;

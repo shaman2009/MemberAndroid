@@ -11,6 +11,8 @@ import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.adapter.MyMembersListAdapter;
 
 public class MyMembersFragment extends Fragment {
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
