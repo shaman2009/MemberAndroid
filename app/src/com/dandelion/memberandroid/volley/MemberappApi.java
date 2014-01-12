@@ -143,4 +143,17 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.TIMELINE_URI + "/Accounts/" + id, j.toString(), listener, errorListener);
     }
+
+
+    //NotificationDataResponse
+
+    public static void getNotification(Long id, String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpGet(WebserviceConstant.NOTIFICATION_URI + "/Accounts/" + id, j.toString(), listener, errorListener);
+    }
 }

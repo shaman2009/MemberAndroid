@@ -20,6 +20,9 @@ public class WebserviceConstant {
     public static final String FEED_URI = HOST + "/Feeds";
 
     public static final String TIMELINE_URI = HOST + "/Timeline";
+
+    public static final String NOTIFICATION_URI = HOST + "/Notifications";
+
     public static String PACKAGE_NAME = "com.dandelion.memberandroid";
 
 

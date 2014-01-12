@@ -3,6 +3,7 @@ package com.dandelion.memberandroid.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -83,7 +84,9 @@ public class MemberTimelineFragment extends Fragment {
         userId = service.getAuthAccount().getUsdId();
         MemberappApi.getTimeline(userId, sid, timelineListener, timelineErrorListener);
     }
-    Response.Listener<String> timelineListener = new Response.Listener<String>() {
+
+
+    private Response.Listener<String> timelineListener = new Response.Listener<String>() {
 
         @Override
         public void onResponse(String response) {
@@ -118,7 +121,7 @@ public class MemberTimelineFragment extends Fragment {
             showProgress(false);
         }
     };
-    Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
+    private Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
 
         @Override
         public void onErrorResponse(VolleyError error) {
@@ -186,6 +189,7 @@ public class MemberTimelineFragment extends Fragment {
         fakeNotificationData.add(memberTimelineFeedPO2);
         return fakeNotificationData;
     }
+
 
 
 
