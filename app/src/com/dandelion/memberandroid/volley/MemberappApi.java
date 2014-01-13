@@ -156,4 +156,24 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.NOTIFICATION_URI + "/Accounts/" + id, j.toString(), listener, errorListener);
     }
+    public static void getMyMembers(String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpGet(WebserviceConstant.MY_MEMBERS_URI, j.toString(), listener, errorListener);
+    }
+    public static void getMyMerchants(String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpGet(WebserviceConstant.MY_MERCHANTS_URI, j.toString(), listener, errorListener);
+    }
+
+
 }

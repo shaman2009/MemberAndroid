@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.model.MyMembersPO;
+import com.dandelion.memberandroid.model.NotificationMessagePO;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,13 +22,13 @@ import java.util.List;
  */
 public class MyMembersListAdapter extends BaseAdapter {
     private Context context;
-    private List<MyMembersPO> notificationData = new ArrayList<MyMembersPO>();
+    private List<MyMembersPO> myMembersData = new ArrayList<MyMembersPO>();
 
 
     public MyMembersListAdapter(Context context) {
         this.context = context;
         //TODO
-        notificationData = fakeData();
+        myMembersData = new ArrayList<MyMembersPO>();
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -83,13 +84,13 @@ public class MyMembersListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return notificationData.size();
+        return myMembersData.size();
     }
 
 
     @Override
     public Object getItem(int position) {
-        return notificationData.get(position);
+        return myMembersData.get(position);
     }
 
     @Override
@@ -97,7 +98,10 @@ public class MyMembersListAdapter extends BaseAdapter {
         return position;
     }
 
-
+    public void swapItems(List<MyMembersPO> data) {
+        myMembersData = data;
+        notifyDataSetChanged();
+    }
 
 
 

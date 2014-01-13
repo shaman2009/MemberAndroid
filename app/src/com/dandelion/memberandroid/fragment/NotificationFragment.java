@@ -29,9 +29,8 @@ import java.util.List;
 
 public class NotificationFragment extends Fragment{
 
-    private NotificationListAdapter notificationListAdapter;
-
     private Gson gson;
+    private NotificationListAdapter notificationListAdapter;
 
 
     //VALUE

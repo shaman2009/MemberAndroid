@@ -23,6 +23,10 @@ public class WebserviceConstant {
 
     public static final String NOTIFICATION_URI = HOST + "/Notifications";
 
+    public static final String MY_MEMBERS_URI = HOST + "/MyMembers";
+
+    public static final String MY_MERCHANTS_URI = HOST + "/MyMerchants";
+
     public static String PACKAGE_NAME = "com.dandelion.memberandroid";
 
 
