@@ -57,11 +57,17 @@ public class MemberTimelineFeedDetailFragment extends Fragment {
         contentView.setText(feedContent);
 
 
+
+
+
         Picasso.with(activity)
                 .load(arguments.getString(FEED_IMAGE_URL))
-                .fit()
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .resizeDimen(R.dimen.list_detail_big_image_size, R.dimen.list_detail_big_image_size)
+                .centerInside()
                 .into(imageView);
-
+        Picasso.with(activity).setDebugging(true);
         return view;
     }
 

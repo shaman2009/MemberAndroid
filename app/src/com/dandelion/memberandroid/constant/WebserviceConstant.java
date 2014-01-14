@@ -21,6 +21,8 @@ public class WebserviceConstant {
 
     public static final String TIMELINE_URI = HOST + "/Timeline";
 
+    public static final String MY_POSTS_URI = HOST + "/MyPosts";
+
     public static final String NOTIFICATION_URI = HOST + "/Notifications";
 
     public static final String MY_MEMBERS_URI = HOST + "/MyMembers";

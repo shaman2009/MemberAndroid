@@ -79,6 +79,7 @@ public class MyMembersListAdapter extends BaseAdapter {
                 .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
                 .centerInside()
                 .into(holder.image);
+        Picasso.with(context).setDebugging(true);
         return convertView;
     }
 
