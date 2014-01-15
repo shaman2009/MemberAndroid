@@ -37,7 +37,6 @@ public class MyMembersFragment extends Fragment {
 
     //VALUE
     private String sid;
-    private Long userId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

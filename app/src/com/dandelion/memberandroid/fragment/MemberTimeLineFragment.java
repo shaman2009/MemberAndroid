@@ -68,7 +68,7 @@ public class MemberTimelineFragment extends Fragment {
         listView.setAdapter(memberTimelineListAdapter);
         listView.setFastScrollEnabled(true);
         getTimeLineData();
-        showProgress(true);
+//        showProgress(true);
         super.onStart();
     }
 
@@ -118,7 +118,7 @@ public class MemberTimelineFragment extends Fragment {
                 e.printStackTrace();
             }
             memberTimelineListAdapter.swapItems(data);
-            showProgress(false);
+//            showProgress(false);
         }
     };
     private Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {

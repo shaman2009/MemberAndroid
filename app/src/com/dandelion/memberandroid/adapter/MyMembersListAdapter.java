@@ -69,6 +69,10 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_score.setText(context.getString(R.string.my_members_applying));
 
         }
+        if (myMember.getScore() == 1L) {
+            holder.text_my_members_total_score.setText(context.getString(R.string.my_members_apply_success));
+            holder.button.setVisibility(View.GONE);
+        }
 
 
         // Trigger the download of the URL asynchronously into the image view.
