@@ -1,6 +1,10 @@
 package com.dandelion.memberandroid.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +12,21 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.constant.QiNiuConstant;
+import com.dandelion.memberandroid.model.MemberDataResponse;
+import com.dandelion.memberandroid.model.MemberListResponse;
 import com.dandelion.memberandroid.model.MyMembersPO;
-import com.dandelion.memberandroid.model.NotificationMessagePO;
+import com.dandelion.memberandroid.service.AccountService;
+import com.dandelion.memberandroid.volley.MemberappApi;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +38,22 @@ public class MyMembersListAdapter extends BaseAdapter {
     private Context context;
     private List<MyMembersPO> myMembersData = new ArrayList<MyMembersPO>();
 
+    private AlertDialog.Builder scoreDialogBuilder;
+    private Dialog scoreDialog;
+    private TextView scoreView;
+
+    //value
+    private String sid;
 
     public MyMembersListAdapter(Context context) {
         this.context = context;
         //TODO
         myMembersData = new ArrayList<MyMembersPO>();
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_my_member, parent, false);
             holder = new ViewHolder();
@@ -44,6 +65,7 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_times_value = (TextView) convertView.findViewById(R.id.my_members_total_times_value);
             holder.text_my_members_total_cost = (TextView) convertView.findViewById(R.id.my_members_total_cost);
             holder.text_my_members_total_times = (TextView) convertView.findViewById(R.id.my_members_total_times);
+            scoreView = (TextView) convertView.findViewById(R.id.my_member_total_score);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -53,14 +75,49 @@ public class MyMembersListAdapter extends BaseAdapter {
         MyMembersPO myMember = (MyMembersPO) getItem(position);
         String url = myMember.getAvatarUrl();
         boolean isMember = myMember.isMember();
+        final long score = myMember.getScore();
+        final long friendId = myMember.getFriendId();
         holder.text_my_members_name.setText(myMember.getName());
         if (isMember) {
             holder.text_my_members_total_cost_value.setVisibility(View.GONE);
             holder.text_my_members_total_times_value.setVisibility(View.GONE);
             holder.text_my_members_total_cost.setVisibility(View.GONE);
             holder.text_my_members_total_times.setVisibility(View.GONE);
-            holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + myMember.getScore().toString());
+            holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + score);
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final View view = LayoutInflater.from(context).inflate(R.layout.dialog_add_score, null);
+                    scoreDialogBuilder = new AlertDialog.Builder(context).setView(view)
+                            .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TextView scoreView = (TextView) view.findViewById(R.id.score);
+                                    long finalscore = score + Long.valueOf(scoreView.getText().toString());
+                                    AccountService service = new AccountService(context);
+                                    sid = service.getAuthAccount().getSid();
+                                    MemberDataResponse memberDataResponse = new MemberDataResponse();
+                                    memberDataResponse.setScore(finalscore);
+                                    memberDataResponse.setAmount(0L);
+                                    memberDataResponse.setAmountcount(0L);
+                                    try {
+                                        MemberappApi.updateMemberInfo(friendId, sid , memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
+                                        holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            })
+                            .setNegativeButton(R.string.account_logout_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
+                                }
+                            });
+
+                    scoreDialog = scoreDialogBuilder.show();
+                }
+            });
         } else {
             holder.button.setVisibility(View.GONE);
 
@@ -109,7 +166,22 @@ public class MyMembersListAdapter extends BaseAdapter {
     }
 
 
+    private Response.Listener<String> updateMyMemberInfoListener = new Response.Listener<String>() {
 
+        @Override
+        public void onResponse(String response) {
+            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+            Toast.makeText(context, R.string.dialog_submit_success, Toast.LENGTH_SHORT).show();
+        }
+    };
+    private Response.ErrorListener updateMyMemberInfoErrorListener = new Response.ErrorListener() {
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Toast.makeText(context, R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
+        }
+
+    };
 
     public List<MyMembersPO> fakeData() {
         List<MyMembersPO> fakeNotificationData = new ArrayList<MyMembersPO>();
@@ -132,7 +204,6 @@ public class MyMembersListAdapter extends BaseAdapter {
 
         myMemberPO3.setAvatarUrl("http://img.hb.aicdn.com/4a1b1875124b325f289733aa08098bd2020bb5012daa-dP44w6_fw658");
         myMemberPO4.setAvatarUrl("http://img.hb.aicdn.com/3036608e2f2e60db1f3b3424f80b1b2e53c2fbc4bb3d-AK3J9E_fw658");
-
 
 
         /**

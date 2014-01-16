@@ -4,6 +4,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.MerchantInfo;
+import com.dandelion.memberandroid.model.MemberDataResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +34,25 @@ public class MemberappApi {
     public static void follow(Long targetUserId, String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
         JSONObject j = new JSONObject();
         j.put("sid", sid);
-        HttpRequestViaVolley.httpRequest(WebserviceConstant.FRIENDS_URI + "/" + targetUserId, Request.Method.PUT, j.toString(), listener, errorListener);
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.FRIENDS_URI + "/" + targetUserId, Request.Method.POST, j.toString(), listener, errorListener);
+    }
+
+    public static void updateMemberInfo(Long friendId, String sid, MemberDataResponse memberDataResponse, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
+        long score = memberDataResponse.getScore();
+        long amount = memberDataResponse.getAmount();
+        long amountcount = memberDataResponse.getAmountcount();
+        JSONObject j = new JSONObject();
+        j.put("sid", sid);
+        if (score != 0) {
+            j.put("score", score);
+        }
+        if (amount != 0) {
+            j.put("amount", amount);
+        }
+        if (amountcount != 0) {
+            j.put("amountcount", amountcount);
+        }
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.FRIENDS_URI + "/" + friendId, Request.Method.PUT, j.toString(), listener, errorListener);
     }
 
     //Merchant

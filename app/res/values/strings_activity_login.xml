@@ -45,7 +45,7 @@
     <string name="record_pic_upload">上傳</string>
     <string name="record_pic_upload_status">上傳</string>
 
-
+    <string name="add_score_dialog">輸入添加的積分</string>
     <!-- My Members-->
     <string name="my_members_total_score">累計積分</string>
     <string name="my_members_total_cost">累計消費金額</string>
@@ -95,7 +95,7 @@
     <string name="dialog_merchant_alert_apply_success">申請提交成功</string>
     <string name="dialog_merchant_alert_apply_error">申請提交失敗，也許網絡出問題了</string>
     <string name="dialog_merchant_search_error">該商戶不存在，或者哪裡出錯了</string>
-    <string name="dialog_network_error">網絡出錯了</string>
+    <string name="dialog_network_error">出錯了,請稍後再試</string>
     <string name="dialog_submit_success">提交成功</string>
 
 
@@ -111,6 +111,7 @@
     <string name="title_activity_member_timeline_feed_detail">詳細信息</string>
 
     <string name="accept_join">接納</string>
+    <string name="add">添加</string>
 
     <!-- Toast -->
     <string name="toast_message_register_failed">註冊失敗</string>

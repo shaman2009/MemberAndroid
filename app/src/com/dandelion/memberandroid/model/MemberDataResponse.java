@@ -16,6 +16,51 @@ public class MemberDataResponse {
     private String introduction;
     private Long createddate;
     private Long modifieddate;
+    private Long friendId;
+    private boolean ismember;
+    private Long amount;
+    private Long amountcount;
+    private Long score;
+
+    public Long getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
+    }
+
+    public boolean isIsmember() {
+        return ismember;
+    }
+
+    public void setIsmember(boolean ismember) {
+        this.ismember = ismember;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public Long getAmountcount() {
+        return amountcount;
+    }
+
+    public void setAmountcount(Long amountcount) {
+        this.amountcount = amountcount;
+    }
+
+    public Long getScore() {
+        return score;
+    }
+
+    public void setScore(Long score) {
+        this.score = score;
+    }
 
     public Long getId() {
         return id;

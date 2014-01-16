@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,19 +18,12 @@ import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.model.MemberDataResponse;
 import com.dandelion.memberandroid.model.MemberListResponse;
 import com.dandelion.memberandroid.model.MyMembersPO;
-import com.dandelion.memberandroid.model.NotificationDataResponse;
-import com.dandelion.memberandroid.model.NotificationMessagePO;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MyMembersFragment extends Fragment {
     private Gson gson;
@@ -37,6 +31,7 @@ public class MyMembersFragment extends Fragment {
 
     //VALUE
     private String sid;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +59,7 @@ public class MyMembersFragment extends Fragment {
         AccountService service = new AccountService(getActivity());
         sid = service.getAuthAccount().getSid();
         MemberappApi.getMyMembers(sid, getMyMembersListener, getMyMembersErrorListener);
+        Toast.makeText(getActivity(), R.string.timeline_progress_loading, Toast.LENGTH_SHORT).show();
     }
 
     private Response.Listener<String> getMyMembersListener = new Response.Listener<String>() {
@@ -78,9 +74,12 @@ public class MyMembersFragment extends Fragment {
                 MyMembersPO member = new MyMembersPO();
                 member.setAvatarUrl(
                         QiNiuConstant.getImageDownloadURL(memberDataResponse.getAvatarurl()));
-                member.setMember(true);
-                member.setScore(Long.valueOf(new Random().nextInt()));
+                member.setMember(memberDataResponse.isIsmember());
+                member.setScore(memberDataResponse.getScore());
+                member.setMemberTotalTimes(memberDataResponse.getAmountcount());
+                member.setMemberTotalCosts(memberDataResponse.getAmount());
                 member.setName(memberDataResponse.getName());
+                member.setFriendId(memberDataResponse.getFriendId());
                 data.add(member);
             }
             myMembersListAdapter.swapItems(data);
@@ -91,6 +90,8 @@ public class MyMembersFragment extends Fragment {
 
         @Override
         public void onErrorResponse(VolleyError error) {
+            Toast.makeText(getActivity(), R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
         }
+
     };
 }

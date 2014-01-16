@@ -10,6 +10,15 @@ public class MyMembersPO {
     private String name;
     private Long memberTotalCosts;
     private Long memberTotalTimes;
+    private Long friendId;
+
+    public Long getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
+    }
 
     public Long getMemberTotalCosts() {
         return memberTotalCosts;

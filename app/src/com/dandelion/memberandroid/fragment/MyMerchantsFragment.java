@@ -82,6 +82,7 @@ public class MyMerchantsFragment extends Fragment {
                 member.setMember(true);
                 member.setScore(1L);
                 member.setName(merchantDataResponse.getName());
+                member.setFriendId(merchantDataResponse.getFriendId());
                 data.add(member);
             }
             myMembersListAdapter.swapItems(data);
