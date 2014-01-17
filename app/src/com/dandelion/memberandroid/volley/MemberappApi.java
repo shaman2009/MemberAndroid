@@ -3,11 +3,14 @@ package com.dandelion.memberandroid.volley;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
+import com.dandelion.memberandroid.dao.auto.MemberInfo;
 import com.dandelion.memberandroid.dao.auto.MerchantInfo;
 import com.dandelion.memberandroid.model.MemberDataResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 public class MemberappApi {
 
@@ -76,6 +79,8 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.MERCHANT_URI, j.toString(), listener, errorListener);
     }
+
+
     public static void updateMerchantInfoByUserId(MerchantInfo merchantInfo,String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
         JSONObject j = new JSONObject();
         String avatarUrl = merchantInfo.getAvatarurl();
@@ -138,6 +143,50 @@ public class MemberappApi {
             e.printStackTrace();
         }
         HttpRequestViaVolley.httpRequest(WebserviceConstant.MERCHANT_URI + "/" + userId, Request.Method.PUT, j.toString(), listener, errorListener);
+    }
+    //Member
+    public static void getMemberInfoByUserId(Long targetUserId,String sid, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpGet(WebserviceConstant.MEMBER_URI + "/" + targetUserId, j.toString(), listener, errorListener);
+    }
+    public static void updateMemberInfoByUserId(MemberInfo memberInfo, String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
+        JSONObject j = new JSONObject();
+        String avatarUrl = memberInfo.getAvatarurl();
+        String name = memberInfo.getName();
+        String address = memberInfo.getAddress();
+        String phone = memberInfo.getPhone();
+        long birthday = memberInfo.getBirthday().getTime();
+        int sex = memberInfo.getSex();
+        long userId = memberInfo.getUserId();
+        if (!"".equals(avatarUrl) && avatarUrl != null) {
+            j.put("avatarUrl", avatarUrl);
+        }
+        if (!"".equals(name) && name != null) {
+            j.put("name", name);
+        }
+        if (!"".equals(address) && address != null) {
+            j.put("address", address);
+        }
+        if (!"".equals(phone) && phone != null) {
+            j.put("phone", phone);
+        }
+        if (!"".equals(name) && name != null) {
+            j.put("name", name);
+        }
+        if (sex != 0) {
+            j.put("sex", sex);
+        }
+        if (birthday != 0) {
+            j.put("birthday", birthday);
+        }
+        j.put("sid", sid);
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.MEMBER_URI + "/" + userId, Request.Method.PUT, j.toString(), listener, errorListener);
+
     }
 
     //Feed

@@ -120,17 +120,11 @@ public class MerchantMyRecordFragment extends Fragment {
 				return;
 			}
 		});
-
-
         accountservice = new AccountService(getActivity());
         authAccount = accountservice.getAuthAccount();
         userId = authAccount.getUsdId();
         sid = authAccount.getSid();
-
         MemberappApi.getMerchantInfoByUserId(userId, sid, getMerchantListener, getMerchantErrorListener);
-
-
-
         registerButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -240,11 +234,11 @@ public class MerchantMyRecordFragment extends Fragment {
         registerButton = (Button) view.findViewById(R.id.button_record_register);
 	}
 
-	
+
 	boolean uploading = false;
 	/**
 	 * 普通上傳文件
-	 * 
+	 *
 	 * @param uri
 	 */
 	private void doUpload(Uri uri) {

@@ -14,6 +14,7 @@ public class WebserviceConstant {
 	public static final int LOGIN_METHOD = Method.POST;
 
     public static final String MERCHANT_URI = HOST + "/Merchants";
+    public static final String MEMBER_URI = HOST + "/Members";
 
     public static final String FRIENDS_URI = HOST + "/Friends";
 

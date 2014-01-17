@@ -27,62 +27,62 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/member_text_record_member_name"
+                        android:id="@+id/t_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/record_member_no" />
+
+                    <EditText
+                        android:id="@+id/no"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number">
+
+                        <requestFocus />
+                    </EditText>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/t_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/record_member_name" />
 
                     <EditText
-                        android:id="@+id/member_edit_text_record_member_name"
+                        android:id="@+id/name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="">
+                        android:inputType="text">
 
                         <requestFocus />
                     </EditText>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/member_text_record_member_alias"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/record_member_alias" />
-
-                    <EditText
-                        android:id="@+id/edit_text_record_merchant_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="">
-
-                        <requestFocus />
-                    </EditText>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/member_text_record_member_sex"
+                        android:id="@+id/t_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/record_member_sex" />
 
                     <EditText
-                        android:id="@+id/member_edit_text_record_member_sex"
+                        android:id="@+id/sex"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="textEmailAddress"></EditText>
+                        android:inputType="number"></EditText>
                 </LinearLayout>
 
 
@@ -92,18 +92,18 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/member_text_record_member_mobile"
+                        android:id="@+id/t_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/record_mobile" />
 
                     <EditText
-                        android:id="@+id/member_edit_text_record_member_mobile"
+                        android:id="@+id/phone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType=""></EditText>
+                        android:inputType="number"></EditText>
                 </LinearLayout>
 
                 <LinearLayout
@@ -111,13 +111,13 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/member_text_record_member_address"
+                        android:id="@+id/t_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/record_address" />
 
                     <EditText
-                        android:id="@+id/member_edit_text_record_member_address"
+                        android:id="@+id/address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -131,13 +131,13 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/member_text_record_member_birthday"
+                        android:id="@+id/t_birthday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/record_member_birthday" />
 
                     <EditText
-                        android:id="@+id/member_edit_text_record_member_birthday"
+                        android:id="@+id/birthday"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

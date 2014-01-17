@@ -67,12 +67,14 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_times = (TextView) convertView.findViewById(R.id.my_members_total_times);
             scoreView = (TextView) convertView.findViewById(R.id.my_member_total_score);
             convertView.setTag(holder);
-        } else {
+        }
+
+        else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         // Get the image URL for the current position.
-        MyMembersPO myMember = (MyMembersPO) getItem(position);
+        final MyMembersPO myMember = (MyMembersPO) getItem(position);
         String url = myMember.getAvatarUrl();
         boolean isMember = myMember.isMember();
         final long score = myMember.getScore();
@@ -93,16 +95,35 @@ public class MyMembersListAdapter extends BaseAdapter {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     TextView scoreView = (TextView) view.findViewById(R.id.score);
-                                    long finalscore = score + Long.valueOf(scoreView.getText().toString());
+                                    final long finalscore =  score + Long.valueOf(scoreView.getText().toString());
                                     AccountService service = new AccountService(context);
                                     sid = service.getAuthAccount().getSid();
                                     MemberDataResponse memberDataResponse = new MemberDataResponse();
                                     memberDataResponse.setScore(finalscore);
                                     memberDataResponse.setAmount(0L);
                                     memberDataResponse.setAmountcount(0L);
+                                    Response.Listener<String> updateMyMemberInfoListener = new Response.Listener<String>() {
+
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                                            myMember.setScore(finalscore);
+                                            notifyDataSetChanged();
+                                            Toast.makeText(context, R.string.dialog_submit_success, Toast.LENGTH_SHORT).show();
+                                        }
+                                    };
+                                    Response.ErrorListener updateMyMemberInfoErrorListener = new Response.ErrorListener() {
+
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Toast.makeText(context, R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    };
                                     try {
                                         MemberappApi.updateMemberInfo(friendId, sid , memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
-                                        holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
+                                        //holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -166,22 +187,7 @@ public class MyMembersListAdapter extends BaseAdapter {
     }
 
 
-    private Response.Listener<String> updateMyMemberInfoListener = new Response.Listener<String>() {
 
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            Toast.makeText(context, R.string.dialog_submit_success, Toast.LENGTH_SHORT).show();
-        }
-    };
-    private Response.ErrorListener updateMyMemberInfoErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Toast.makeText(context, R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
-        }
-
-    };
 
     public List<MyMembersPO> fakeData() {
         List<MyMembersPO> fakeNotificationData = new ArrayList<MyMembersPO>();
