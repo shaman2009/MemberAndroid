@@ -8,8 +8,8 @@ Build instructions
 
 Dependency:
 
-- Gradle 1.8
-- Android Studio
+- Gradle 1.9
+- Android Studio 0.4.2
 
 Setup:
 
