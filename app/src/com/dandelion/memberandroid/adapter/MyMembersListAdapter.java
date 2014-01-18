@@ -140,16 +140,34 @@ public class MyMembersListAdapter extends BaseAdapter {
                 }
             });
         } else {
-            holder.button.setVisibility(View.GONE);
+            holder.button.setVisibility(View.INVISIBLE);
 
             holder.text_my_members_total_cost_value.setText(myMember.getMemberTotalCosts().toString());
             holder.text_my_members_total_times_value.setText(myMember.getMemberTotalTimes().toString());
             holder.text_my_members_total_score.setText(context.getString(R.string.my_members_applying));
 
         }
-        if (myMember.getScore() == 1L) {
-            holder.text_my_members_total_score.setText(context.getString(R.string.my_members_apply_success));
-            holder.button.setVisibility(View.GONE);
+        if (myMember.isMerchantOrMember()) {
+            if (isMember) {
+
+            } else {
+//                holder.text_my_members_total_score.setText(context.getString(R.string.my_members_apply_success));
+
+            }
+            holder.button.setVisibility(View.VISIBLE);
+            holder.button.setText(R.string.merchant_detail);
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(context)
+                            .setMessage(context.getString(R.string.developing))
+                            .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }).show();
+                }
+            });
         }
 
 

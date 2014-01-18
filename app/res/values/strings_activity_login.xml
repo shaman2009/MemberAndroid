@@ -98,6 +98,8 @@
     <string name="dialog_merchant_search_error">該商戶不存在，或者哪裡出錯了</string>
     <string name="dialog_network_error">出錯了,請稍後再試</string>
     <string name="dialog_submit_success">提交成功</string>
+    <string name="developing">該功能還在開發ing</string>
+    <string name="merchant_detail">商戶諮詢</string>
 
 
     <string name="dialog_merchant_alert_accept_success">接納成功</string>

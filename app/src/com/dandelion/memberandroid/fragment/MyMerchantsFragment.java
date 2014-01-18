@@ -79,10 +79,13 @@ public class MyMerchantsFragment extends Fragment {
                 MyMembersPO member = new MyMembersPO();
                 member.setAvatarUrl(
                         QiNiuConstant.getImageDownloadURL(merchantDataResponse.getAvatarurl()));
-                member.setMember(true);
-                member.setScore(1L);
+                member.setMember(merchantDataResponse.isIsmember());
+                member.setScore(merchantDataResponse.getScore());
+                member.setMemberTotalTimes(merchantDataResponse.getAmountcount());
+                member.setMemberTotalCosts(merchantDataResponse.getAmount());
                 member.setName(merchantDataResponse.getName());
                 member.setFriendId(merchantDataResponse.getFriendId());
+                member.setMerchantOrMember(true);
                 data.add(member);
             }
             myMembersListAdapter.swapItems(data);
