@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.model.MemberTimelineFeedPO;
 import com.dandelion.memberandroid.model.NotificationMessagePO;
 import com.dandelion.memberandroid.service.AccountService;
@@ -53,16 +54,73 @@ public class NotificationListAdapter extends BaseAdapter {
         }
 
         // Get the image URL for the current position.
-        NotificationMessagePO notificationMessage = (NotificationMessagePO) getItem(position);
+        final NotificationMessagePO notificationMessage = (NotificationMessagePO) getItem(position);
+        final long id = notificationMessage.getId();
         String url = notificationMessage.getAvatarUrl();
+        boolean isRead = notificationMessage.isRead();
         AccountService service = new AccountService(context);
         final long targetUserId = notificationMessage.getTargetUserId();
-        final String sid = service.getAuthAccount().getSid();
+        Account account = service.getAuthAccount();
+        final String sid = account.getSid();
+        final long userId = account.getUsdId();
         holder.text.setText(notificationMessage.getContext());
+
+
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    Response.Listener<String> followListener = new Response.Listener<String>() {
+
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.dialog_merchant_alert_accept_success))
+                                    .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    }).show();
+
+                            Response.Listener<String> updateNotificationListener = new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String response) {
+                                    Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                                    notificationMessage.setRead(true);
+                                    notifyDataSetChanged();
+                                }
+                            };
+
+                            Response.ErrorListener updateNotificationErrorListener = new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
+                            };
+                            MemberappApi.updateNotificationIsRead(id, userId, sid, true, updateNotificationListener, updateNotificationErrorListener);
+
+                        }
+                    };
+
+
+                    Response.ErrorListener followErrorListener = new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.dialog_network_error))
+                                    .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }
+                    };
                     MemberappApi.follow(targetUserId, sid, followListener, followErrorListener);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -79,6 +137,9 @@ public class NotificationListAdapter extends BaseAdapter {
                 .centerInside()
                 .into(holder.image);
         Picasso.with(context).setDebugging(true);
+        if (isRead) {
+            holder.button.setEnabled(false);
+        }
         return convertView;
     }
 
@@ -106,36 +167,7 @@ public class NotificationListAdapter extends BaseAdapter {
     }
 
 
-    Response.Listener<String> followListener = new Response.Listener<String>() {
 
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            new AlertDialog.Builder(context)
-                    .setMessage(context.getString(R.string.dialog_merchant_alert_accept_success))
-                    .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).show();
-        }
-    };
-
-
-    Response.ErrorListener followErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            new AlertDialog.Builder(context)
-                    .setMessage(context.getString(R.string.dialog_network_error))
-                    .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).show();
-        }
-    };
 
     public List<NotificationMessagePO> fakeData() {
         List<NotificationMessagePO> fakeNotificationData = new ArrayList<NotificationMessagePO>();

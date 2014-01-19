@@ -82,12 +82,14 @@ public class NotificationFragment extends Fragment{
                     NotificationMessagePO notificationMessagePO = new NotificationMessagePO();
                     notificationDataResponse = gson.fromJson(
                             responseJsonArray.get(i).toString(), NotificationDataResponse.class);
+                    notificationMessagePO.setId(notificationDataResponse.getId());
                     notificationMessagePO.setContext(
                             notificationDataResponse.getMember().getName() + " 想要成為你的會員");
                     notificationMessagePO.setAvatarUrl(
                             QiNiuConstant.getImageDownloadURL(
                                     notificationDataResponse.getMember().getAvatarurl()));
                     notificationMessagePO.setTargetUserId(notificationDataResponse.getFromuseridfk());
+                    notificationMessagePO.setRead(notificationDataResponse.getIsread());
                     data.add(notificationMessagePO);
                 }
             } catch (JSONException e) {

@@ -233,6 +233,21 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.NOTIFICATION_URI + "/Accounts/" + id, j.toString(), listener, errorListener);
     }
+
+    public static void updateNotificationIsRead(Long id, Long accountId, String sid, boolean isRead, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+            j.put("isRead", isRead);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.NOTIFICATION_URI + "/" + id + "/Accounts/" + accountId, Request.Method.PUT, j.toString(), listener, errorListener);
+    }
+
+
+
+
     public static void getMyMembers(String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
         JSONObject j = new JSONObject();
         try {
