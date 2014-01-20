@@ -177,10 +177,7 @@ public class MerchantMyRecordFragment extends Fragment {
         try {
             JSONObject merchantJson = new JSONObject(response);
             merchantIdView.setText(String.valueOf(merchantJson.getLong("merchantId")));
-            String imageUrl = merchantJson.getString("avatarurl");
-            if ( imageUrl!= null && !"".equals(imageUrl)) {
-                imagekey = imageUrl;
-            }
+            imagekey = merchantJson.getString("avatarurl");
             Picasso.with(getActivity()).load(QiNiuConstant.getImageDownloadURL(imagekey)).into(imageView);
             nameView.setText(merchantJson.getString("name"));
             addressView.setText(merchantJson.getString("address"));
@@ -196,6 +193,18 @@ public class MerchantMyRecordFragment extends Fragment {
             emailRequiredView.setChecked(merchantJson.getBoolean("emailrequired"));
             birthdayRequiredView.setChecked(merchantJson.getBoolean("birthdayrequired"));
             memberSettingView.setChecked(merchantJson.getBoolean("membersetting"));
+            memberSettingView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!memberSettingView.isChecked()) {
+                        memberCostView.setEnabled(false);
+                        memberTimesView.setEnabled(false);
+                    } else {
+                        memberCostView.setEnabled(true);
+                        memberTimesView.setEnabled(true);
+                    }
+                }
+            });
             scorePlanView.setChecked(merchantJson.getBoolean("scoreplan"));
 
             memberCostView.setText(merchantJson.getString("amountrequired"));
@@ -220,7 +229,7 @@ public class MerchantMyRecordFragment extends Fragment {
         introductionView = (TextView) view.findViewById(R.id.edit_text_record_info);
         nameRequiredVIew = (CheckBox) view.findViewById(R.id.checkbox_record_member_name);
         sexRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_member_sex);
-        phoneRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_member_sex);
+        phoneRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_mobile);
         addressRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_address);
         emailRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_email);
         birthdayRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_member_birthday);
@@ -262,6 +271,7 @@ public class MerchantMyRecordFragment extends Fragment {
 				hint.setText("上傳成功！ ");
 				Log.d("QINIU_UPLOAD", "redirect : " + redirect);
 				downloadViaPicasso(getActivity(), redirect);
+                attemptMerchantRecordRegister();
 			}
 
 			@Override
@@ -275,7 +285,6 @@ public class MerchantMyRecordFragment extends Fragment {
 	public void downloadViaPicasso(Context context, String path) {
 		Picasso.with(context).load(path).into(imageView);
 	}
-
 
     public void attemptMerchantRecordRegister() {
         accountservice = new AccountService(getActivity());
@@ -393,28 +402,21 @@ public class MerchantMyRecordFragment extends Fragment {
                 merchantInfo.setAmountcountrequired(0);
             }
             merchantInfo.setUseridfk(userId);
-
+            Response.Listener<String> updateListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                    recordRegisterSuccess();
+                }
+            };
+            Response.ErrorListener updateErrorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            };
             MemberappApi.updateMerchantInfoByUserId(merchantInfo, sid, updateListener, updateErrorListener);
         }
     }
-
-
-    Response.Listener<String> updateListener = new Response.Listener<String>() {
-
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            recordRegisterSuccess();
-        }
-    };
-
-
-    Response.ErrorListener updateErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-        }
-    };
 
     public void recordRegisterSuccess() {
         new AlertDialog.Builder(getActivity())
@@ -424,6 +426,5 @@ public class MerchantMyRecordFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 }).show();
-
     }
 }

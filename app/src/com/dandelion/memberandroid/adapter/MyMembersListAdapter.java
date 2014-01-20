@@ -47,7 +47,6 @@ public class MyMembersListAdapter extends BaseAdapter {
 
     public MyMembersListAdapter(Context context) {
         this.context = context;
-        //TODO
         myMembersData = new ArrayList<MyMembersPO>();
     }
 
@@ -65,6 +64,7 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_times_value = (TextView) convertView.findViewById(R.id.my_members_total_times_value);
             holder.text_my_members_total_cost = (TextView) convertView.findViewById(R.id.my_members_total_cost);
             holder.text_my_members_total_times = (TextView) convertView.findViewById(R.id.my_members_total_times);
+            holder.count_click = convertView.findViewById(R.id.count_click);
             scoreView = (TextView) convertView.findViewById(R.id.my_member_total_score);
             convertView.setTag(holder);
         }
@@ -79,6 +79,8 @@ public class MyMembersListAdapter extends BaseAdapter {
         boolean isMember = myMember.isMember();
         final long score = myMember.getScore();
         final long friendId = myMember.getFriendId();
+        final Long totalCosts = myMember.getMemberTotalCosts();
+        final Long totalTimes = myMember.getMemberTotalTimes();
         holder.text_my_members_name.setText(myMember.getName());
         if (isMember) {
             holder.text_my_members_total_cost_value.setVisibility(View.GONE);
@@ -142,17 +144,74 @@ public class MyMembersListAdapter extends BaseAdapter {
         } else {
             holder.button.setVisibility(View.INVISIBLE);
 
-            holder.text_my_members_total_cost_value.setText(myMember.getMemberTotalCosts().toString());
-            holder.text_my_members_total_times_value.setText(myMember.getMemberTotalTimes().toString());
+            holder.text_my_members_total_cost_value.setText(totalCosts.toString());
+            holder.text_my_members_total_times_value.setText(totalTimes.toString());
             holder.text_my_members_total_score.setText(context.getString(R.string.my_members_applying));
+
+            holder.count_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final View view = LayoutInflater.from(context).inflate(R.layout.dialog_add_score, null);
+                    TextView scoreView = (TextView) view.findViewById(R.id.score);
+                    scoreView.setHint(R.string.add_amount_dialog);
+                    scoreDialogBuilder = new AlertDialog.Builder(context).setView(view)
+                            .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TextView scoreView = (TextView) view.findViewById(R.id.score);
+
+                                    final long finalTotalCosts =  totalCosts + Long.valueOf(scoreView.getText().toString());
+                                    final long finalTotalTimes = totalTimes + 1;
+                                    AccountService service = new AccountService(context);
+                                    sid = service.getAuthAccount().getSid();
+                                    MemberDataResponse memberDataResponse = new MemberDataResponse();
+                                    memberDataResponse.setScore(0L);
+                                    memberDataResponse.setAmount(finalTotalCosts);
+                                    memberDataResponse.setAmountcount(finalTotalTimes);
+                                    Response.Listener<String> updateMyMemberInfoListener = new Response.Listener<String>() {
+
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                                            myMember.setMemberTotalCosts(finalTotalCosts);
+                                            myMember.setMemberTotalTimes(finalTotalTimes);
+                                            notifyDataSetChanged();
+                                            Toast.makeText(context, R.string.dialog_submit_success, Toast.LENGTH_SHORT).show();
+                                        }
+                                    };
+                                    Response.ErrorListener updateMyMemberInfoErrorListener = new Response.ErrorListener() {
+
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Toast.makeText(context, R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    };
+                                    try {
+                                        MemberappApi.updateMemberInfo(friendId, sid , memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
+                                        //holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            })
+                            .setNegativeButton(R.string.account_logout_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                    scoreDialog = scoreDialogBuilder.show();
+                }
+            });
 
         }
         if (myMember.isMerchantOrMember()) {
+            holder.count_click.setOnClickListener(null);
             if (isMember) {
-
             } else {
-//                holder.text_my_members_total_score.setText(context.getString(R.string.my_members_apply_success));
-
             }
             holder.button.setVisibility(View.VISIBLE);
             holder.button.setText(R.string.merchant_detail);
@@ -250,6 +309,7 @@ public class MyMembersListAdapter extends BaseAdapter {
         TextView text_my_members_total_times_value;
         TextView text_my_members_total_cost;
         TextView text_my_members_total_times;
+        View count_click;
         Button button;
     }
 }

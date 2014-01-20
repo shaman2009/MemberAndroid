@@ -96,6 +96,20 @@ public class MerchantRegisterFragment extends Fragment {
         merchantTypeView.setText(WebserviceConstant.STAR);
 
 
+
+        memberSettingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!memberSettingView.isChecked()) {
+                    memberCostView.setEnabled(false);
+                    memberTimesView.setEnabled(false);
+                } else {
+                    memberCostView.setEnabled(true);
+                    memberTimesView.setEnabled(true);
+                }
+            }
+        });
+
         registerButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

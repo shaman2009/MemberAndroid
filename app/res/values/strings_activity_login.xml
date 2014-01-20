@@ -47,6 +47,7 @@
     <string name="record_pic_upload_status">上傳</string>
 
     <string name="add_score_dialog">輸入添加的積分</string>
+    <string name="add_amount_dialog">輸入消費的金額</string>
     <!-- My Members-->
     <string name="my_members_total_score">累計積分</string>
     <string name="my_members_total_cost">累計消費金額</string>
@@ -74,7 +75,8 @@
     <string name="account_logout_message">確定登出？</string>
     <string name="account_logout_cancel">取消</string>
     <string name="account_logout_sure">確定</string>
-
+    <string name="agree">同意</string>
+    <string name="cancel">取消</string>
 
 
     <!-- Timeline -->
@@ -87,8 +89,11 @@
     <!-- Join Merchant -->
     <string name="join_merchant_entering_number">輸入商戶號碼</string>
     <string name="join_merchant_button">加入</string>
-
-
+    <string name="join_apply_need_head">入會需要提交 : </string>
+    <string name="join_amount_head">消費滿 </string>
+    <string name="join_amount_mid"> 次或 </string>
+    <string name="join_amount_foot"> 即可成為會員 . </string>
+    <string name="join_alert_title">商戶要求你提供下列資料</string>
     <!-- Dialog Merchant Detail -->
     <string name="dialog_merchant_applying">申請入會</string>
     <string name="dialog_merchant_complete_self_info">補全資料</string>
