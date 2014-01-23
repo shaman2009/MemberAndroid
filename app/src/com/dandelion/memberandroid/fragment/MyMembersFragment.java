@@ -1,5 +1,6 @@
 package com.dandelion.memberandroid.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -28,6 +29,8 @@ import java.util.List;
 public class MyMembersFragment extends Fragment {
     private Gson gson;
     private MyMembersListAdapter myMembersListAdapter;
+    private ProgressDialog mDialog;
+    private ListView listView;
 
     //VALUE
     private String sid;
@@ -49,49 +52,64 @@ public class MyMembersFragment extends Fragment {
         getMyMembersData();
         gson = new Gson();
         myMembersListAdapter = new MyMembersListAdapter(getActivity());
-        ListView listView = (ListView) getActivity().findViewById(R.id.my_members_list);
+        listView = (ListView) getActivity().findViewById(R.id.my_members_list);
         listView.setAdapter(myMembersListAdapter);
         listView.setFastScrollEnabled(true);
+        showLoading(true);
         super.onStart();
     }
 
     public void getMyMembersData() {
         AccountService service = new AccountService(getActivity());
         sid = service.getAuthAccount().getSid();
+        Response.Listener<String> getMyMembersListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                List<MyMembersPO> data = new ArrayList<MyMembersPO>();
+                List<MemberDataResponse> memberList =
+                        gson.fromJson(response, MemberListResponse.class).getMemberList();
+                for (MemberDataResponse memberDataResponse : memberList) {
+                    MyMembersPO member = new MyMembersPO();
+                    member.setAvatarUrl(
+                            QiNiuConstant.getImageDownloadURL(memberDataResponse.getAvatarurl()));
+                    member.setMember(memberDataResponse.isIsmember());
+                    member.setScore(memberDataResponse.getScore());
+                    member.setMemberTotalTimes(memberDataResponse.getAmountcount());
+                    member.setMemberTotalCosts(memberDataResponse.getAmount());
+                    member.setName(memberDataResponse.getName());
+                    member.setFriendId(memberDataResponse.getFriendId());
+                    data.add(member);
+                }
+                myMembersListAdapter.swapItems(data);
+                showLoading(false);
+            }
+        };
+        Response.ErrorListener getMyMembersErrorListener = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showLoading(false);
+                Toast.makeText(getActivity(), R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
+            }
+
+        };
         MemberappApi.getMyMembers(sid, getMyMembersListener, getMyMembersErrorListener);
-        Toast.makeText(getActivity(), R.string.timeline_progress_loading, Toast.LENGTH_SHORT).show();
     }
 
-    private Response.Listener<String> getMyMembersListener = new Response.Listener<String>() {
 
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            List<MyMembersPO> data = new ArrayList<MyMembersPO>();
-            List<MemberDataResponse> memberList =
-                    gson.fromJson(response, MemberListResponse.class).getMemberList();
-            for (MemberDataResponse memberDataResponse : memberList) {
-                MyMembersPO member = new MyMembersPO();
-                member.setAvatarUrl(
-                        QiNiuConstant.getImageDownloadURL(memberDataResponse.getAvatarurl()));
-                member.setMember(memberDataResponse.isIsmember());
-                member.setScore(memberDataResponse.getScore());
-                member.setMemberTotalTimes(memberDataResponse.getAmountcount());
-                member.setMemberTotalCosts(memberDataResponse.getAmount());
-                member.setName(memberDataResponse.getName());
-                member.setFriendId(memberDataResponse.getFriendId());
-                data.add(member);
-            }
-            myMembersListAdapter.swapItems(data);
 
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage(getActivity().getString(R.string.progress_loading));
+            mDialog.setCancelable(false);
+            mDialog.show();
+        } else {
+            if(mDialog != null)
+                mDialog.dismiss();
         }
-    };
-    private Response.ErrorListener getMyMembersErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Toast.makeText(getActivity(), R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
-        }
-
-    };
+        listView.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
 }

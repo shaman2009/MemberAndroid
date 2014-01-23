@@ -21,8 +21,8 @@
 
 
     <string name="register_progress_register">努力註冊中...</string>
-    <string name="timeline_progress_loading">拼命加載中...</string>
-
+    <string name="progress_loading">拼命加載中...</string>
+    <string name="progress_searching">拼命搜索中...</string>
     <!-- My Document Fragment -->
     <string name="record_merchant_no">商號</string>
     <string name="record_merchant_name">店名</string>

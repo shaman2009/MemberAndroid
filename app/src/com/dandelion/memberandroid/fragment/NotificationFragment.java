@@ -1,5 +1,6 @@
 package com.dandelion.memberandroid.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,6 +33,8 @@ public class NotificationFragment extends Fragment{
 
     private Gson gson;
     private NotificationListAdapter notificationListAdapter;
+    private ListView listView;
+    private ProgressDialog mDialog;
 
 
     //VALUE
@@ -49,12 +53,14 @@ public class NotificationFragment extends Fragment{
     }
 	@Override
 	public void onStart() {
-        getNotificationData();
+
         gson = new Gson();
         notificationListAdapter = new NotificationListAdapter(getActivity());
-		ListView listView = (ListView)getActivity().findViewById(R.id.notification_list);
+        listView = (ListView)getActivity().findViewById(R.id.notification_list);
 		listView.setAdapter(notificationListAdapter);
 		listView.setFastScrollEnabled(true);
+
+        getNotificationData();
 		super.onStart();
 	}
 
@@ -63,46 +69,60 @@ public class NotificationFragment extends Fragment{
         AccountService service = new AccountService(getActivity());
         sid = service.getAuthAccount().getSid();
         userId = service.getAuthAccount().getUsdId();
+        Response.Listener<String> notificationListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                List<NotificationMessagePO> data = new ArrayList<NotificationMessagePO>();
+                try {
+                    JSONObject responseJson = new JSONObject(response);
+                    JSONArray responseJsonArray = responseJson.getJSONArray("notificationList");
+                    for (int i = 0; i < responseJsonArray.length(); i++) {
+                        NotificationDataResponse notificationDataResponse;
+                        NotificationMessagePO notificationMessagePO = new NotificationMessagePO();
+                        notificationDataResponse = gson.fromJson(
+                                responseJsonArray.get(i).toString(), NotificationDataResponse.class);
+                        notificationMessagePO.setId(notificationDataResponse.getId());
+                        notificationMessagePO.setContext(
+                                notificationDataResponse.getMember().getName() + " 想要成為你的會員");
+                        notificationMessagePO.setAvatarUrl(
+                                QiNiuConstant.getImageDownloadURL(
+                                        notificationDataResponse.getMember().getAvatarurl()));
+                        notificationMessagePO.setTargetUserId(notificationDataResponse.getFromuseridfk());
+                        notificationMessagePO.setRead(notificationDataResponse.getIsread());
+                        data.add(notificationMessagePO);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                notificationListAdapter.swapItems(data);
+                showLoading(false);
+            }
+        };
+        Response.ErrorListener notificationErrorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showLoading(false);
+                Toast.makeText(getActivity(), R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
+            }
+        };
+        showLoading(true);
         MemberappApi.getNotification(userId, sid, notificationListener, notificationErrorListener);
     }
 
 
-
-    private Response.Listener<String> notificationListener = new Response.Listener<String>() {
-
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            List<NotificationMessagePO> data = new ArrayList<NotificationMessagePO>();
-            try {
-                JSONObject responseJson = new JSONObject(response);
-                JSONArray responseJsonArray = responseJson.getJSONArray("notificationList");
-                for (int i = 0; i < responseJsonArray.length(); i++) {
-                    NotificationDataResponse notificationDataResponse;
-                    NotificationMessagePO notificationMessagePO = new NotificationMessagePO();
-                    notificationDataResponse = gson.fromJson(
-                            responseJsonArray.get(i).toString(), NotificationDataResponse.class);
-                    notificationMessagePO.setId(notificationDataResponse.getId());
-                    notificationMessagePO.setContext(
-                            notificationDataResponse.getMember().getName() + " 想要成為你的會員");
-                    notificationMessagePO.setAvatarUrl(
-                            QiNiuConstant.getImageDownloadURL(
-                                    notificationDataResponse.getMember().getAvatarurl()));
-                    notificationMessagePO.setTargetUserId(notificationDataResponse.getFromuseridfk());
-                    notificationMessagePO.setRead(notificationDataResponse.getIsread());
-                    data.add(notificationMessagePO);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            notificationListAdapter.swapItems(data);
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage(getActivity().getString(R.string.progress_loading));
+            mDialog.setCancelable(false);
+            mDialog.show();
+        } else {
+            if(mDialog != null)
+                mDialog.dismiss();
         }
-    };
-    private Response.ErrorListener notificationErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-        }
-    };
+        listView.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
 
 }

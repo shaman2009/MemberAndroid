@@ -2,6 +2,7 @@ package com.dandelion.memberandroid.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class JoinMemberFragment extends Fragment {
     private Button recordRegisterButton;
     private AlertDialog.Builder merchantBuilder;
     private Dialog merchantDialog;
+    private ProgressDialog mDialog;
 
     //VALUE
     private String sid;
@@ -63,6 +65,7 @@ public class JoinMemberFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 attemptGetMerchant();
+                showLoading(true);
             }
         });
         super.onStart();
@@ -71,6 +74,17 @@ public class JoinMemberFragment extends Fragment {
     public void initWidget() {
         joinButton = (Button) getActivity().findViewById(R.id.join_merchant_button);
         searchEditText = (EditText) getActivity().findViewById(R.id.join_merchant_input);
+    }
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage(getActivity().getString(R.string.progress_searching));
+            mDialog.setCancelable(false);
+            mDialog.show();
+        } else {
+            if(mDialog != null)
+                mDialog.dismiss();
+        }
     }
 
     public void attemptGetMerchant() {
@@ -103,12 +117,15 @@ public class JoinMemberFragment extends Fragment {
                     Log.d(LoggerConstant.VOLLEY_REQUEST, response);
                     merchantBuilder = new AlertDialog.Builder(getActivity()).setView(callMerchantDetailDialog(response));
                     merchantDialog = merchantBuilder.show();
+                    showLoading(false);
+
                 }
             };
             Response.ErrorListener getMerchantErrorListener = new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d(LoggerConstant.VOLLEY_REQUEST, error.toString());
+                    showLoading(false);
                     new AlertDialog.Builder(getActivity())
                             .setMessage(getActivity().getString(R.string.dialog_merchant_search_error))
                             .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
