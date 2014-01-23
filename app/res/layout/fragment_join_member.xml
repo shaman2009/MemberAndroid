@@ -30,7 +30,7 @@
         android:id="@+id/join_merchant_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
         android:text="@string/join_merchant_button" />

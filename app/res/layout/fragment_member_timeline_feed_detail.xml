@@ -24,10 +24,10 @@
             android:layout_marginBottom="16dp"
             android:gravity="center" />
 
-        <com.dandelion.memberandroid.view.SquaredImageView
+        <ImageView
             android:id="@+id/image_timeline_feed_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp" />
 
 
         <TextView

@@ -3,6 +3,8 @@ package com.dandelion.memberandroid.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,10 +38,10 @@ import java.util.List;
 public class MemberTimelineFragment extends Fragment {
 
 
-
     //UI
     private View mListView;
     private View mLoadingStatusView;
+    private ProgressDialog mDialog;
 
     private MemberTimelineListAdapter memberTimelineListAdapter;
 
@@ -46,6 +49,7 @@ public class MemberTimelineFragment extends Fragment {
     //VALUE
     private String sid;
     private Long userId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +71,12 @@ public class MemberTimelineFragment extends Fragment {
         listView.setAdapter(memberTimelineListAdapter);
         listView.setFastScrollEnabled(true);
         getTimeLineData();
-        showProgress(true);
+//        showProgress(true);
+
+
+        showLoading(true);
+
+
         super.onStart();
     }
 
@@ -83,7 +92,9 @@ public class MemberTimelineFragment extends Fragment {
         userId = service.getAuthAccount().getUsdId();
         MemberappApi.getTimeline(userId, sid, timelineListener, timelineErrorListener);
     }
-    Response.Listener<String> timelineListener = new Response.Listener<String>() {
+
+
+    private Response.Listener<String> timelineListener = new Response.Listener<String>() {
 
         @Override
         public void onResponse(String response) {
@@ -115,16 +126,33 @@ public class MemberTimelineFragment extends Fragment {
                 e.printStackTrace();
             }
             memberTimelineListAdapter.swapItems(data);
-            showProgress(false);
+//            showProgress(false);
+            showLoading(false);
         }
     };
-    Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
+    private Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
 
         @Override
         public void onErrorResponse(VolleyError error) {
+            showLoading(false);
+            Toast.makeText(getActivity(), R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
         }
     };
 
+
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage(getActivity().getString(R.string.progress_loading));
+            mDialog.setCancelable(false);
+            mDialog.show();
+        } else {
+            if(mDialog != null)
+            mDialog.dismiss();
+
+        }
+        mListView.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
 
     /**
      * Shows the progress UI and hides the login form.
@@ -186,8 +214,4 @@ public class MemberTimelineFragment extends Fragment {
         fakeNotificationData.add(memberTimelineFeedPO2);
         return fakeNotificationData;
     }
-
-
-
-
 }

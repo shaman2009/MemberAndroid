@@ -21,8 +21,8 @@
 
 
     <string name="register_progress_register">努力註冊中...</string>
-    <string name="timeline_progress_loading">拼命加載中...</string>
-
+    <string name="progress_loading">拼命加載中...</string>
+    <string name="progress_searching">拼命搜索中...</string>
     <!-- My Document Fragment -->
     <string name="record_merchant_no">商號</string>
     <string name="record_merchant_name">店名</string>
@@ -34,6 +34,7 @@
     <string name="record_member_provide_info">會員提供資料</string>
     <string name="record_member_name">姓名</string>
     <string name="record_member_alias">昵稱</string>
+    <string name="record_member_no">編號</string>
     <string name="record_member_sex">性別</string>
     <string name="record_member_birthday">出生日期</string>
     <string name="record_member_setting">會員設定</string>
@@ -45,13 +46,15 @@
     <string name="record_pic_upload">上傳</string>
     <string name="record_pic_upload_status">上傳</string>
 
-
+    <string name="add_score_dialog">輸入添加的積分</string>
+    <string name="add_amount_dialog">輸入消費的金額</string>
     <!-- My Members-->
     <string name="my_members_total_score">累計積分</string>
     <string name="my_members_total_cost">累計消費金額</string>
     <string name="my_members_total_times">累計消費次數</string>
     <string name="my_members_add_score">添加積分</string>
     <string name="my_members_applying">申請中</string>
+    <string name="my_members_apply_success">已成為會員</string>
 
     <string name="button_my_post">發佈優惠信息</string>
     <string name="button_post">發佈</string>
@@ -72,7 +75,8 @@
     <string name="account_logout_message">確定登出？</string>
     <string name="account_logout_cancel">取消</string>
     <string name="account_logout_sure">確定</string>
-
+    <string name="agree">同意</string>
+    <string name="cancel">取消</string>
 
 
     <!-- Timeline -->
@@ -85,8 +89,11 @@
     <!-- Join Merchant -->
     <string name="join_merchant_entering_number">輸入商戶號碼</string>
     <string name="join_merchant_button">加入</string>
-
-
+    <string name="join_apply_need_head">入會需要提交 : </string>
+    <string name="join_amount_head">消費滿 </string>
+    <string name="join_amount_mid"> 次或 </string>
+    <string name="join_amount_foot"> 即可成為會員 . </string>
+    <string name="join_alert_title">商戶要求你提供下列資料</string>
     <!-- Dialog Merchant Detail -->
     <string name="dialog_merchant_applying">申請入會</string>
     <string name="dialog_merchant_complete_self_info">補全資料</string>
@@ -94,7 +101,13 @@
     <string name="dialog_merchant_alert_apply_success">申請提交成功</string>
     <string name="dialog_merchant_alert_apply_error">申請提交失敗，也許網絡出問題了</string>
     <string name="dialog_merchant_search_error">該商戶不存在，或者哪裡出錯了</string>
+    <string name="dialog_network_error">出錯了,請稍後再試</string>
+    <string name="dialog_submit_success">提交成功</string>
+    <string name="developing">該功能還在開發ing</string>
+    <string name="merchant_detail">商戶諮詢</string>
 
+
+    <string name="dialog_merchant_alert_accept_success">接納成功</string>
 
     <string name="app_name">Member</string>
     <string name="action_settings">Settings</string>
@@ -104,6 +117,9 @@
     <string name="title_activity_register">註冊</string>
     <string name="title_activity_merchant_register">商戶註冊</string>
     <string name="title_activity_member_timeline_feed_detail">詳細信息</string>
+
+    <string name="accept_join">接納</string>
+    <string name="add">添加</string>
 
     <!-- Toast -->
     <string name="toast_message_register_failed">註冊失敗</string>

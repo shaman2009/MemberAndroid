@@ -2,8 +2,8 @@ package com.dandelion.memberandroid.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -14,21 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.activity.LoginActivity;
-import com.dandelion.memberandroid.activity.RegisterActivity;
-import com.dandelion.memberandroid.adapter.MyPostListAdapter;
 import com.dandelion.memberandroid.constant.LoggerConstant;
-import com.dandelion.memberandroid.constant.WebserviceConstant;
+import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.service.AccountService;
-import com.dandelion.memberandroid.util.DeviceUtil;
-import com.dandelion.memberandroid.util.Md5;
 import com.dandelion.memberandroid.volley.MemberappApi;
 import com.squareup.picasso.Picasso;
 
@@ -47,6 +40,7 @@ public class JoinMemberFragment extends Fragment {
     private Button recordRegisterButton;
     private AlertDialog.Builder merchantBuilder;
     private Dialog merchantDialog;
+    private ProgressDialog mDialog;
 
     //VALUE
     private String sid;
@@ -71,6 +65,7 @@ public class JoinMemberFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 attemptGetMerchant();
+                showLoading(true);
             }
         });
         super.onStart();
@@ -79,6 +74,17 @@ public class JoinMemberFragment extends Fragment {
     public void initWidget() {
         joinButton = (Button) getActivity().findViewById(R.id.join_merchant_button);
         searchEditText = (EditText) getActivity().findViewById(R.id.join_merchant_input);
+    }
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage(getActivity().getString(R.string.progress_searching));
+            mDialog.setCancelable(false);
+            mDialog.show();
+        } else {
+            if(mDialog != null)
+                mDialog.dismiss();
+        }
     }
 
     public void attemptGetMerchant() {
@@ -105,39 +111,38 @@ public class JoinMemberFragment extends Fragment {
             AccountService service = new AccountService(getActivity());
             sid = service.getAuthAccount().getSid();
             long targetMerchantId = Long.valueOf(key);
+            Response.Listener<String> getMerchantListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                    merchantBuilder = new AlertDialog.Builder(getActivity()).setView(callMerchantDetailDialog(response));
+                    merchantDialog = merchantBuilder.show();
+                    showLoading(false);
+
+                }
+            };
+            Response.ErrorListener getMerchantErrorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(LoggerConstant.VOLLEY_REQUEST, error.toString());
+                    showLoading(false);
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getActivity().getString(R.string.dialog_merchant_search_error))
+                            .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }).show();
+                }
+            };
             MemberappApi.getMerchantInfoByMerchantId(targetMerchantId, sid, getMerchantListener, getMerchantErrorListener);
-
-   }
-
-    }
-    Response.Listener<String> getMerchantListener = new Response.Listener<String>() {
-
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            merchantBuilder = new AlertDialog.Builder(getActivity()).setView(callMerchantDetailDialog(response));
-            merchantDialog = merchantBuilder.show();
-
         }
 
-    };
-    Response.ErrorListener getMerchantErrorListener = new Response.ErrorListener() {
+    }
 
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, error.toString());
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(getActivity().getString(R.string.dialog_merchant_search_error))
-                    .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).show();
-   }
-    };
+
     public View callMerchantDetailDialog(String response) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_merchant_detail_info, container, false);
-
 
 
         ImageView avatarView = (ImageView) view.findViewById(R.id.imageView_dialog_merchant_detail_avator);
@@ -146,7 +151,8 @@ public class JoinMemberFragment extends Fragment {
         TextView merchantMobileView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_mobile);
         TextView addressView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_address);
         TextView emailView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_email);
-        TextView contentView = (TextView) view.findViewById(R.id.edut_dialog_merchant_detail_content);
+        TextView contentView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_content);
+        TextView contentNeedView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_need);
         recordRegisterButton = (Button) view.findViewById(R.id.button_dialog_merchant_detail_record_register);
         applyButton = (Button) view.findViewById(R.id.button_dialog_merchant_detail_applying);
 
@@ -154,7 +160,7 @@ public class JoinMemberFragment extends Fragment {
             JSONObject json = new JSONObject(response).getJSONArray("merchantList").getJSONObject(0);
             String imageUrl = json.getString("avatarurl");
             Picasso.with(getActivity())
-                    .load(imageUrl)
+                    .load(QiNiuConstant.getImageDownloadURL(imageUrl))
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.error)
                     .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
@@ -169,6 +175,16 @@ public class JoinMemberFragment extends Fragment {
             merchantMobileView.setText(json.getString("phone"));
             addressView.setText(json.getString("address"));
             emailView.setText(json.getString("email"));
+            long amountcountrequired = json.getLong("amountcountrequired");
+            long amountrequired = json.getLong("amountrequired");
+            if (!(amountrequired == 0 && amountcountrequired == 0)) {
+                String need = getActivity().getString(R.string.join_amount_head);
+                need += amountcountrequired + getActivity().getString(R.string.join_amount_mid)
+                        + amountrequired + " HKD " + getActivity().getString(R.string.join_amount_foot);
+                contentNeedView.setText(need);
+            }
+
+
             //TODO
             targetUserId = json.getLong("useridfk");
             boolean namerequired = json.getBoolean("namerequired");
@@ -177,35 +193,65 @@ public class JoinMemberFragment extends Fragment {
             boolean addressrequired = json.getBoolean("addressrequired");
             boolean emailrequired = json.getBoolean("emailrequired");
             boolean birthdayrequired = json.getBoolean("birthdayrequired");
-            String content = "";
-            if(namerequired) {
-                content += "namerequired ";
+            String content = getActivity().getString(R.string.join_apply_need_head);
+            boolean contentIsNull = true;
+            if (namerequired) {
+                content += " 姓名 ";
+                contentIsNull = false;
             }
-            if(sexrequired) {
-                content += "sexrequired ";
+            if (sexrequired) {
+                content += " 性別 ";
+                contentIsNull = false;
             }
-            if(phonerequired) {
-                content += "phonerequired ";
+            if (phonerequired) {
+                content += " 電話 ";
+                contentIsNull = false;
             }
-            if(addressrequired) {
-                content += "addressrequired ";
+            if (addressrequired) {
+                content += " 地址 ";
+                contentIsNull = false;
             }
-            if(emailrequired) {
-                content += "emailrequired ";
+            if (emailrequired) {
+                content += " 電郵 ";
+                contentIsNull = false;
             }
-            if(birthdayrequired) {
-                content += "birthdayrequired ";
+            if (birthdayrequired) {
+                content += " 生日 ";
+                contentIsNull = false;
             }
-            contentView.setText(content);
+            if (!contentIsNull) {
+                contentView.setText(content);
+                String[] strs = content.split(":");
+                final String message = strs[1];
+                applyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle(getActivity().getString(R.string.join_alert_title))
+                                .setMessage(message)
+                                .setNegativeButton(getActivity().getString(R.string.cancel), null)
+                                .setNeutralButton(getActivity().getString(R.string.agree), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        followMerchant();
+                                    }
+                                }).show();
+
+                    }
+                });
+            } else {
+                applyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        followMerchant();
+
+                    }
+                });
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        applyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                followMerchant();
-            }
-        });
+
         recordRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,7 +262,6 @@ public class JoinMemberFragment extends Fragment {
     }
 
 
-
     public void registerMemberRecord() {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -225,45 +270,42 @@ public class JoinMemberFragment extends Fragment {
                 .commit();
         merchantDialog.dismiss();
     }
+
     public void followMerchant() {
         try {
+            Response.Listener<String> followListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getActivity().getString(R.string.dialog_merchant_alert_apply_success))
+                            .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    merchantDialog.dismiss();
+                                }
+                            }).show();
+                    applyButton.setText(R.string.dialog_merchant_applyed);
+                    applyButton.setOnClickListener(null);
+                }
+            };
+            Response.ErrorListener followErrorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getActivity().getString(R.string.dialog_merchant_alert_apply_error))
+                            .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }).show();
+                }
+            };
             MemberappApi.follow(targetUserId, sid, followListener, followErrorListener);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    Response.Listener<String> followListener = new Response.Listener<String>() {
 
-        @Override
-        public void onResponse(String response) {
-            Log.d(LoggerConstant.VOLLEY_REQUEST, response);
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(getActivity().getString(R.string.dialog_merchant_alert_apply_success))
-                    .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            merchantDialog.dismiss();
-                        }
-                    }).show();
-            applyButton.setText(R.string.dialog_merchant_applyed);
-            applyButton.setOnClickListener(null);
-        }
-    };
-
-
-    Response.ErrorListener followErrorListener = new Response.ErrorListener() {
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(getActivity().getString(R.string.dialog_merchant_alert_apply_error))
-                    .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).show();
-        }
-    };
 
 }
