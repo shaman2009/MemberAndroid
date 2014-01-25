@@ -29,6 +29,12 @@ public class MerchantDataResponse {
     private Long amount;
     private Long amountcount;
     private Long score;
+    private Long userId;
+    private String useremail;
+    private Integer friendcount;
+    private Integer fancount;
+    private Integer followcount;
+    private Integer articlecount;
 
     public Long getFriendId() {
         return friendId;
@@ -270,10 +276,5 @@ public class MerchantDataResponse {
         this.articlecount = articlecount;
     }
 
-    private Long userId;
-    private String useremail;
-    private Integer friendcount;
-    private Integer fancount;
-    private Integer followcount;
-    private Integer articlecount;
+
 }

@@ -220,7 +220,15 @@ public class MemberappApi {
         }
         HttpRequestViaVolley.httpGet(WebserviceConstant.MY_POSTS_URI, j.toString(), listener, errorListener);
     }
-
+    public static void getMerchantPosts(long userId, String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpGet(WebserviceConstant.MERCHANT_POSTS_URI + "/" + userId, j.toString(), listener, errorListener);
+    }
 
     //NotificationDataResponse
 

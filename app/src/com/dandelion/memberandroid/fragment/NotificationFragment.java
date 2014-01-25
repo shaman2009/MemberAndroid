@@ -119,8 +119,10 @@ public class NotificationFragment extends Fragment{
             mDialog.setCancelable(false);
             mDialog.show();
         } else {
-            if(mDialog != null)
+            if(mDialog != null) {
                 mDialog.dismiss();
+            }
+
         }
         listView.setVisibility(show ? View.GONE : View.VISIBLE);
     }

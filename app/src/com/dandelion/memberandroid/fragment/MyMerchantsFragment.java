@@ -58,7 +58,7 @@ public class MyMerchantsFragment extends Fragment {
     public void onStart() {
         getMyMerchantsData();
         gson = new Gson();
-        myMembersListAdapter = new MyMembersListAdapter(getActivity());
+        myMembersListAdapter = new MyMembersListAdapter(getActivity(), getActivity().getSupportFragmentManager());
         listView = (ListView) getActivity().findViewById(R.id.my_members_list);
         listView.setAdapter(myMembersListAdapter);
         listView.setFastScrollEnabled(true);
@@ -87,6 +87,7 @@ public class MyMerchantsFragment extends Fragment {
                     member.setName(merchantDataResponse.getName());
                     member.setFriendId(merchantDataResponse.getFriendId());
                     member.setMerchantOrMember(true);
+                    member.setMerchantUserId(merchantDataResponse.getUserId());
                     data.add(member);
                 }
                 myMembersListAdapter.swapItems(data);

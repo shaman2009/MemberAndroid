@@ -65,7 +65,7 @@ public class JoinMemberFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 attemptGetMerchant();
-                showLoading(true);
+
             }
         });
         super.onStart();
@@ -135,6 +135,7 @@ public class JoinMemberFragment extends Fragment {
                             }).show();
                 }
             };
+            showLoading(true);
             MemberappApi.getMerchantInfoByMerchantId(targetMerchantId, sid, getMerchantListener, getMerchantErrorListener);
         }
 

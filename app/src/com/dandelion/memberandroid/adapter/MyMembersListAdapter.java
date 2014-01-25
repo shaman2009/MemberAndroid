@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.LoggerConstant;
-import com.dandelion.memberandroid.constant.QiNiuConstant;
+import com.dandelion.memberandroid.fragment.MemberMyRecordFragment;
+import com.dandelion.memberandroid.fragment.MerchantPostFragment;
 import com.dandelion.memberandroid.model.MemberDataResponse;
-import com.dandelion.memberandroid.model.MemberListResponse;
 import com.dandelion.memberandroid.model.MyMembersPO;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
@@ -37,7 +38,7 @@ import java.util.List;
 public class MyMembersListAdapter extends BaseAdapter {
     private Context context;
     private List<MyMembersPO> myMembersData = new ArrayList<MyMembersPO>();
-
+    private FragmentManager fm;
     private AlertDialog.Builder scoreDialogBuilder;
     private Dialog scoreDialog;
     private TextView scoreView;
@@ -47,6 +48,12 @@ public class MyMembersListAdapter extends BaseAdapter {
 
     public MyMembersListAdapter(Context context) {
         this.context = context;
+        myMembersData = new ArrayList<MyMembersPO>();
+    }
+
+    public MyMembersListAdapter(Context context, FragmentManager fm) {
+        this.context = context;
+        this.fm = fm;
         myMembersData = new ArrayList<MyMembersPO>();
     }
 
@@ -65,11 +72,9 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_cost = (TextView) convertView.findViewById(R.id.my_members_total_cost);
             holder.text_my_members_total_times = (TextView) convertView.findViewById(R.id.my_members_total_times);
             holder.count_click = convertView.findViewById(R.id.count_click);
-            scoreView = (TextView) convertView.findViewById(R.id.my_member_total_score);
-            convertView.setTag(holder);
-        }
 
-        else {
+            convertView.setTag(holder);
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
@@ -81,6 +86,7 @@ public class MyMembersListAdapter extends BaseAdapter {
         final long friendId = myMember.getFriendId();
         final Long totalCosts = myMember.getMemberTotalCosts();
         final Long totalTimes = myMember.getMemberTotalTimes();
+
         holder.text_my_members_name.setText(myMember.getName());
         if (isMember) {
             holder.text_my_members_total_cost_value.setVisibility(View.GONE);
@@ -97,7 +103,7 @@ public class MyMembersListAdapter extends BaseAdapter {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     TextView scoreView = (TextView) view.findViewById(R.id.score);
-                                    final long finalscore =  score + Long.valueOf(scoreView.getText().toString());
+                                    final long finalscore = score + Long.valueOf(scoreView.getText().toString());
                                     AccountService service = new AccountService(context);
                                     sid = service.getAuthAccount().getSid();
                                     MemberDataResponse memberDataResponse = new MemberDataResponse();
@@ -123,7 +129,7 @@ public class MyMembersListAdapter extends BaseAdapter {
 
                                     };
                                     try {
-                                        MemberappApi.updateMemberInfo(friendId, sid , memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
+                                        MemberappApi.updateMemberInfo(friendId, sid, memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
                                         //holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
 
                                     } catch (JSONException e) {
@@ -160,7 +166,7 @@ public class MyMembersListAdapter extends BaseAdapter {
                                 public void onClick(DialogInterface dialog, int which) {
                                     TextView scoreView = (TextView) view.findViewById(R.id.score);
 
-                                    final long finalTotalCosts =  totalCosts + Long.valueOf(scoreView.getText().toString());
+                                    final long finalTotalCosts = totalCosts + Long.valueOf(scoreView.getText().toString());
                                     final long finalTotalTimes = totalTimes + 1;
                                     AccountService service = new AccountService(context);
                                     sid = service.getAuthAccount().getSid();
@@ -188,7 +194,7 @@ public class MyMembersListAdapter extends BaseAdapter {
 
                                     };
                                     try {
-                                        MemberappApi.updateMemberInfo(friendId, sid , memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
+                                        MemberappApi.updateMemberInfo(friendId, sid, memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
                                         //holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
 
                                     } catch (JSONException e) {
@@ -210,25 +216,16 @@ public class MyMembersListAdapter extends BaseAdapter {
         }
         if (myMember.isMerchantOrMember()) {
             holder.count_click.setOnClickListener(null);
-            if (isMember) {
-            } else {
-            }
+            final Long userId = myMember.getMerchantUserId();
             holder.button.setVisibility(View.VISIBLE);
             holder.button.setText(R.string.merchant_detail);
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new AlertDialog.Builder(context)
-                            .setMessage(context.getString(R.string.developing))
-                            .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            }).show();
+                    showMerchantInfo(userId);
                 }
             });
         }
-
 
         // Trigger the download of the URL asynchronously into the image view.
         Picasso.with(context)
@@ -241,6 +238,7 @@ public class MyMembersListAdapter extends BaseAdapter {
         Picasso.with(context).setDebugging(true);
         return convertView;
     }
+
 
     @Override
     public int getCount() {
@@ -264,7 +262,12 @@ public class MyMembersListAdapter extends BaseAdapter {
     }
 
 
-
+    private void showMerchantInfo(long userId) {
+        fm.beginTransaction()
+                .replace(R.id.content_frame, new MerchantPostFragment(userId))
+                .addToBackStack(null)
+                .commit();
+    }
 
     public List<MyMembersPO> fakeData() {
         List<MyMembersPO> fakeNotificationData = new ArrayList<MyMembersPO>();

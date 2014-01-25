@@ -15,7 +15,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.adapter.MemberTimelineListAdapter;
-import com.dandelion.memberandroid.adapter.MyPostListAdapter;
 import com.dandelion.memberandroid.constant.LoggerConstant;
 import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.model.MemberTimelineFeedPO;
@@ -29,8 +28,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyPostFragment extends Fragment {
-
+/**
+ * Created by FengxiangZhu on 14-1-25.
+ */
+public class MerchantPostFragment extends Fragment {
     //UI
     private ListView listView;
     private ProgressDialog mDialog;
@@ -42,8 +43,9 @@ public class MyPostFragment extends Fragment {
     private String sid;
     private Long userId;
 
-
-
+    public MerchantPostFragment(long userId) {
+        this.userId = userId;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,42 +54,26 @@ public class MyPostFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my_post, container, false);
+        return inflater.inflate(R.layout.fragment_member_timeline_list, container, false);
     }
 
     @Override
     public void onStart() {
         memberTimelineListAdapter = new MemberTimelineListAdapter(getActivity());
-        listView = (ListView) getActivity().findViewById(R.id.my_post_list);
+        listView = (ListView) getActivity().findViewById(R.id.list_member_timeline_feed);
         listView.setAdapter(memberTimelineListAdapter);
         listView.setFastScrollEnabled(true);
         getMyPostsData();
 
-
-        Button postButton = (Button) getActivity().findViewById(R.id.button_my_post);
-        postButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postFeed();
-            }
-        });
         super.onStart();
     }
 
 
 
-    public void postFeed() {
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame, new PostFeedFragment())
-                .addToBackStack(null)
-                .commit();
-    }
-
     public void getMyPostsData() {
         AccountService service = new AccountService(getActivity());
         sid = service.getAuthAccount().getSid();
-        userId = service.getAuthAccount().getUsdId();
+
         Response.Listener<String> timelineListener = new Response.Listener<String>() {
 
             @Override
@@ -132,7 +118,7 @@ public class MyPostFragment extends Fragment {
             }
         };
         showLoading(true);
-        MemberappApi.getMyPosts(sid, timelineListener, timelineErrorListener);
+        MemberappApi.getMerchantPosts(userId, sid, timelineListener, timelineErrorListener);
 
     }
 

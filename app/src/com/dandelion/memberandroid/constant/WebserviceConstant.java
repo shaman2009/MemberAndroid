@@ -24,6 +24,8 @@ public class WebserviceConstant {
 
     public static final String MY_POSTS_URI = HOST + "/MyPosts";
 
+    public static final String MERCHANT_POSTS_URI = HOST + "/MerchantPosts";
+
     public static final String NOTIFICATION_URI = HOST + "/Notifications";
 
     public static final String MY_MEMBERS_URI = HOST + "/MyMembers";

@@ -82,7 +82,6 @@ public class MemberTimelineFragment extends Fragment {
 
     private void initWidget() {
         mListView = getActivity().findViewById(R.id.list_member_timeline_feed);
-        mLoadingStatusView = getActivity().findViewById(R.id.timeline_loading_progress);
     }
 
 
@@ -154,46 +153,7 @@ public class MemberTimelineFragment extends Fragment {
         mListView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(
-                    android.R.integer.config_shortAnimTime);
 
-            mLoadingStatusView.setVisibility(View.VISIBLE);
-            mLoadingStatusView.animate().setDuration(shortAnimTime)
-                    .alpha(show ? 1 : 0)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLoadingStatusView.setVisibility(show ? View.VISIBLE
-                                    : View.GONE);
-                        }
-                    });
-
-            mListView.setVisibility(View.VISIBLE);
-            mListView.animate().setDuration(shortAnimTime)
-                    .alpha(show ? 0 : 1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mListView.setVisibility(show ? View.GONE
-                                    : View.VISIBLE);
-                        }
-                    });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mLoadingStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mListView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
 
     public List<MemberTimelineFeedPO> fakeData() {
         List<MemberTimelineFeedPO> fakeNotificationData = new ArrayList<MemberTimelineFeedPO>();

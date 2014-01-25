@@ -11,6 +11,16 @@ public class MyMembersPO {
     private Long memberTotalCosts;
     private Long memberTotalTimes;
     private Long friendId;
+    private Long merchantUserId;
+
+    public Long getMerchantUserId() {
+        return merchantUserId;
+    }
+
+    public void setMerchantUserId(Long merchantUserId) {
+        this.merchantUserId = merchantUserId;
+    }
+
     private boolean merchantOrMember; // false means members , true means merchants.
 
     public boolean isMerchantOrMember() {
