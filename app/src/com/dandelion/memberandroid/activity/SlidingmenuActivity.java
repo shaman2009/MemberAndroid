@@ -97,6 +97,8 @@ public class SlidingmenuActivity extends BaseActivity {
 
 
         if (fragment instanceof NotificationFragment || fragment instanceof MemberTimelineFragment) {
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             if (getSupportActionBar().getTabCount() != 3) {
                 for (int i = 0; i <= 2; i++) {
@@ -106,15 +108,15 @@ public class SlidingmenuActivity extends BaseActivity {
                     tab.setTabListener(this);
                     getSupportActionBar().addTab(tab);
                 }
-
             }
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
         } else {
             getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
             getSupportActionBar().removeAllTabs();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
+            setTitle(R.string.app_name);
+//            getSupportActionBar().setDisplayShowHomeEnabled(false);
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
 
