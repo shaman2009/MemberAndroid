@@ -18,9 +18,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -53,7 +55,7 @@ public class MerchantMyRecordFragment extends Fragment {
     private TextView phoneView;
     private TextView addressView;
     private TextView emailView;
-    private TextView merchantTypeView;
+    private Spinner merchantTypeSpinner;
     private TextView introductionView;
     private CheckBox nameRequiredVIew;
     private CheckBox sexRequiredView;
@@ -183,7 +185,8 @@ public class MerchantMyRecordFragment extends Fragment {
             addressView.setText(merchantJson.getString("address"));
             phoneView.setText(merchantJson.getString("phone"));
             emailView.setText(merchantJson.getString("email"));
-            merchantTypeView.setText(merchantJson.getString("merchanttype"));
+//TODO
+            //merchantTypeView.setText(merchantJson.getString("merchanttype"));
             introductionView.setText(merchantJson.getString("introduction"));
 
             nameRequiredVIew.setChecked(merchantJson.getBoolean("namerequired"));
@@ -225,7 +228,15 @@ public class MerchantMyRecordFragment extends Fragment {
         phoneView = (TextView) view.findViewById(R.id.edit_text_record_mobile);
         addressView = (TextView) view.findViewById(R.id.edit_text_record_address);
         emailView = (TextView) view.findViewById(R.id.edit_text_record_email);
-        merchantTypeView = (TextView) view.findViewById(R.id.edit_text_record_type);
+        merchantTypeSpinner = (Spinner) view.findViewById(R.id.planets_spinner_record_type);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.merchant_type, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        merchantTypeSpinner.setAdapter(adapter);
+
         introductionView = (TextView) view.findViewById(R.id.edit_text_record_info);
         nameRequiredVIew = (CheckBox) view.findViewById(R.id.checkbox_record_member_name);
         sexRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_member_sex);
@@ -241,6 +252,8 @@ public class MerchantMyRecordFragment extends Fragment {
 
 
         registerButton = (Button) view.findViewById(R.id.button_record_register);
+
+
 	}
 
 
@@ -299,14 +312,15 @@ public class MerchantMyRecordFragment extends Fragment {
         phoneView.setError(null);
         addressView.setError(null);
         emailView.setError(null);
-        merchantTypeView.setError(null);
+        //TODO
+//        merchantTypeView.setError(null);
         // Store values at the time of the login attempt.
         name = nameView.getText().toString();
         phone = phoneView.getText().toString();
         address = addressView.getText().toString();
         email = emailView.getText().toString();
-        merchantType = merchantTypeView.getText().toString();
-
+        //TODO
+//        merchantType = merchantTypeView.getText().toString();
         introduction = introductionView.getText().toString();
         memberCost = memberCostView.getText().toString();
         memberTimes = memberTimesView.getText().toString();
@@ -364,8 +378,9 @@ public class MerchantMyRecordFragment extends Fragment {
         }
 
         if (merchantType.equals(WebserviceConstant.STAR)) {
-            merchantTypeView.setError(getString(R.string.error_field_required));
-            focusView = merchantTypeView;
+            //TODO
+//            merchantTypeView.setError(getString(R.string.error_field_required));
+//            focusView = merchantTypeView;
             cancel = true;
         }
         if (cancel) {
