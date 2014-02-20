@@ -136,15 +136,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/record_type" />
-
-                    <EditText
-                        android:id="@+id/edit_text_record_type"
-                        android:layout_width="0dp"
+                    <Spinner
+                        android:id="@+id/planets_spinner_record_type"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="" >
-                    </EditText>
+                        android:layout_weight="1"/>
+                    <!--<EditText-->
+                        <!--android:id="@+id/edit_text_record_type"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:ems="10"-->
+                        <!--android:inputType="" >-->
+                    <!--</EditText>-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -226,7 +230,7 @@
                         android:id="@+id/checkbox_record_member_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked" />
+                         />
 
                     <TextView
                         android:id="@+id/text_record_member_name"
@@ -238,7 +242,7 @@
                         android:id="@+id/checkbox_record_member_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked" />
+                         />
 
                     <TextView
                         android:id="@+id/text_record_member_sex"
@@ -256,7 +260,7 @@
                         android:id="@+id/checkbox_record_mobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked" />
+                         />
 
                     <TextView
                         android:id="@+id/text_checkbox_record_mobile"
@@ -268,7 +272,7 @@
                         android:id="@+id/checkbox_record_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked" />
+                         />
 
                     <TextView
                         android:id="@+id/text_checkbox_record_address"
@@ -286,7 +290,7 @@
                         android:id="@+id/checkbox_record_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked" />
+                         />
 
                     <TextView
                         android:id="@+id/text_checkbox_record_email"
@@ -298,7 +302,7 @@
                         android:id="@+id/checkbox_record_member_birthday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked" />
+                         />
 
                     <TextView
                         android:id="@+id/text_record_member_birthday"
@@ -330,7 +334,6 @@
                     android:id="@+id/togglebutton_record_member_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onToggleClicked"
                     android:textOff="off"
                     android:textOn="on" />
 
@@ -341,7 +344,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/record_member_cost"
-                    android:inputType="textEmailAddress" >
+                    android:inputType="number" >
                 </EditText>
 
                 <EditText
@@ -351,7 +354,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/record_member_times"
-                    android:inputType="textEmailAddress" >
+                    android:inputType="number" >
                 </EditText>
             </LinearLayout>
         </LinearLayout>
@@ -371,7 +374,6 @@
                 android:id="@+id/togglebutton_record_score_plan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onToggleClicked"
                 android:textOff="off"
                 android:textOn="on" />
         </LinearLayout>

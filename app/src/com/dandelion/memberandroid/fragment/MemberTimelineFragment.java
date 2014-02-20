@@ -3,6 +3,8 @@ package com.dandelion.memberandroid.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,10 +38,10 @@ import java.util.List;
 public class MemberTimelineFragment extends Fragment {
 
 
-
     //UI
     private View mListView;
     private View mLoadingStatusView;
+    private ProgressDialog mDialog;
 
     private MemberTimelineListAdapter memberTimelineListAdapter;
 
@@ -46,6 +49,7 @@ public class MemberTimelineFragment extends Fragment {
     //VALUE
     private String sid;
     private Long userId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +71,17 @@ public class MemberTimelineFragment extends Fragment {
         listView.setAdapter(memberTimelineListAdapter);
         listView.setFastScrollEnabled(true);
         getTimeLineData();
-        showProgress(true);
+//        showProgress(true);
+
+
+        showLoading(true);
+
+
         super.onStart();
     }
 
     private void initWidget() {
         mListView = getActivity().findViewById(R.id.list_member_timeline_feed);
-        mLoadingStatusView = getActivity().findViewById(R.id.timeline_loading_progress);
     }
 
 
@@ -83,7 +91,9 @@ public class MemberTimelineFragment extends Fragment {
         userId = service.getAuthAccount().getUsdId();
         MemberappApi.getTimeline(userId, sid, timelineListener, timelineErrorListener);
     }
-    Response.Listener<String> timelineListener = new Response.Listener<String>() {
+
+
+    private Response.Listener<String> timelineListener = new Response.Listener<String>() {
 
         @Override
         public void onResponse(String response) {
@@ -115,57 +125,35 @@ public class MemberTimelineFragment extends Fragment {
                 e.printStackTrace();
             }
             memberTimelineListAdapter.swapItems(data);
-            showProgress(false);
+//            showProgress(false);
+            showLoading(false);
         }
     };
-    Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
+    private Response.ErrorListener timelineErrorListener = new Response.ErrorListener() {
 
         @Override
         public void onErrorResponse(VolleyError error) {
+            showLoading(false);
+            Toast.makeText(getActivity(), R.string.dialog_network_error, Toast.LENGTH_SHORT).show();
         }
     };
 
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(
-                    android.R.integer.config_shortAnimTime);
-
-            mLoadingStatusView.setVisibility(View.VISIBLE);
-            mLoadingStatusView.animate().setDuration(shortAnimTime)
-                    .alpha(show ? 1 : 0)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLoadingStatusView.setVisibility(show ? View.VISIBLE
-                                    : View.GONE);
-                        }
-                    });
-
-            mListView.setVisibility(View.VISIBLE);
-            mListView.animate().setDuration(shortAnimTime)
-                    .alpha(show ? 0 : 1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mListView.setVisibility(show ? View.GONE
-                                    : View.VISIBLE);
-                        }
-                    });
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage(getActivity().getString(R.string.progress_loading));
+            mDialog.setCancelable(false);
+            mDialog.show();
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mLoadingStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mListView.setVisibility(show ? View.GONE : View.VISIBLE);
+            if(mDialog != null)
+            mDialog.dismiss();
+
         }
+        mListView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
+
+
 
     public List<MemberTimelineFeedPO> fakeData() {
         List<MemberTimelineFeedPO> fakeNotificationData = new ArrayList<MemberTimelineFeedPO>();
@@ -186,8 +174,4 @@ public class MemberTimelineFragment extends Fragment {
         fakeNotificationData.add(memberTimelineFeedPO2);
         return fakeNotificationData;
     }
-
-
-
-
 }

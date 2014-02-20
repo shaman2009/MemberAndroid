@@ -1,32 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!-- Loading progress -->
 
-    <LinearLayout
-        android:id="@+id/timeline_loading_progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        >
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/timeline_loading_progress_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/timeline_progress_loading"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
 
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"

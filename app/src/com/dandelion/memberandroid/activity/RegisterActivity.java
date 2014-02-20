@@ -212,6 +212,10 @@ public class RegisterActivity extends Activity {
 
         @Override
         public void onErrorResponse(VolleyError error) {
+            String e =  error.getMessage();
+            e = error.networkResponse.data.toString();
+            int i = error.networkResponse.statusCode;
+
             showProgress(false);
             registerFailed();
         }

@@ -219,3 +219,5 @@ pip-log.txt
 .idea/*
 build/*
 *.iml
+gradle/*
+

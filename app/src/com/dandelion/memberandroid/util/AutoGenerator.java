@@ -4,7 +4,8 @@ package com.dandelion.memberandroid.util;
  * Created by Fengxiang on 14-1-3.
  */
 
-import com.dandelion.memberandroid.dao.auto.MerchantInfo;
+import com.dandelion.memberandroid.dao.auto.MemberInfo;
+import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
 
@@ -318,8 +319,17 @@ public class AutoGenerator {
         // System.out.println(new JO(b));
         // System.out.println(new ClassAttributesAssignment().assignLeft(a, b));
         // System.out.println(new ClassAttributesAssignment().assignLeft(b, a));
-//		System.out.println(new AutoGenerator().printSetter( new GameRoleAchievement()));
+//		System.out.println(new AutoGenerator().printSetter( new MerchantInfo()));
 //		System.out.println(new AutoGenerator().printGetterSetter(new GameRoleAchievementInfo(), new GameRoleAchievement()));
-        new AutoGenerator().printGetter(new MerchantInfo());
+        new AutoGenerator().printGetter(new MemberInfo());
+//        A a = new A();
+//        a.setPra("s");
+//        Gson gson = new Gson();
+//        String json = gson.toJson(a);
+//        System.out.println(json);
+//        A b;
+//        b = gson.fromJson(json, A.class);
+//        System.out.println(b.getPra());
+
     }
 }

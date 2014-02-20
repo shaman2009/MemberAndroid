@@ -15,4 +15,15 @@
         <item>登出</item>
     </string-array>
 
+    <string-array name="merchant_type">
+        <item>飲食</item>
+        <item>美容</item>
+        <item>服裝</item>
+        <item>飾物</item>
+        <item>娛樂</item>
+        <item>個人服務</item>
+        <item>教育</item>
+        <item>其他</item>
+    </string-array>
+
 </resources>

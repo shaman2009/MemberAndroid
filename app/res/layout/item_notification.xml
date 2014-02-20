@@ -5,22 +5,33 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="8sp"
-    android:paddingLeft="8sp"
-    android:paddingTop="8sp" >
+    android:paddingTop="8sp">
 
-        <ImageView
-            android:id="@+id/image_notification"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="3"
-            android:contentDescription="@drawable/devfest_shanghai"
-            android:src="@drawable/ic_launcher" />
+    <ImageView
+        android:id="@+id/image_notification"
+        android:layout_width="@dimen/list_detail_image_size"
+        android:layout_height="@dimen/list_detail_image_size"
+        android:contentDescription="@drawable/devfest_shanghai"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_notification"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="@string/register_notice" 
-            android:layout_weight="1"/>
+            android:text="@string/register_notice"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button_accept"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accept_join"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </LinearLayout>

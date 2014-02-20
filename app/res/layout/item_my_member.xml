@@ -10,95 +10,102 @@
 
     <ImageView
         android:id="@+id/image_my_member"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="@dimen/list_detail_small_image_size"
+        android:layout_height="@dimen/list_detail_small_image_size"
         android:contentDescription="@drawable/devfest_shanghai"
         android:src="@drawable/ic_launcher" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/my_member_name"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/record_member_name"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/my_member_total_score"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/my_members_total_score"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/my_members_total_cost"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/my_members_total_cost"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/my_members_total_cost_value"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/my_members_total_cost"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/my_members_total_times"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/my_members_total_times"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/my_members_total_times_value"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/my_members_total_times"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/my_member_name"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text=""
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/my_member_button_add_score"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/my_members_add_score" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:layout_weight="1">
 
+            <TextView
+                android:id="@+id/my_member_name"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/record_member_name"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/my_member_total_score"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/my_members_total_score"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/count_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_members_total_cost"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/my_members_total_cost"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/my_members_total_cost_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/my_members_total_cost"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_members_total_times"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/my_members_total_times"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/my_members_total_times_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/my_members_total_times"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/my_member_name"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text=""
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/my_member_button_add_score"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/my_members_add_score" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

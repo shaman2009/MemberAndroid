@@ -16,7 +16,6 @@ import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.fragment.JoinMemberFragment;
 import com.dandelion.memberandroid.fragment.MemberTimelineFragment;
-import com.dandelion.memberandroid.fragment.MerchantMyRecordFragment;
 import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyMerchantsFragment;
 import com.dandelion.memberandroid.fragment.MyPostFragment;

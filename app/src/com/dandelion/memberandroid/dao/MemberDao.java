@@ -93,6 +93,11 @@ public class MemberDao {
         List<MerchantInfo> merchantList = merchantInfoDao.queryBuilder().where(MerchantInfoDao.Properties.Useridfk.eq(userId)).list();
         return merchantList;
     }
+    public void deleteMerchantInfo(long id) {
+        MerchantInfoDao merchantInfoDao = daoSession.getMerchantInfoDao();
+        merchantInfoDao.deleteByKey(id);
+
+    }
 
 
 
