@@ -2,6 +2,7 @@ package com.dandelion.memberandroid.adapter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.LoggerConstant;
+import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.fragment.MemberMyRecordFragment;
 import com.dandelion.memberandroid.fragment.MerchantPostFragment;
 import com.dandelion.memberandroid.model.MemberDataResponse;
@@ -28,6 +30,7 @@ import com.dandelion.memberandroid.volley.MemberappApi;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,13 @@ public class MyMembersListAdapter extends BaseAdapter {
     private List<MyMembersPO> myMembersData = new ArrayList<MyMembersPO>();
     private FragmentManager fm;
     private AlertDialog.Builder scoreDialogBuilder;
+    private ViewGroup container;
     private Dialog scoreDialog;
     private TextView scoreView;
+
+    private AlertDialog.Builder merchantBuilder;
+    private Dialog merchantDialog;
+    private ProgressDialog mDialog;
 
     //value
     private String sid;
@@ -61,6 +69,7 @@ public class MyMembersListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         if (convertView == null) {
+            container = parent;
             convertView = LayoutInflater.from(context).inflate(R.layout.item_my_member, parent, false);
             holder = new ViewHolder();
             holder.image = (ImageView) convertView.findViewById(R.id.image_my_member);
@@ -217,12 +226,15 @@ public class MyMembersListAdapter extends BaseAdapter {
         if (myMember.isMerchantOrMember()) {
             holder.count_click.setOnClickListener(null);
             final Long userId = myMember.getMerchantUserId();
+            final Long merchantId = myMember.getMerchantId();
             holder.button.setVisibility(View.VISIBLE);
             holder.button.setText(R.string.merchant_detail);
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showMerchantInfo(userId);
+//                    showMerchantInfo(userId);
+                    showMerchantDetails(merchantId);
+
                 }
             });
         }
@@ -261,12 +273,97 @@ public class MyMembersListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    private void showMerchantDetails(long targetMerchantId) {
+        AccountService service = new AccountService(context);
+        sid = service.getAuthAccount().getSid();
+
+        Response.Listener<String> getMerchantListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                merchantBuilder = new AlertDialog.Builder(context).setView(callMerchantDetailDialog(response));
+                merchantDialog = merchantBuilder.show();
+                showLoading(false);
+
+            }
+        };
+        Response.ErrorListener getMerchantErrorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(LoggerConstant.VOLLEY_REQUEST, error.toString());
+                showLoading(false);
+                new AlertDialog.Builder(context)
+                        .setMessage(context.getString(R.string.dialog_merchant_search_error))
+                        .setNeutralButton(context.getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).show();
+            }
+        };
+        showLoading(true);
+        MemberappApi.getMerchantInfoByMerchantId(targetMerchantId, sid, getMerchantListener, getMerchantErrorListener);
+    }
 
     private void showMerchantInfo(long userId) {
         fm.beginTransaction()
                 .replace(R.id.content_frame, new MerchantPostFragment(userId))
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public View callMerchantDetailDialog(String response) {
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_merchant_detail_info, container, false);
+
+
+        ImageView avatarView = (ImageView) view.findViewById(R.id.imageView_dialog_merchant_detail_avator);
+        TextView merchantNoView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_no);
+        TextView merchantNameView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_merchant_name);
+        TextView merchantMobileView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_mobile);
+        TextView addressView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_address);
+        TextView emailView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_email);
+        TextView contentView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_content);
+        TextView contentNeedView = (TextView) view.findViewById(R.id.edit_dialog_merchant_detail_need);
+        Button recordRegisterButton = (Button) view.findViewById(R.id.button_dialog_merchant_detail_record_register);
+        Button applyButton = (Button) view.findViewById(R.id.button_dialog_merchant_detail_applying);
+        recordRegisterButton.setVisibility(View.INVISIBLE);
+        applyButton.setVisibility(View.INVISIBLE);
+        try {
+            JSONObject json = new JSONObject(response).getJSONArray("merchantList").getJSONObject(0);
+            String imageUrl = json.getString("avatarurl");
+            Picasso.with(context)
+                    .load(QiNiuConstant.getImageDownloadURL(imageUrl))
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.error)
+                    .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
+                    .centerInside()
+                    .into(avatarView);
+            //{"id":2001,"avatarurl":"","name":"cc","address":"","phone":"","email":"","merchanttype":"","introduction":"",
+            // "namerequired":false,"sexrequired":false,"phonerequired":false,"addressrequired":false,"emailrequired":false,
+            // "birthdayrequired":false,"membersetting":false,"amountrequired":0,
+            // "amountcountrequired":0,"scoreplan":false,"createddate":1388546653000,"modifieddate":1388547235000,"useridfk":248,"backgroundurl":""}
+            merchantNoView.setText(json.getString("id"));
+            merchantNameView.setText(json.getString("name"));
+            merchantMobileView.setText(json.getString("phone"));
+            addressView.setText(json.getString("address"));
+            emailView.setText(json.getString("email"));
+            long amountcountrequired = json.getLong("amountcountrequired");
+            long amountrequired = json.getLong("amountrequired");
+            if (!(amountrequired == 0 && amountcountrequired == 0)) {
+                String need = context.getString(R.string.join_amount_head);
+                need += amountcountrequired + context.getString(R.string.join_amount_mid)
+                        + amountrequired + " HKD " + context.getString(R.string.join_amount_foot);
+                contentNeedView.setText(need);
+            }
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return view;
     }
 
     public List<MyMembersPO> fakeData() {
@@ -302,6 +399,17 @@ public class MyMembersListAdapter extends BaseAdapter {
         fakeNotificationData.add(myMemberPO1);
         fakeNotificationData.add(myMemberPO2);
         return fakeNotificationData;
+    }
+    public void showLoading(final boolean show) {
+        if (show) {
+            mDialog = new ProgressDialog(context);
+            mDialog.setMessage(context.getString(R.string.progress_loading));
+            mDialog.setCancelable(false);
+            mDialog.show();
+        } else {
+            if(mDialog != null)
+                mDialog.dismiss();
+        }
     }
 
     static class ViewHolder {

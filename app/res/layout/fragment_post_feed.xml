@@ -52,7 +52,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-
+        <Button
+            android:id="@+id/button_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_history"
+            android:layout_weight="1"></Button>
         <Button
             android:id="@+id/buttton_upload_post_image"
             android:layout_width="wrap_content"

@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -23,13 +25,7 @@ import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
 import com.dandelion.memberandroid.dao.auto.MerchantInfo;
 import com.dandelion.memberandroid.service.AccountService;
-import com.dandelion.memberandroid.util.DeviceUtil;
-import com.dandelion.memberandroid.util.Md5;
 import com.dandelion.memberandroid.volley.MemberappApi;
-
-import org.json.JSONException;
-
-import java.util.List;
 
 public class MerchantRegisterFragment extends Fragment {
     //UI
@@ -37,7 +33,8 @@ public class MerchantRegisterFragment extends Fragment {
     private TextView phoneView;
     private TextView addressView;
     private TextView emailView;
-    private TextView merchantTypeView;
+//    private TextView merchantTypeView;
+    private Spinner merchantTypeView;
     private TextView introductionView;
     private CheckBox nameRequiredVIew;
     private CheckBox sexRequiredView;
@@ -93,8 +90,7 @@ public class MerchantRegisterFragment extends Fragment {
         phoneView.setText(WebserviceConstant.STAR);
         addressView.setText(WebserviceConstant.STAR);
         emailView.setText(WebserviceConstant.STAR);
-        merchantTypeView.setText(WebserviceConstant.STAR);
-
+        merchantTypeView.setSelection(0);
 
 
         memberSettingView.setOnClickListener(new View.OnClickListener() {
@@ -136,13 +132,12 @@ public class MerchantRegisterFragment extends Fragment {
         phoneView.setError(null);
         addressView.setError(null);
         emailView.setError(null);
-        merchantTypeView.setError(null);
         // Store values at the time of the login attempt.
         name = nameView.getText().toString();
         phone = phoneView.getText().toString();
         address = addressView.getText().toString();
         email = emailView.getText().toString();
-        merchantType = merchantTypeView.getText().toString();
+        merchantType = String.valueOf(merchantTypeView.getSelectedItemPosition());
 
         introduction = introductionView.getText().toString();
         memberCost = memberCostView.getText().toString();
@@ -200,11 +195,6 @@ public class MerchantRegisterFragment extends Fragment {
             cancel = true;
         }
 
-        if (merchantType.equals(WebserviceConstant.STAR)) {
-            merchantTypeView.setError(getString(R.string.error_field_required));
-            focusView = merchantTypeView;
-            cancel = true;
-        }
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -275,7 +265,14 @@ public class MerchantRegisterFragment extends Fragment {
         phoneView = (TextView) view.findViewById(R.id.edit_text_record_mobile);
         addressView = (TextView) view.findViewById(R.id.edit_text_record_address);
         emailView = (TextView) view.findViewById(R.id.edit_text_record_email);
-        merchantTypeView = (TextView) view.findViewById(R.id.edit_text_record_type);
+        merchantTypeView = (Spinner) view.findViewById(R.id.planets_spinner_record_type);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.merchant_type, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        merchantTypeView.setAdapter(adapter);
         introductionView = (TextView) view.findViewById(R.id.edit_text_record_info);
         nameRequiredVIew = (CheckBox) view.findViewById(R.id.checkbox_record_member_name);
         sexRequiredView = (CheckBox) view.findViewById(R.id.checkbox_record_member_sex);

@@ -1,8 +1,5 @@
 package com.dandelion.memberandroid.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,10 +17,14 @@ import com.dandelion.memberandroid.fragment.MyMembersFragment;
 import com.dandelion.memberandroid.fragment.MyMerchantsFragment;
 import com.dandelion.memberandroid.fragment.MyPostFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
+import com.dandelion.memberandroid.fragment.PostFeedFragment;
 import com.dandelion.memberandroid.fragment.SlidingFragment;
 import com.dandelion.memberandroid.service.AccountService;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseActivity extends SlidingFragmentActivity implements ActionBar.TabListener {
 
@@ -95,7 +96,7 @@ public class BaseActivity extends SlidingFragmentActivity implements ActionBar.T
             if (x == 0) {
                 f = new NotificationFragment();
             } else if (x == 1) {
-                f = new MyPostFragment();
+                f = new PostFeedFragment();
             } else if (x == 2) {
                 f = new MyMembersFragment();
             }

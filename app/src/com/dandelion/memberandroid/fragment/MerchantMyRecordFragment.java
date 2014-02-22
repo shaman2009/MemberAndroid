@@ -1,11 +1,5 @@
 package com.dandelion.memberandroid.fragment;
 
-import java.util.UUID;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,7 +23,6 @@ import android.widget.ToggleButton;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
-import com.dandelion.memberandroid.activity.SlidingmenuActivity;
 import com.dandelion.memberandroid.constant.LoggerConstant;
 import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
@@ -42,6 +35,11 @@ import com.qiniu.auth.JSONObjectRet;
 import com.qiniu.io.IO;
 import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.UUID;
 
 public class MerchantMyRecordFragment extends Fragment {
 
@@ -77,7 +75,7 @@ public class MerchantMyRecordFragment extends Fragment {
     private String phone;
     private String address;
     private String email;
-    private String merchantType;
+    private int merchantType;
     private String introduction;
     private boolean isNameRequired;
     private boolean isSexRequired;
@@ -131,7 +129,6 @@ public class MerchantMyRecordFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //TODO  backgroundurl?
                         attemptMerchantRecordRegister();
                     }
                 });
@@ -186,6 +183,7 @@ public class MerchantMyRecordFragment extends Fragment {
             phoneView.setText(merchantJson.getString("phone"));
             emailView.setText(merchantJson.getString("email"));
 //TODO
+            merchantTypeSpinner.setSelection(Integer.valueOf(merchantJson.getString("merchanttype")));
             //merchantTypeView.setText(merchantJson.getString("merchanttype"));
             introductionView.setText(merchantJson.getString("introduction"));
 
@@ -320,6 +318,7 @@ public class MerchantMyRecordFragment extends Fragment {
         address = addressView.getText().toString();
         email = emailView.getText().toString();
         //TODO
+        merchantType = merchantTypeSpinner.getSelectedItemPosition();
 //        merchantType = merchantTypeView.getText().toString();
         introduction = introductionView.getText().toString();
         memberCost = memberCostView.getText().toString();
@@ -377,12 +376,7 @@ public class MerchantMyRecordFragment extends Fragment {
             cancel = true;
         }
 
-        if (merchantType.equals(WebserviceConstant.STAR)) {
-            //TODO
-//            merchantTypeView.setError(getString(R.string.error_field_required));
-//            focusView = merchantTypeView;
-            cancel = true;
-        }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -396,7 +390,7 @@ public class MerchantMyRecordFragment extends Fragment {
             merchantInfo.setAddress(address);
             merchantInfo.setPhone(phone);
             merchantInfo.setEmail(email);
-            merchantInfo.setMerchanttype(merchantType);
+            merchantInfo.setMerchanttype(String.valueOf(merchantType));
             merchantInfo.setIntroduction(introduction);
             merchantInfo.setNamerequired(isNameRequired);
             merchantInfo.setSexrequired(isSexRequired);

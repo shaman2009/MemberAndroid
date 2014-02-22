@@ -45,6 +45,7 @@ public class PostFeedFragment extends Fragment {
     private EditText contentEditText;
     private Button postButton;
     private Button uploadButton;
+    private Button historyButton;
     private ImageView imageView;
 
     //
@@ -78,6 +79,12 @@ public class PostFeedFragment extends Fragment {
                 return;
             }
         });
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                historyFeed();
+            }
+        });
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +107,15 @@ public class PostFeedFragment extends Fragment {
         contentEditText = (EditText) getActivity().findViewById(R.id.post_content);
         postButton = (Button) getActivity().findViewById(R.id.button_submit);
         uploadButton = (Button) getActivity().findViewById(R.id.buttton_upload_post_image);
+        historyButton = (Button) getActivity().findViewById(R.id.button_history);
         imageView = (ImageView) getActivity().findViewById(R.id.imageView_post_feed);
+    }
+    public void historyFeed() {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, new MyPostFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     public void popButtons() {

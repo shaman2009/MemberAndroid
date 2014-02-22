@@ -88,6 +88,7 @@ public class MyMerchantsFragment extends Fragment {
                     member.setFriendId(merchantDataResponse.getFriendId());
                     member.setMerchantOrMember(true);
                     member.setMerchantUserId(merchantDataResponse.getUserId());
+                    member.setMerchantId(merchantDataResponse.getMerchantId());
                     data.add(member);
                 }
                 myMembersListAdapter.swapItems(data);

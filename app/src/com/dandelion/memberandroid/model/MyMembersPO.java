@@ -13,6 +13,15 @@ public class MyMembersPO {
     private Long friendId;
     private Long merchantUserId;
 
+    private Long merchantId;
+
+    public Long getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(Long merchantId) {
+        this.merchantId = merchantId;
+    }
     public Long getMerchantUserId() {
         return merchantUserId;
     }
