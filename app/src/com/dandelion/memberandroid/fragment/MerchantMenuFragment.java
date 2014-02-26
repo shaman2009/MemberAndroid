@@ -51,7 +51,7 @@ public class MerchantMenuFragment extends ListFragment {
                 newContent = new MerchantMyRecordFragment();
                 break;
             case 4:
-                newContent = new ColorFragment(android.R.color.white);
+                newContent = new MapTestFragment();
                 break;
             case 5:
                 new AlertDialog.Builder(getActivity())

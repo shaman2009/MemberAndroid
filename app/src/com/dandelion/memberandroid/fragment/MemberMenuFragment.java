@@ -51,7 +51,7 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new MemberMyRecordFragment();
 			break;
 		case 4:
-			newContent = new ColorFragment(android.R.color.white);
+			newContent = new MapTestFragment();
 			break;
 		case 5:
 			newContent = new ColorFragment(android.R.color.black);

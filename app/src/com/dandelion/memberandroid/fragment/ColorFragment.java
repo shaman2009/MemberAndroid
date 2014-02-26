@@ -10,33 +10,33 @@ import android.widget.RelativeLayout;
 import com.dandelion.memberandroid.R;
 
 public class ColorFragment extends Fragment {
-	
-	private int mColorRes = -1;
-	
-	public ColorFragment() { 
-		this(R.color.abs__background_holo_dark);
-	}
-	
-	public ColorFragment(int colorRes) {
-		mColorRes = colorRes;
-		setRetainInstance(true);
-	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if (savedInstanceState != null)
-			mColorRes = savedInstanceState.getInt("mColorRes");
-		int color = getResources().getColor(mColorRes);
-		// construct the RelativeLayout
-		RelativeLayout v = new RelativeLayout(getActivity());
-		v.setBackgroundColor(color);		
-		return v;
-	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putInt("mColorRes", mColorRes);
-	}
+        private int mColorRes = -1;
+
+        public ColorFragment() {
+            this(R.color.abs__background_holo_dark);
+        }
+
+        public ColorFragment(int colorRes) {
+            mColorRes = colorRes;
+            setRetainInstance(true);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            if (savedInstanceState != null)
+                mColorRes = savedInstanceState.getInt("mColorRes");
+            int color = getResources().getColor(mColorRes);
+            // construct the RelativeLayout
+            RelativeLayout v = new RelativeLayout(getActivity());
+            v.setBackgroundColor(color);
+            return v;
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putInt("mColorRes", mColorRes);
+        }
 	
 }
