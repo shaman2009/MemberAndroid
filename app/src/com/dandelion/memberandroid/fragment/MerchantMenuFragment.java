@@ -42,12 +42,18 @@ public class MerchantMenuFragment extends ListFragment {
                 newContent = new NotificationFragment();
                 break;
             case 1:
-                newContent = new MerchantMyRecordFragment();
+                newContent = new MyPostFragment();
                 break;
             case 2:
-                newContent = new ColorFragment(android.R.color.white);
+                newContent = new MyMembersFragment();
                 break;
             case 3:
+                newContent = new MerchantMyRecordFragment();
+                break;
+            case 4:
+                newContent = new ColorFragment(android.R.color.white);
+                break;
+            case 5:
                 new AlertDialog.Builder(getActivity())
                         .setTitle(getActivity().getString(R.string.account_logout))
                         .setMessage(getActivity().getString(R.string.account_logout_message))

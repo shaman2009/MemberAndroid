@@ -77,7 +77,6 @@ public class SlidingmenuActivity extends BaseActivity {
         // customize the SlidingMenu
         getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
-
     }
 
 
@@ -96,28 +95,26 @@ public class SlidingmenuActivity extends BaseActivity {
         getSlidingMenu().showContent();
 
 
-        if (fragment instanceof NotificationFragment || fragment instanceof MemberTimelineFragment) {
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            if (getSupportActionBar().getTabCount() != 3) {
-                for (int i = 0; i <= 2; i++) {
-                    List<String> list = initTabNames();
-                    ActionBar.Tab tab = getSupportActionBar().newTab();
-                    tab.setText(list.get(i));
-                    tab.setTabListener(this);
-                    getSupportActionBar().addTab(tab);
-                }
-            }
-        } else {
-            getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
-            getSupportActionBar().removeAllTabs();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-            setTitle(R.string.app_name);
+//        if (fragment instanceof NotificationFragment || fragment instanceof MemberTimelineFragment) {
 //            getSupportActionBar().setDisplayShowHomeEnabled(false);
 //            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+//            getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//            if (getSupportActionBar().getTabCount() != 3) {
+//                for (int i = 0; i <= 2; i++) {
+//                    List<String> list = initTabNames();
+//                    ActionBar.Tab tab = getSupportActionBar().newTab();
+//                    tab.setText(list.get(i));
+//                    tab.setTabListener(this);
+//                    getSupportActionBar().addTab(tab);
+//                }
+//            }
+//        } else {
+//            getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
+//            getSupportActionBar().removeAllTabs();
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().setDisplayShowTitleEnabled(true);
+//            setTitle(R.string.app_name);
+//        }
 
 
     }

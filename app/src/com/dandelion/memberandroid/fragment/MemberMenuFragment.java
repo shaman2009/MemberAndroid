@@ -42,15 +42,21 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new MemberTimelineFragment();
 			break;
 		case 1:
-			newContent = new MemberMyRecordFragment();
+			newContent = new JoinMemberFragment();
 			break;
 		case 2:
-			newContent = new ColorFragment(android.R.color.white);
+			newContent = new MyMerchantsFragment();
 			break;
 		case 3:
-			newContent = new ColorFragment(android.R.color.black);
+			newContent = new MemberMyRecordFragment();
 			break;
 		case 4:
+			newContent = new ColorFragment(android.R.color.white);
+			break;
+		case 5:
+			newContent = new ColorFragment(android.R.color.black);
+			break;
+		case 6:
             new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getString(R.string.account_logout))
                     .setMessage(getActivity().getString(R.string.account_logout_message))
