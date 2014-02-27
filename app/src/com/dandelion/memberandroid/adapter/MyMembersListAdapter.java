@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.activity.ClusteringDemoActivity;
+import com.dandelion.memberandroid.activity.RegisterActivity;
 import com.dandelion.memberandroid.constant.LoggerConstant;
 import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.fragment.MemberMyRecordFragment;
@@ -327,7 +330,13 @@ public class MyMembersListAdapter extends BaseAdapter {
         Button recordRegisterButton = (Button) view.findViewById(R.id.button_dialog_merchant_detail_record_register);
         Button applyButton = (Button) view.findViewById(R.id.button_dialog_merchant_detail_applying);
         recordRegisterButton.setVisibility(View.INVISIBLE);
-        applyButton.setVisibility(View.INVISIBLE);
+        applyButton.setText(R.string.map_info);
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getMapView();
+            }
+        });
         try {
             JSONObject json = new JSONObject(response).getJSONArray("merchantList").getJSONObject(0);
             String imageUrl = json.getString("avatarurl");
@@ -338,10 +347,6 @@ public class MyMembersListAdapter extends BaseAdapter {
                     .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
                     .centerInside()
                     .into(avatarView);
-            //{"id":2001,"avatarurl":"","name":"cc","address":"","phone":"","email":"","merchanttype":"","introduction":"",
-            // "namerequired":false,"sexrequired":false,"phonerequired":false,"addressrequired":false,"emailrequired":false,
-            // "birthdayrequired":false,"membersetting":false,"amountrequired":0,
-            // "amountcountrequired":0,"scoreplan":false,"createddate":1388546653000,"modifieddate":1388547235000,"useridfk":248,"backgroundurl":""}
             merchantNoView.setText(json.getString("id"));
             merchantNameView.setText(json.getString("name"));
             merchantMobileView.setText(json.getString("phone"));
@@ -412,6 +417,11 @@ public class MyMembersListAdapter extends BaseAdapter {
         }
     }
 
+
+    public void getMapView() {
+        Intent intent = new Intent(context, ClusteringDemoActivity.class);
+        context.startActivity(intent);
+    }
     static class ViewHolder {
         ImageView image;
         TextView text_my_members_name;

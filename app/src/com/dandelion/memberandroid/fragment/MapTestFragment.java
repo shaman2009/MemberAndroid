@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dandelion.memberandroid.R;
+import com.google.android.gms.maps.GoogleMap;
 
 /**
  * Created by ouroc on 2/26/14.
  */
 public class MapTestFragment extends Fragment {
 
+    private GoogleMap mMap;
 
 
     @Override

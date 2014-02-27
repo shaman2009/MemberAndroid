@@ -109,6 +109,9 @@
 
 
     <string name="dialog_merchant_alert_accept_success">接納成功</string>
+    <string name="map_info">查看地圖</string>
+
+
 
     <string name="app_name">Member</string>
     <string name="action_settings">Settings</string>
