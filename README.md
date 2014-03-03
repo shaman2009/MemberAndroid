@@ -13,7 +13,7 @@ Build instructions
 Dependency:
 
 - Gradle 1.10
-- Android Studio 0.4.3
+- Android Studio 0.4.6
 
 Setup:
 
