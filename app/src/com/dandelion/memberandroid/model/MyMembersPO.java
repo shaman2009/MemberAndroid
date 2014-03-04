@@ -14,6 +14,24 @@ public class MyMembersPO {
     private Long merchantUserId;
 
     private Long merchantId;
+    private int amountrequired;
+    private int amountcountrequired;
+
+    public int getAmountrequired() {
+        return amountrequired;
+    }
+
+    public void setAmountrequired(int amountrequired) {
+        this.amountrequired = amountrequired;
+    }
+
+    public int getAmountcountrequired() {
+        return amountcountrequired;
+    }
+
+    public void setAmountcountrequired(int amountcountrequired) {
+        this.amountcountrequired = amountcountrequired;
+    }
 
     public Long getMerchantId() {
         return merchantId;

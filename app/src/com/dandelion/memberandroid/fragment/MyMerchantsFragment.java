@@ -89,6 +89,8 @@ public class MyMerchantsFragment extends Fragment {
                     member.setMerchantOrMember(true);
                     member.setMerchantUserId(merchantDataResponse.getUserId());
                     member.setMerchantId(merchantDataResponse.getMerchantId());
+                    member.setAmountcountrequired(merchantDataResponse.getAmountcountrequired());
+                    member.setAmountrequired(merchantDataResponse.getAmountrequired());
                     data.add(member);
                 }
                 myMembersListAdapter.swapItems(data);

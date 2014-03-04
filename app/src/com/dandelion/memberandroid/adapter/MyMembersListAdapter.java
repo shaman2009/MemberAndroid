@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,7 +85,7 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_cost = (TextView) convertView.findViewById(R.id.my_members_total_cost);
             holder.text_my_members_total_times = (TextView) convertView.findViewById(R.id.my_members_total_times);
             holder.count_click = convertView.findViewById(R.id.count_click);
-
+            holder.progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -106,6 +107,8 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder.text_my_members_total_cost.setVisibility(View.GONE);
             holder.text_my_members_total_times.setVisibility(View.GONE);
             holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + score);
+
+            holder.progressBar.setVisibility(View.GONE);
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -142,7 +145,6 @@ public class MyMembersListAdapter extends BaseAdapter {
                                     };
                                     try {
                                         MemberappApi.updateMemberInfo(friendId, sid, memberDataResponse, updateMyMemberInfoListener, updateMyMemberInfoErrorListener);
-                                        //holder.text_my_members_total_score.setText(context.getString(R.string.my_members_total_score) + " : " + finalscore);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -160,6 +162,23 @@ public class MyMembersListAdapter extends BaseAdapter {
                 }
             });
         } else {
+            long amount = myMember.getAmountrequired();
+            long amountCount = myMember.getAmountcountrequired();
+            long actualAmount = totalCosts;
+            long actualAmountCount = totalTimes;
+            int max = holder.progressBar.getMax();
+            if(amount != 0 && amountCount != 0) {
+                int a = Math.round(Float.valueOf(actualAmount)/amount * max);
+                int b = Math.round(Float.valueOf(actualAmountCount)/amountCount *max);
+                if (a > b) {
+                    Log.d("actualAmount", String.valueOf(a));
+                    holder.progressBar.setProgress(a);
+                } else {
+                    Log.d("actualAmountCount", String.valueOf(b));
+                    holder.progressBar.setProgress(b);
+                }
+            }
+
             holder.button.setVisibility(View.INVISIBLE);
 
             holder.text_my_members_total_cost_value.setText(totalCosts.toString());
@@ -432,5 +451,6 @@ public class MyMembersListAdapter extends BaseAdapter {
         TextView text_my_members_total_times;
         View count_click;
         Button button;
+        ProgressBar progressBar;
     }
 }
