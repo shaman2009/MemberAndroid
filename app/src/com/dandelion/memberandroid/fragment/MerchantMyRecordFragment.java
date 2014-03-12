@@ -226,6 +226,8 @@ public class MerchantMyRecordFragment extends Fragment {
         phoneView = (TextView) view.findViewById(R.id.edit_text_record_mobile);
         addressView = (TextView) view.findViewById(R.id.edit_text_record_address);
         emailView = (TextView) view.findViewById(R.id.edit_text_record_email);
+
+
         merchantTypeSpinner = (Spinner) view.findViewById(R.id.planets_spinner_record_type);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
@@ -234,6 +236,9 @@ public class MerchantMyRecordFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         merchantTypeSpinner.setAdapter(adapter);
+
+
+
 
         introductionView = (TextView) view.findViewById(R.id.edit_text_record_info);
         nameRequiredVIew = (CheckBox) view.findViewById(R.id.checkbox_record_member_name);

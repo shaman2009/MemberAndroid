@@ -36,7 +36,7 @@
     <string name="record_member_alias">昵稱</string>
     <string name="record_member_no">編號</string>
     <string name="record_member_sex">性別</string>
-    <string name="record_member_birthday">出生日期</string>
+    <string name="record_member_birthday">生日</string>
     <string name="record_member_setting">會員設定</string>
     <string name="record_member_cost">設定消費金額</string>
     <string name="record_member_times">設定消費次數</string>

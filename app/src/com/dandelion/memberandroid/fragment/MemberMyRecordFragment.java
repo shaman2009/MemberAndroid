@@ -1,22 +1,32 @@
 package com.dandelion.memberandroid.fragment;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Member;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -55,8 +66,8 @@ public class MemberMyRecordFragment extends Fragment {
     EditText mName;
     @InjectView(R.id.no)
     EditText mNo;
-    @InjectView(R.id.sex)
-    EditText mSex;
+    @InjectView(R.id.spinner_sex)
+    Spinner mSex;
     @InjectView(R.id.phone)
     EditText mPhone;
     @InjectView(R.id.address)
@@ -79,7 +90,7 @@ public class MemberMyRecordFragment extends Fragment {
     private String name;
     private String address;
     private String phone;
-    private long birthday;
+    private Long birthday;
     private int sex;
 
     private MemberInfo member;
@@ -98,13 +109,23 @@ public class MemberMyRecordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_member_my_record, container, false);
         ButterKnife.inject(this, view);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.sex, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSex.setAdapter(adapter);
+
+        mBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog(v);
+            }
+        });
         return view;
     }
 
     @Override
     public void onStart() {
-
-
         accountservice = new AccountService(getActivity());
         authAccount = accountservice.getAuthAccount();
         userId = authAccount.getUsdId();
@@ -152,6 +173,11 @@ public class MemberMyRecordFragment extends Fragment {
         super.onStart();
     }
 
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        FragmentManager fm = MemberMyRecordFragment.this.getActivity().getSupportFragmentManager();
+        newFragment.show(fm, "timePicker");
+    }
     private void attemptMemberRecordRegister() {
 
         accountservice = new AccountService(getActivity());
@@ -164,16 +190,13 @@ public class MemberMyRecordFragment extends Fragment {
         mName.setError(null);
         mPhone.setError(null);
         mAddress.setError(null);
-        mSex.setError(null);
-        mBirthday.setError(null);
+        //TODO
+//        mBirthday.setError(null);
         // Store values at the time of the login attempt.
         name = mName.getText().toString();
-        sex = Integer.valueOf(mSex.getText().toString());
         phone = mPhone.getText().toString();
         address = mAddress.getText().toString();
-        //TODO birthday
-//        birthday = mBirthday.getText().toString();
-
+        sex = mSex.getSelectedItemPosition();
 
         boolean cancel = false;
         View focusView = null;
@@ -200,7 +223,7 @@ public class MemberMyRecordFragment extends Fragment {
             member.setSex(sex);
             member.setPhone(phone);
             member.setAddress(address);
-            member.setBirthday(new Date(0));
+            member.setBirthday(new Date(birthday));
             member.setAvatarurl(avatarUrl);
             member.setUserId(userId);
 
@@ -241,10 +264,13 @@ public class MemberMyRecordFragment extends Fragment {
         MemberInfoDataResponse memberInfoDataResponse = gson.fromJson(response, MemberInfoDataResponse.class);
         mNo.setText(memberInfoDataResponse.getId().toString());
         mName.setText(memberInfoDataResponse.getName());
-        mSex.setText(memberInfoDataResponse.getSex().toString());
+        mSex.setSelection(memberInfoDataResponse.getSex());
         mPhone.setText(memberInfoDataResponse.getPhone());
         mAddress.setText(memberInfoDataResponse.getAddress());
-        mBirthday.setText(new Date(memberInfoDataResponse.getBirthday()).toString());
+        birthday = memberInfoDataResponse.getBirthday() * 1000;
+        Date b = new Date(birthday);
+        String data = b.getYear() + "." + b.getMonth() + "." + b.getDay();
+        mBirthday.setText(data);
         avatarUrl = memberInfoDataResponse.getAvatarurl();
         Picasso.with(getActivity()).load(QiNiuConstant.getImageDownloadURL(avatarUrl)).into(mImageViewRecordMemberAvator);
     }
@@ -304,5 +330,28 @@ public class MemberMyRecordFragment extends Fragment {
 
     public void downloadViaPicasso(Context context, String path) {
         Picasso.with(context).load(path).into(mImageViewRecordMemberAvator);
+    }
+
+    public class TimePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int month = c.get(Calendar.MONTH);
+            int year = c.get(Calendar.YEAR);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month,day);
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            birthday = new Date(year, monthOfYear, dayOfMonth).getTime() / 1000;
+            String data = year + "." + monthOfYear + "." + dayOfMonth;
+            mBirthday.setText(data);
+        }
     }
 }
