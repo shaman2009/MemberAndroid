@@ -19,6 +19,7 @@
     <string name="action_register_merchant">商戶註冊</string>
     <string name="action_register_member">會員註冊</string>
     <string name="action_forget_password">忘記密碼</string>
+    <string name="action_change_password">修改密碼</string>
 
 
     <string name="register_progress_register">努力註冊中...</string>

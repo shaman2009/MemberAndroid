@@ -16,20 +16,7 @@ import com.dandelion.memberandroid.R;
 public class ForgetPasswordActivity extends Activity {
 
 
-    //UI
-    private EditText mEmailView;
-    private EditText mPasswordView;
-    private EditText mAliasView;
-    private View mRegisterFormView;
-    private View mRegisterStatusView;
-    private TextView mRegisterStatusMessageView;
 
-
-    //VALUES
-    private String registerEmail;
-    private String registerPassword;
-    private String registerAlias;
-    private int accountType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

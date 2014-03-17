@@ -51,7 +51,7 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new MemberMyRecordFragment();
 			break;
 		case 4:
-			newContent = new MapTestFragment();
+			newContent = new PasswordChangeFragment();
 			break;
 		case 5:
             new AlertDialog.Builder(getActivity())
