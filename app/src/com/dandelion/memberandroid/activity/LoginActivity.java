@@ -11,8 +11,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,12 +91,22 @@ public class LoginActivity extends Activity {
                         register();
                     }
                 });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.login, menu);
+
+        MenuItem item = menu.findItem(R.id.action_forgot_password);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                forgetPassword();
+                return true;
+            }
+        });
         return true;
     }
 
@@ -203,7 +215,10 @@ public class LoginActivity extends Activity {
     public void register() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-        finish();
+    }
+    public void forgetPassword() {
+        Intent intent = new Intent(this, ForgetPasswordActivity.class);
+        startActivity(intent);
     }
 
     public void loginSuccess() {

@@ -54,9 +54,6 @@ public class MemberMenuFragment extends ListFragment {
 			newContent = new MapTestFragment();
 			break;
 		case 5:
-			newContent = new ColorFragment(android.R.color.black);
-			break;
-		case 6:
             new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getString(R.string.account_logout))
                     .setMessage(getActivity().getString(R.string.account_logout_message))

@@ -74,6 +74,15 @@
                 android:value="com.dandelion.memberandroid.activity.LoginActivity" />
         </activity>
 
+
+        <activity
+            android:name="com.dandelion.memberandroid.activity.ForgetPasswordActivity"
+            android:label="@string/action_forget_password"
+            android:parentActivityName="com.dandelion.memberandroid.activity.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.LoginActivity" />
+        </activity>
         <activity
             android:name="com.dandelion.memberandroid.activity.RegisterActivity"
             android:label="@string/title_activity_register"
