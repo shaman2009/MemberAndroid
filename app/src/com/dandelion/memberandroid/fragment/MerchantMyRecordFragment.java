@@ -69,6 +69,7 @@ public class MerchantMyRecordFragment extends Fragment {
 
     //VALUES
     private String imagekey;
+    private String key;
 
     private Long merchantId;
     private String name;
@@ -273,17 +274,17 @@ public class MerchantMyRecordFragment extends Fragment {
 		}
 
 		uploading = true;
-        imagekey = UUID.randomUUID().toString();
+        key = UUID.randomUUID().toString();
 		// 上传文件名
 		PutExtra extra = new PutExtra();
 		extra.checkCrc = PutExtra.AUTO_CRC32;
 		extra.params.put("x:arg", "value");
 		hint.setText("上傳中...");
-		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, imagekey, uri, extra, new JSONObjectRet() {
+		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
 			@Override
 			public void onSuccess(JSONObject resp) {
 				uploading = false;
-				String redirect = QiNiuConstant.getImageDownloadURL(imagekey);
+				String redirect = QiNiuConstant.getImageDownloadURL(key);
 				hint.setText("上傳成功！ ");
 				Log.d("QINIU_UPLOAD", "redirect : " + redirect);
 				downloadViaPicasso(getActivity(), redirect);
@@ -390,7 +391,13 @@ public class MerchantMyRecordFragment extends Fragment {
 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            merchantInfo.setAvatarurl(imagekey);
+            if (key != null) {
+                merchantInfo.setAvatarurl(key);
+
+            } else {
+                merchantInfo.setAvatarurl(imagekey);
+
+            }
             merchantInfo.setName(name);
             merchantInfo.setAddress(address);
             merchantInfo.setPhone(phone);

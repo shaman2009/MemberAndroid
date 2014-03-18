@@ -87,6 +87,7 @@ public class MemberMyRecordFragment extends Fragment {
     //values
 
     private String avatarUrl;
+    private String key;
     private String name;
     private String address;
     private String phone;
@@ -224,7 +225,12 @@ public class MemberMyRecordFragment extends Fragment {
             member.setPhone(phone);
             member.setAddress(address);
             member.setBirthday(new Date(birthday));
-            member.setAvatarurl(avatarUrl);
+            if (key != null) {
+                member.setAvatarurl(key);
+            } else {
+                member.setAvatarurl(avatarUrl);
+            }
+
             member.setUserId(userId);
 
             Response.Listener<String> updateListener = new Response.Listener<String>() {
@@ -301,9 +307,8 @@ public class MemberMyRecordFragment extends Fragment {
         }
 
         uploading = true;
-        avatarUrl = UUID.randomUUID().toString();
+        key = UUID.randomUUID().toString();
 
-        final String key = avatarUrl;
         // 上传文件名
         PutExtra extra = new PutExtra();
         extra.checkCrc = PutExtra.AUTO_CRC32;
