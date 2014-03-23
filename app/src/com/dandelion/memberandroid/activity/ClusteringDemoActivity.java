@@ -23,7 +23,7 @@ public class ClusteringDemoActivity extends BaseDemoActivity {
 
     @Override
     protected void startDemo() {
-        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.503186, -0.126446), 10));
+        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.299118, 114.172845), 15));
 
         mClusterManager = new ClusterManager<MyItem>(this, getMap());
         getMap().setOnCameraChangeListener(mClusterManager);
