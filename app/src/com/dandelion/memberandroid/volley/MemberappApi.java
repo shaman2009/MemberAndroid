@@ -10,8 +10,6 @@ import com.dandelion.memberandroid.model.MemberDataResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-
 public class MemberappApi {
 
 
@@ -38,6 +36,18 @@ public class MemberappApi {
         JSONObject j = new JSONObject();
         j.put("sid", sid);
         HttpRequestViaVolley.httpRequest(WebserviceConstant.FRIENDS_URI + "/" + targetUserId, Request.Method.POST, j.toString(), listener, errorListener);
+    }
+
+    public static void changePassword(long id, String oldPassword, String newPassword, String sid, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("oldPassword", oldPassword);
+            j.put("newPassword", newPassword);
+            j.put("sid", sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.CHANGE_PASSWORD_URI + "/" + id, Request.Method.POST, j.toString(), listener, errorListener);
     }
 
     public static void updateMemberInfo(Long friendId, String sid, MemberDataResponse memberDataResponse, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
@@ -247,6 +257,17 @@ public class MemberappApi {
         try {
             j.put("sid", sid);
             j.put("isRead", isRead);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpRequestViaVolley.httpRequest(WebserviceConstant.NOTIFICATION_URI + "/" + id + "/Accounts/" + accountId, Request.Method.PUT, j.toString(), listener, errorListener);
+    }
+
+    public static void updateNotificationIsDelete(Long id, Long accountId, String sid, boolean isDeleted, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("sid", sid);
+            j.put("isDeleted", isDeleted);
         } catch (JSONException e) {
             e.printStackTrace();
         }

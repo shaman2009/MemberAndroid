@@ -16,6 +16,8 @@ public class WebserviceConstant {
     public static final String MERCHANT_URI = HOST + "/Merchants";
     public static final String MEMBER_URI = HOST + "/Members";
 
+    public static final String CHANGE_PASSWORD_URI = HOST + "/ChangePassword";
+
     public static final String FRIENDS_URI = HOST + "/Friends";
 
     public static final String FEED_URI = HOST + "/Feeds";

@@ -5,6 +5,8 @@
     <!-- Strings related to login -->
     <string name="prompt_email">電郵</string>
     <string name="prompt_password">密碼</string>
+    <string name="old_password">舊密碼</string>
+    <string name="new_password">新密碼</string>
     <string name="prompt_alias">暱稱</string>
     <string name="action_sign_in">登入</string>
     <string name="action_register">註冊</string>
@@ -131,6 +133,8 @@
     <!-- Toast -->
     <string name="toast_message_register_failed">註冊失敗</string>
     <string name="toast_message_login_failed">登陸失敗</string>
+    <string name="toast_message_change_password_failed">修改密碼失敗</string>
+    <string name="toast_message_change_password_success">修改密碼成功</string>
 
     <!-- Alert -->
     <string name="alert_post_null_image_error">爲了保證推廣質量，請選擇一張美膩的圖片.</string>

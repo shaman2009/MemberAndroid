@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.LoggerConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
-import com.dandelion.memberandroid.model.MemberTimelineFeedPO;
 import com.dandelion.memberandroid.model.NotificationMessagePO;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
@@ -47,7 +46,8 @@ public class NotificationListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.image = (ImageView) convertView.findViewById(R.id.image_notification);
             holder.text = (TextView) convertView.findViewById(R.id.text_notification);
-            holder.button = (Button) convertView.findViewById(R.id.button_accept);
+            holder.button_accept = (Button) convertView.findViewById(R.id.button_accept);
+            holder.button_refuse = (Button) convertView.findViewById(R.id.button_refuse);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -65,9 +65,32 @@ public class NotificationListAdapter extends BaseAdapter {
         final long userId = account.getUsdId();
         holder.text.setText(notificationMessage.getContext());
 
+        holder.button_refuse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Response.Listener<String> updateNotificationListener = new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(LoggerConstant.VOLLEY_REQUEST, response);
+                        notifyDataSetChanged();
+                    }
+                };
+
+                Response.ErrorListener updateNotificationErrorListener = new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                };
+                MemberappApi.updateNotificationIsDelete(id, userId, sid, true, updateNotificationListener, updateNotificationErrorListener);
 
 
-        holder.button.setOnClickListener(new View.OnClickListener() {
+            }
+        });
+
+        holder.button_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -138,7 +161,7 @@ public class NotificationListAdapter extends BaseAdapter {
                 .into(holder.image);
         Picasso.with(context).setDebugging(true);
         if (isRead) {
-            holder.button.setEnabled(false);
+            holder.button_accept.setEnabled(false);
         }
         return convertView;
     }
@@ -185,6 +208,7 @@ public class NotificationListAdapter extends BaseAdapter {
     static class ViewHolder {
         ImageView image;
         TextView text;
-        Button button;
+        Button button_accept;
+        Button button_refuse;
     }
 }
