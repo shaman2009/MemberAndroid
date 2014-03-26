@@ -179,13 +179,14 @@ public class MyMembersListAdapter extends BaseAdapter {
                 }
             }
 
-            holder.button.setVisibility(View.INVISIBLE);
+//            holder.button.setVisibility(View.INVISIBLE);
 
             holder.text_my_members_total_cost_value.setText(totalCosts.toString());
             holder.text_my_members_total_times_value.setText(totalTimes.toString());
             holder.text_my_members_total_score.setText(context.getString(R.string.my_members_applying));
 
-            holder.count_click.setOnClickListener(new View.OnClickListener() {
+            holder.button.setText(R.string.my_members_add_amount);
+            holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final View view = LayoutInflater.from(context).inflate(R.layout.dialog_add_score, null);
@@ -259,7 +260,10 @@ public class MyMembersListAdapter extends BaseAdapter {
 
                 }
             });
+        } else {
+            holder.progressBar.setVisibility(View.INVISIBLE);
         }
+
 
         // Trigger the download of the URL asynchronously into the image view.
         Picasso.with(context)

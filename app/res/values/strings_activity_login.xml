@@ -57,6 +57,7 @@
     <string name="my_members_total_cost">累計消費金額</string>
     <string name="my_members_total_times">累計消費次數</string>
     <string name="my_members_add_score">添加積分</string>
+    <string name="my_members_add_amount">添加金額</string>
     <string name="my_members_applying">申請中</string>
     <string name="my_members_apply_success">已成為會員</string>
 
