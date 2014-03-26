@@ -220,4 +220,4 @@ pip-log.txt
 build/*
 *.iml
 gradle/*
-
+*.apk
