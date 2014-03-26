@@ -14,13 +14,14 @@
         android:layout_height="@dimen/list_detail_small_image_size"
         android:contentDescription="@drawable/devfest_shanghai"
         android:src="@drawable/ic_launcher" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -96,14 +97,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_gravity="right">
 
             <TextView
                 android:id="@+id/my_member_name"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text=""
-                android:layout_weight="1" />
+                android:layout_height="fill_parent"/>
 
             <Button
                 android:id="@+id/my_member_button_add_score"
