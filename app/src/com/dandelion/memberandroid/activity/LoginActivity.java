@@ -222,7 +222,7 @@ public class LoginActivity extends Activity {
     }
 
     public void loginSuccess() {
-        Intent intent = new Intent(this, SlidingmenuActivity.class);
+        Intent intent = new Intent(this, ListViewActivity.class);
         startActivity(intent);
         finish();
     }

@@ -34,4 +34,12 @@
         <item>男</item>
         <item>女</item>
     </string-array>
+
+
+    <string-array name="locations">
+        <item>主页</item>
+        <item>我的檔案</item>
+        <item>更改密碼</item>
+        <item>登出</item>
+    </string-array>
 </resources>

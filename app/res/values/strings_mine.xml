@@ -67,12 +67,12 @@
     <string name="button_history">歷史發佈</string>
 
     <!-- Tab  -->
- 	<string name="tab_system_nofitication">系統通知</string>
- 	<string name="tab_post">我要發佈</string>
- 	<string name="tab_my_members">我的會員</string>
- 	<string name="tab_timeline">優惠資訊</string>
- 	<string name="tab_join_member">加入會員</string>
- 	<string name="tab_my_merchant">我的商戶</string>
+    <string name="tab_system_nofitication">系統通知</string>
+    <string name="tab_post">我要發佈</string>
+    <string name="tab_my_members">我的會員</string>
+    <string name="tab_timeline">優惠資訊</string>
+    <string name="tab_join_member">加入會員</string>
+    <string name="tab_my_merchant">我的商戶</string>
 
 
     <!-- Logout -->
@@ -116,6 +116,8 @@
     <string name="dialog_merchant_alert_accept_success">接納成功</string>
     <string name="map_info">查看地圖</string>
 
+    <string name="list_navigation">List Navigation</string>
+    <string name="list_navigation_content">List navigation requires the use of a special layout for the spinner item. Failure to use it will result in your spinner text being the same color as the action bar background on pre-3.0. See the source code of this demo for more information.</string>
 
 
     <string name="app_name">Member</string>

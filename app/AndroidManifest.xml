@@ -54,6 +54,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.dandelion.memberandroid.activity.ListViewActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.dandelion.memberandroid.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="text/*" />
+                <data android:mimeType="video/*" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.LoginActivity" />
+        </activity>
         <activity
             android:name="com.dandelion.memberandroid.activity.SlidingmenuActivity"
             android:label="@string/app_name"

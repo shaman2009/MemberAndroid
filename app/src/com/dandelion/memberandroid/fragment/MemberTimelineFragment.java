@@ -1,11 +1,6 @@
 package com.dandelion.memberandroid.fragment;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -40,7 +35,6 @@ public class MemberTimelineFragment extends Fragment {
 
     //UI
     private View mListView;
-    private View mLoadingStatusView;
     private ProgressDialog mDialog;
 
     private MemberTimelineListAdapter memberTimelineListAdapter;
@@ -146,13 +140,12 @@ public class MemberTimelineFragment extends Fragment {
             mDialog.setCancelable(false);
             mDialog.show();
         } else {
-            if(mDialog != null)
-            mDialog.dismiss();
+            if (mDialog != null)
+                mDialog.dismiss();
 
         }
         mListView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
-
 
 
     public List<MemberTimelineFeedPO> fakeData() {

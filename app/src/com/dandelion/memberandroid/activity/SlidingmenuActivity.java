@@ -3,7 +3,6 @@ package com.dandelion.memberandroid.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.dao.auto.Account;
@@ -13,8 +12,6 @@ import com.dandelion.memberandroid.fragment.MerchantMenuFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.dandelion.memberandroid.service.AccountService;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
-import java.util.List;
 
 public class SlidingmenuActivity extends BaseActivity {
 
