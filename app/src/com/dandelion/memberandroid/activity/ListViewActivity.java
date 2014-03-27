@@ -4,18 +4,21 @@ package com.dandelion.memberandroid.activity;
  * Created by FengxiangZhu on 2014/3/27 0027.
  */
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
-import android.widget.ArrayAdapter;
+import android.view.ViewConfiguration;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.SubMenu;
 import com.astuetz.PagerSlidingTabStrip;
 import com.dandelion.memberandroid.R;
 import com.dandelion.memberandroid.constant.WebserviceConstant;
@@ -26,10 +29,10 @@ import com.dandelion.memberandroid.fragment.MyMerchantsFragment;
 import com.dandelion.memberandroid.fragment.SuperAwesomeCardFragment;
 import com.dandelion.memberandroid.service.AccountService;
 
-public class ListViewActivity extends SherlockFragmentActivity
-        implements ActionBar.OnNavigationListener {
-    private TextView mSelected;
-    private String[] mLocations;
+import java.lang.reflect.Field;
+
+public class ListViewActivity extends SherlockFragmentActivity {
+
 
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -43,19 +46,25 @@ public class ListViewActivity extends SherlockFragmentActivity
         setTheme(R.style.Theme_Sherlock_Light);
         super.onCreate(savedInstanceState);
 
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
+
+
         accountService = new AccountService(this);
         authAccount = accountService.getAuthAccount();
         accountType = authAccount.getAccountType();
 
         setContentView(R.layout.list_navigation);
-        mSelected = (TextView) findViewById(R.id.text);
-        mLocations = getResources().getStringArray(R.array.locations);
-        Context context = getSupportActionBar().getThemedContext();
-        ArrayAdapter<CharSequence> list = ArrayAdapter.createFromResource(context,
-                R.array.locations, R.layout.sherlock_spinner_item);
-        list.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        getSupportActionBar().setListNavigationCallbacks(list, this);
+        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
@@ -75,14 +84,73 @@ public class ListViewActivity extends SherlockFragmentActivity
 
         tabs.setViewPager(pager);
     }
-
     @Override
-    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-        mSelected.setText("Selected: " + mLocations[itemPosition]);
-        return true;
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        SubMenu subMenuPlus = menu.addSubMenu("Action Item");
+        subMenuPlus.add("Sample").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getBaseContext(), "You selected Sample", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        subMenuPlus.add("Menu").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getBaseContext(), "You selected Menu", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        subMenuPlus.add("Items").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getBaseContext(), "You selected Items", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        MenuItem subMenuPlusItem = subMenuPlus.getItem();
+        subMenuPlusItem.setIcon(R.drawable.app_panel_add_icon);
+        subMenuPlusItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        SubMenu subMenu = menu.addSubMenu("Action Item");
+        subMenu.add("Sample").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getBaseContext(), "You selected Sample", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        subMenu.add("Menu").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getBaseContext(), "You selected Menu", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        subMenu.add("Items").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getBaseContext(), "You selected Items", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        MenuItem subMenu1Item = subMenu.getItem();
+        subMenu1Item.setIcon(R.drawable.abc_ic_menu_moreoverflow_normal_holo_light);
+        subMenu1Item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+
+
+
+
+
+        return super.onCreateOptionsMenu(menu);
     }
-    public void switchContent(Fragment fragment) {
-    }
+
+
+
+
     public class MemberAdapter extends FragmentPagerAdapter {
         private final String[] TITLES = {"優惠資訊", "加入會員", "我的商戶"};
 
