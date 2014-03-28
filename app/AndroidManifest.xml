@@ -56,7 +56,7 @@
         </activity>
 
         <activity
-            android:name="com.dandelion.memberandroid.activity.ListViewActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.dandelion.memberandroid.activity.LoginActivity">
             <intent-filter>
@@ -73,6 +73,30 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dandelion.memberandroid.activity.LoginActivity" />
+        </activity>
+        <activity
+            android:name="com.dandelion.memberandroid.activity.MemberRecordActivity"
+            android:label="@string/action_my_record"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dandelion.memberandroid.activity.MerchantRecordActivity"
+            android:label="@string/action_my_record"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dandelion.memberandroid.activity.ChangePasswordActivity"
+            android:label="@string/action_change_password"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.MainActivity" />
         </activity>
         <activity
             android:name="com.dandelion.memberandroid.activity.SlidingmenuActivity"
