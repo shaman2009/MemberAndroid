@@ -287,8 +287,8 @@ public class MemberRecordActivity extends FragmentActivity {
         mSex.setSelection(memberInfoDataResponse.getSex());
         mPhone.setText(memberInfoDataResponse.getPhone());
         mAddress.setText(memberInfoDataResponse.getAddress());
-        birthday = memberInfoDataResponse.getBirthday() * 1000;
-        Date b = new Date(birthday);
+        birthday = memberInfoDataResponse.getBirthday();
+        Date b = new Date(birthday * 1000);
         String data = b.getYear() + "." + b.getMonth() + "." + b.getDay();
         mBirthday.setText(data);
         avatarUrl = memberInfoDataResponse.getAvatarurl();

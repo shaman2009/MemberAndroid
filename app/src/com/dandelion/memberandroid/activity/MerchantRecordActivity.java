@@ -297,7 +297,7 @@ public class MerchantRecordActivity extends FragmentActivity {
             public void onSuccess(JSONObject resp) {
                 uploading = false;
                 String redirect = QiNiuConstant.getImageDownloadURL(key);
-                hint.setText("Upload Success£¡ ");
+                hint.setText("Upload Success");
                 Log.d("QINIU_UPLOAD", "redirect : " + redirect);
                 downloadViaPicasso(activity, redirect);
                 attemptMerchantRecordRegister();
