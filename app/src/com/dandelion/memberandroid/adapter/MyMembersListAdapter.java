@@ -78,6 +78,7 @@ public class MyMembersListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.image = (ImageView) convertView.findViewById(R.id.image_my_member);
             holder.button = (Button) convertView.findViewById(R.id.my_member_button_add_score);
+            holder.text_my_members_id = (TextView) convertView.findViewById(R.id.my_member_id);
             holder.text_my_members_name = (TextView) convertView.findViewById(R.id.my_member_name);
             holder.text_my_members_total_score = (TextView) convertView.findViewById(R.id.my_member_total_score);
             holder.text_my_members_total_cost_value = (TextView) convertView.findViewById(R.id.my_members_total_cost_value);
@@ -100,6 +101,7 @@ public class MyMembersListAdapter extends BaseAdapter {
         final Long totalCosts = myMember.getMemberTotalCosts();
         final Long totalTimes = myMember.getMemberTotalTimes();
 
+        holder.text_my_members_id.setText(myMember.getMerchantId().toString());
         holder.text_my_members_name.setText(myMember.getName());
         if (isMember) {
             holder.text_my_members_total_cost_value.setVisibility(View.GONE);
@@ -247,6 +249,8 @@ public class MyMembersListAdapter extends BaseAdapter {
 
         }
         if (myMember.isMerchantOrMember()) {
+            holder.text_my_members_id.setVisibility(View.VISIBLE);
+            holder.text_my_members_id.setText(myMember.getMerchantId().toString());
             holder.count_click.setOnClickListener(null);
             final Long userId = myMember.getMerchantUserId();
             final Long merchantId = myMember.getMerchantId();
@@ -447,6 +451,7 @@ public class MyMembersListAdapter extends BaseAdapter {
     }
     static class ViewHolder {
         ImageView image;
+        TextView text_my_members_id;
         TextView text_my_members_name;
         TextView text_my_members_total_score;
         TextView text_my_members_total_cost_value;

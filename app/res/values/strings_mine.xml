@@ -131,7 +131,9 @@
     <string name="title_activity_member_timeline_feed_detail">詳細信息</string>
 
     <string name="accept_join">接納</string>
+    <string name="accept_join_yet">已接納</string>
     <string name="refuse_join">拒絕</string>
+    <string name="delete">刪除</string>
     <string name="add">添加</string>
 
     <!-- Toast -->

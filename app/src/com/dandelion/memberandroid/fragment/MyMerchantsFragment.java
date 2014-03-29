@@ -62,7 +62,7 @@ public class MyMerchantsFragment extends Fragment {
         listView = (ListView) getActivity().findViewById(R.id.my_members_list);
         listView.setAdapter(myMembersListAdapter);
         listView.setFastScrollEnabled(true);
-        showLoading(true);
+//        showLoading(true);
         super.onStart();
     }
     public void getMyMerchantsData() {

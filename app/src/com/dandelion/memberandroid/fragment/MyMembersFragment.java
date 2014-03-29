@@ -55,7 +55,7 @@ public class MyMembersFragment extends Fragment {
         listView = (ListView) getActivity().findViewById(R.id.my_members_list);
         listView.setAdapter(myMembersListAdapter);
         listView.setFastScrollEnabled(true);
-        showLoading(true);
+//        showLoading(true);
         super.onStart();
     }
 
@@ -80,6 +80,7 @@ public class MyMembersFragment extends Fragment {
                     member.setMemberTotalCosts(memberDataResponse.getAmount());
                     member.setName(memberDataResponse.getName());
                     member.setFriendId(memberDataResponse.getFriendId());
+                    member.setMerchantId(memberDataResponse.getId());
                     data.add(member);
                 }
                 myMembersListAdapter.swapItems(data);

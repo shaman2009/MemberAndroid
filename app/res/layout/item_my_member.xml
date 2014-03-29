@@ -32,11 +32,17 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/my_member_name"
+                android:id="@+id/my_member_id"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="@string/record_member_name"
                 android:layout_weight="1" />
+            <TextView
+            android:id="@+id/my_member_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/record_member_name"
+            android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/my_member_total_score"
@@ -100,7 +106,7 @@
             android:layout_gravity="right">
 
             <TextView
-                android:id="@+id/my_member_name"
+                android:id="@+id/my_member_namex"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"/>
 

@@ -162,6 +162,8 @@ public class NotificationListAdapter extends BaseAdapter {
         Picasso.with(context).setDebugging(true);
         if (isRead) {
             holder.button_accept.setEnabled(false);
+            holder.button_accept.setText(R.string.accept_join_yet);
+            holder.button_refuse.setText(R.string.delete);
         }
         return convertView;
     }
