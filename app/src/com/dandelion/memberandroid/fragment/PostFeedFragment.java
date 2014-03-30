@@ -20,19 +20,16 @@ import android.widget.ImageView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.dandelion.memberandroid.R;
+import com.dandelion.memberandroid.activity.HistoryPostAcitvity;
 import com.dandelion.memberandroid.constant.LoggerConstant;
 import com.dandelion.memberandroid.constant.QiNiuConstant;
-import com.dandelion.memberandroid.constant.WebserviceConstant;
 import com.dandelion.memberandroid.service.AccountService;
-import com.dandelion.memberandroid.util.DeviceUtil;
-import com.dandelion.memberandroid.util.Md5;
 import com.dandelion.memberandroid.volley.MemberappApi;
 import com.qiniu.auth.JSONObjectRet;
 import com.qiniu.io.IO;
 import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.UUID;
@@ -111,11 +108,8 @@ public class PostFeedFragment extends Fragment {
         imageView = (ImageView) getActivity().findViewById(R.id.imageView_post_feed);
     }
     public void historyFeed() {
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame, new MyPostFragment())
-                .addToBackStack(null)
-                .commit();
+        Intent intent = new Intent(getActivity(), HistoryPostAcitvity.class);
+        getActivity().startActivity(intent);
     }
 
     public void popButtons() {

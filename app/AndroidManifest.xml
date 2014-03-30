@@ -90,6 +90,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dandelion.memberandroid.activity.MainActivity" />
         </activity>
+
+        <activity
+            android:name="com.dandelion.memberandroid.activity.HistoryPostAcitvity"
+            android:label="@string/action_my_history_post"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dandelion.memberandroid.activity.MainActivity" />
+        </activity>
         <activity
             android:name="com.dandelion.memberandroid.activity.ChangePasswordActivity"
             android:label="@string/action_change_password"

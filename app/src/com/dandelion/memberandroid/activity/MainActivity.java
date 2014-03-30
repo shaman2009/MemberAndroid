@@ -34,6 +34,7 @@ import com.dandelion.memberandroid.fragment.MyMerchantsFragment;
 import com.dandelion.memberandroid.fragment.MyPostFragment;
 import com.dandelion.memberandroid.fragment.NotificationFragment;
 import com.dandelion.memberandroid.fragment.PasswordChangeFragment;
+import com.dandelion.memberandroid.fragment.PostFeedFragment;
 import com.dandelion.memberandroid.fragment.SuperAwesomeCardFragment;
 import com.dandelion.memberandroid.service.AccountService;
 
@@ -57,16 +58,7 @@ public class MainActivity extends SherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         activity = this;
 
-        try {
-            ViewConfiguration config = ViewConfiguration.get(this);
-            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            if(menuKeyField != null) {
-                menuKeyField.setAccessible(true);
-                menuKeyField.setBoolean(config, false);
-            }
-        } catch (Exception ex) {
-            // Ignore
-        }
+
 
 
         accountService = new AccountService(this);
@@ -243,7 +235,7 @@ public class MainActivity extends SherlockFragmentActivity {
                 return new NotificationFragment();
             }
             if (position == 1) {
-                return new MyPostFragment();
+                return new PostFeedFragment();
             }
             if (position == 2) {
                 return new MyMembersFragment();
