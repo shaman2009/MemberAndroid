@@ -19,5 +19,5 @@
     <dimen name="faux_action_bar_size">12dp</dimen>
     <dimen name="list_detail_small_image_size">50dp</dimen>
     <dimen name="list_detail_image_size">100dp</dimen>
-    <dimen name="list_detail_big_image_size">200dp</dimen>
+    <dimen name="list_detail_big_image_size">300dp</dimen>
 </resources>

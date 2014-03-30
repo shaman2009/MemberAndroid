@@ -28,8 +28,8 @@
                 android:layout_weight="1" />
             <ImageView
                 android:id="@+id/imageView_post_feed"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:contentDescription="@drawable/eye"
                 android:src="@drawable/eye" />
 
