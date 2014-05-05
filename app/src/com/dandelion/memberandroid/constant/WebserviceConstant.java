@@ -3,8 +3,9 @@ package com.dandelion.memberandroid.constant;
 import com.android.volley.Request.Method;
 
 public class WebserviceConstant {
-	public static final String HOST = "http://memberappwebservice.duapp.com";
-	
+//	public static final String HOST = "http://memberappwebservice.duapp.com";
+	public static final String HOST = "http://112.124.99.204/indefensible-membership";
+
 	
 	public static final String REGISTER_URI = HOST + "/Register";
 	public static final int REGISTER_METHOD = Method.POST;
