@@ -31,9 +31,9 @@ import com.dandelion.memberandroid.dao.auto.MerchantInfo;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
-import com.qiniu.auth.JSONObjectRet;
-import com.qiniu.io.IO;
-import com.qiniu.io.PutExtra;
+//import com.qiniu.auth.JSONObjectRet;
+//import com.qiniu.io.IO;
+//import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -268,35 +268,35 @@ public class MerchantMyRecordFragment extends Fragment {
 	 * @param uri
 	 */
 	private void doUpload(Uri uri) {
-		if (uploading) {
-			hint.setText("上傳中，請稍後");
-			return;
-		}
-
-		uploading = true;
-        key = UUID.randomUUID().toString();
-		// 上传文件名
-		PutExtra extra = new PutExtra();
-		extra.checkCrc = PutExtra.AUTO_CRC32;
-		extra.params.put("x:arg", "value");
-		hint.setText("上傳中...");
-		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
-			@Override
-			public void onSuccess(JSONObject resp) {
-				uploading = false;
-				String redirect = QiNiuConstant.getImageDownloadURL(key);
-				hint.setText("上傳成功！ ");
-				Log.d("QINIU_UPLOAD", "redirect : " + redirect);
-				downloadViaPicasso(getActivity(), redirect);
-                attemptMerchantRecordRegister();
-			}
-
-			@Override
-			public void onFailure(Exception ex) {
-				uploading = false;
-				hint.setText("錯誤: " + ex.getMessage());
-			}
-		});
+//		if (uploading) {
+//			hint.setText("上傳中，請稍後");
+//			return;
+//		}
+//
+//		uploading = true;
+//        key = UUID.randomUUID().toString();
+//		// 上传文件名
+//		PutExtra extra = new PutExtra();
+//		extra.checkCrc = PutExtra.AUTO_CRC32;
+//		extra.params.put("x:arg", "value");
+//		hint.setText("上傳中...");
+//		IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
+//			@Override
+//			public void onSuccess(JSONObject resp) {
+//				uploading = false;
+//				String redirect = QiNiuConstant.getImageDownloadURL(key);
+//				hint.setText("上傳成功！ ");
+//				Log.d("QINIU_UPLOAD", "redirect : " + redirect);
+//				downloadViaPicasso(getActivity(), redirect);
+//                attemptMerchantRecordRegister();
+//			}
+//
+//			@Override
+//			public void onFailure(Exception ex) {
+//				uploading = false;
+//				hint.setText("錯誤: " + ex.getMessage());
+//			}
+//		});
 	}
 
 	public void downloadViaPicasso(Context context, String path) {

@@ -39,9 +39,9 @@ import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
 import com.google.gson.Gson;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
-import com.qiniu.auth.JSONObjectRet;
-import com.qiniu.io.IO;
-import com.qiniu.io.PutExtra;
+//import com.qiniu.auth.JSONObjectRet;
+//import com.qiniu.io.IO;
+//import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -310,40 +310,40 @@ public class MemberRecordActivity extends FragmentActivity {
     boolean uploading = false;
 
     /**
-     * ÆÕÍ¨ÉÏ‚÷ÎÄ¼þ
+     * ï¿½ï¿½Í¨ï¿½Ï‚ï¿½ï¿½Ä¼ï¿½
      *
      * @param uri
      */
     private void doUpload(Uri uri) {
-        if (uploading) {
-            mMemberRecordPicUploadStatus.setText("Uploading...");
-            return;
-        }
-
-        uploading = true;
-        key = UUID.randomUUID().toString();
-
-        PutExtra extra = new PutExtra();
-        extra.checkCrc = PutExtra.AUTO_CRC32;
-        extra.params.put("x:arg", "value");
-        mMemberRecordPicUploadStatus.setText("Uploading...");
-        IO.putFile(this, QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
-            @Override
-            public void onSuccess(JSONObject resp) {
-                uploading = false;
-                String redirect = "http://" + QiNiuConstant.DOWNLOAD_DOMAIN + "/" + key;
-                mMemberRecordPicUploadStatus.setText("Upload Success! ");
-                Log.d("QINIU_UPLOAD", "redirect : " + redirect);
-                downloadViaPicasso(activity, redirect);
-                attemptMemberRecordRegister();
-            }
-
-            @Override
-            public void onFailure(Exception ex) {
-                uploading = false;
-                mMemberRecordPicUploadStatus.setText("Error: " + ex.getMessage());
-            }
-        });
+//        if (uploading) {
+//            mMemberRecordPicUploadStatus.setText("Uploading...");
+//            return;
+//        }
+//
+//        uploading = true;
+//        key = UUID.randomUUID().toString();
+//
+//        PutExtra extra = new PutExtra();
+//        extra.checkCrc = PutExtra.AUTO_CRC32;
+//        extra.params.put("x:arg", "value");
+//        mMemberRecordPicUploadStatus.setText("Uploading...");
+//        IO.putFile(this, QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
+//            @Override
+//            public void onSuccess(JSONObject resp) {
+//                uploading = false;
+//                String redirect = "http://" + QiNiuConstant.DOWNLOAD_DOMAIN + "/" + key;
+//                mMemberRecordPicUploadStatus.setText("Upload Success! ");
+//                Log.d("QINIU_UPLOAD", "redirect : " + redirect);
+//                downloadViaPicasso(activity, redirect);
+//                attemptMemberRecordRegister();
+//            }
+//
+//            @Override
+//            public void onFailure(Exception ex) {
+//                uploading = false;
+//                mMemberRecordPicUploadStatus.setText("Error: " + ex.getMessage());
+//            }
+//        });
     }
 
     public void downloadViaPicasso(Context context, String path) {

@@ -25,9 +25,9 @@ import com.dandelion.memberandroid.constant.LoggerConstant;
 import com.dandelion.memberandroid.constant.QiNiuConstant;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
-import com.qiniu.auth.JSONObjectRet;
-import com.qiniu.io.IO;
-import com.qiniu.io.PutExtra;
+//import com.qiniu.auth.JSONObjectRet;
+//import com.qiniu.io.IO;
+//import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -200,36 +200,36 @@ public class PostFeedFragment extends Fragment {
      * @param uri
      */
     private void doUpload(Uri uri) {
-        if (uploading) {
-            return;
-        }
-
-        uploading = true;
-
-        // 上传文件名
-        PutExtra extra = new PutExtra();
-        extra.checkCrc = PutExtra.AUTO_CRC32;
-        extra.params.put("x:arg", "value");
-        IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, imageKey, uri, extra, new JSONObjectRet() {
-            @Override
-            public void onSuccess(JSONObject resp) {
-                uploading = false;
-                String redirect = QiNiuConstant.getImageDownloadURL(imageKey);
-                Log.d("QINIU_UPLOAD", "redirect : " + redirect);
-            }
-
-            @Override
-            public void onFailure(Exception ex) {
-                uploading = false;
-                new AlertDialog.Builder(getActivity())
-                        .setMessage(getActivity().getString(R.string.alert_post_upload_image_error))
-                        .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).show();
-            }
-        });
+//        if (uploading) {
+//            return;
+//        }
+//
+//        uploading = true;
+//
+//        // 上传文件名
+//        PutExtra extra = new PutExtra();
+//        extra.checkCrc = PutExtra.AUTO_CRC32;
+//        extra.params.put("x:arg", "value");
+//        IO.putFile(getActivity(), QiNiuConstant.UP_TOKEN, imageKey, uri, extra, new JSONObjectRet() {
+//            @Override
+//            public void onSuccess(JSONObject resp) {
+//                uploading = false;
+//                String redirect = QiNiuConstant.getImageDownloadURL(imageKey);
+//                Log.d("QINIU_UPLOAD", "redirect : " + redirect);
+//            }
+//
+//            @Override
+//            public void onFailure(Exception ex) {
+//                uploading = false;
+//                new AlertDialog.Builder(getActivity())
+//                        .setMessage(getActivity().getString(R.string.alert_post_upload_image_error))
+//                        .setNeutralButton(getActivity().getString(R.string.account_logout_sure), new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        }).show();
+//            }
+//        });
     }
 
 }

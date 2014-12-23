@@ -33,9 +33,9 @@ import com.dandelion.memberandroid.dao.auto.MerchantInfo;
 import com.dandelion.memberandroid.service.AccountService;
 import com.dandelion.memberandroid.volley.MemberappApi;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
-import com.qiniu.auth.JSONObjectRet;
-import com.qiniu.io.IO;
-import com.qiniu.io.PutExtra;
+//import com.qiniu.auth.JSONObjectRet;
+//import com.qiniu.io.IO;
+//import com.qiniu.io.PutExtra;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -275,40 +275,40 @@ public class MerchantRecordActivity extends FragmentActivity {
 
     boolean uploading = false;
     /**
-     * 普通上傳文件
+     * 锟斤拷通锟较傦拷锟侥硷拷
      *
      * @param uri
      */
     private void doUpload(Uri uri) {
-        if (uploading) {
-            hint.setText("Uploading...");
-            return;
-        }
-
-        uploading = true;
-        key = UUID.randomUUID().toString();
-        // 上传文件名
-        PutExtra extra = new PutExtra();
-        extra.checkCrc = PutExtra.AUTO_CRC32;
-        extra.params.put("x:arg", "value");
-        hint.setText("Uploading...");
-        IO.putFile(activity, QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
-            @Override
-            public void onSuccess(JSONObject resp) {
-                uploading = false;
-                String redirect = QiNiuConstant.getImageDownloadURL(key);
-                hint.setText("Upload Success");
-                Log.d("QINIU_UPLOAD", "redirect : " + redirect);
-                downloadViaPicasso(activity, redirect);
-                attemptMerchantRecordRegister();
-            }
-
-            @Override
-            public void onFailure(Exception ex) {
-                uploading = false;
-                hint.setText("Error: " + ex.getMessage());
-            }
-        });
+//        if (uploading) {
+//            hint.setText("Uploading...");
+//            return;
+//        }
+//
+//        uploading = true;
+//        key = UUID.randomUUID().toString();
+//        // 锟较达拷锟侥硷拷锟斤拷
+//        PutExtra extra = new PutExtra();
+//        extra.checkCrc = PutExtra.AUTO_CRC32;
+//        extra.params.put("x:arg", "value");
+//        hint.setText("Uploading...");
+//        IO.putFile(activity, QiNiuConstant.UP_TOKEN, key, uri, extra, new JSONObjectRet() {
+//            @Override
+//            public void onSuccess(JSONObject resp) {
+//                uploading = false;
+//                String redirect = QiNiuConstant.getImageDownloadURL(key);
+//                hint.setText("Upload Success");
+//                Log.d("QINIU_UPLOAD", "redirect : " + redirect);
+//                downloadViaPicasso(activity, redirect);
+//                attemptMerchantRecordRegister();
+//            }
+//
+//            @Override
+//            public void onFailure(Exception ex) {
+//                uploading = false;
+//                hint.setText("Error: " + ex.getMessage());
+//            }
+//        });
     }
 
     public void downloadViaPicasso(Context context, String path) {
